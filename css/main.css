@@ -133,6 +133,10 @@ body {
     text-align: center;
 }
 
+.NSFW {
+    filter: blur(10px);
+}
+
 .card {
     border-radius: 5px !important;
     background-color: #292a36;
