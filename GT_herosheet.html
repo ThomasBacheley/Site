@@ -19,7 +19,7 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <img src="assets/menuIcon.svg" width="20px" height="20px" style="max-width: none !important;">
         </button>
-        <img src="assets/BotLogo.svg" width="50" height="50">
+        <img src="assets/BotLogo.png" width="40" height="40">
         <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 20px !important">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -39,25 +39,46 @@
             </div>
         </div>
     </nav>
-        <select style="margin-left:auto;margin-right:auto;display:block" name="select_hero" id="select_hero" onchange="loadhero(this.value)">
-            <option value="null">Choose a Hero first</option>
-        </select>
-    <div class="heading">
-        <div class="card text-white bg-secondary" style="width: 18rem;">
-            <img id="hero_img" src="https://upload.wikimedia.org/wikipedia/commons/7/71/Black.png" class="card-img-top"
-                alt="hero profil pic img">
-            <div class="card-body">
-                <h5><a class="card-title" href="#" id="heroname"></a></h5>
-                <p class="card-text">His EX Weapon is :<span id="weapon_name" style="font-weight: bold;"></span></p>
-                <p class="card-text">He/She is a <span id="type" style="font-weight: bold;"></span> <span id="role"
-                        style="font-weight: bold;"></span> Hero</p>
+
+    <div class="modal fade" id="modal_hero" tabindex="-1" role="dialog" aria-labelledby="modal_heroLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background-color: #343540;color: white;">
+                <div class="modal-body">
+                    <h2 class="text-secondary" id="modal_heroLabel"></h2>
+                    <h3 class="modal-title text-secondary" id="modal_heroLabel" style="font-size: 18px;"></h3>
+                    <p>His EX Weapon is : <span id="weapon_name" style="font-weight: bold;"></span></p>
+                    <p>He/She is a <span id="type" style="font-weight: bold;"></span> <span id="role"
+                            style="font-weight: bold;"></span> Hero</p>
+                    <p>It's recommended to put <span id="accesory" style="font-weight: bold;"></span> as accesory item
+                    </p>
+                    <img id="hero_pic" src="https://upload.wikimedia.org/wikipedia/commons/7/71/Black.png"
+                        alt="hero pic img" style="width: auto;height: auto;border-radius: 5%;">
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary" id="moreinfo_link" role="button">More Information</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
+    <div class="heading" id="heading">
+        <div class="input-group mb-3">
+            <input type="text" id="heroname_input" class="form-control" placeholder="Hero's name"
+                aria-label="Hero's name" aria-describedby="button-addon2">
+            <button class="btn btn-outline-primary" type="button" id="button-addon2"
+                onclick="research_hero()">Research</button>
+        </div>
+        <br/><br/>
+        <div id="list-cards" style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content:space-evenly">
+
+        </div>
+    </div>
+
     <div class="page_end">
         <div class="footer">
             <div class="bot-footer">
-                <img src="assets/BotLogoWord.svg" width="150"><br />
+                <img src="assets/BotLogoWord.png" width="150" style="margin-left:-45px;"><br />
             </div><br />
             <div class="nouridio">website designed by <span style="color: #ffa500;">nouridio</span></div>
         </div>
@@ -74,51 +95,47 @@
     <script src="js/now-ui-kit.min.js"></script>
     <script>
 
-        if (window.location.search) {
-            loadhero(window.location.search.substring(1).split('=')[1].split('_').join(' '));
-            document.getElementById('heroname').value = window.location.search.substring(1).split('=')[1].split('_').join(' ');
-        }
+        $("#heroname_input").on('keyup', function (e) {
+            if (e.key === 'Enter' || e.keyCode === 13) {
+                research_hero()
+            }
+        });
 
-        herolist();
-        function herolist(){
+        function research_hero() {
+            var heroname_input = document.getElementById('heroname_input').value;
+
             var xhr = new XMLHttpRequest();
-            var selecter = document.getElementById('select_hero')
 
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
                     if (this.status == 200) {
-
-                        var datas = JSON.parse(this.responseText);
-
-                        datas.forEach(data=>{
-                            var option = document.createElement('option');
-                            option.value = data;
-                            option.innerText = data;
-
-                            selecter.appendChild(option);
-                        })
-
-                    } else {
-                        alert('erreur : status -> ' + this.status)
+                        var data = JSON.parse(this.responseText)
+                        if (data) {
+                            openmodal(data.name);
+                            $('#modal_hero').modal('show')
+                        } else {
+                            alert('The hero seems doesn\'t exist')
+                        }
                     }
                 }
-            };
-            xhr.open("GET", "http://yweelon.fr:8084/herolist", true);
+            }
+            xhr.open("GET", "http://yweelon.fr:8084/gethero/" + heroname_input, true);
             xhr.send();
         }
 
-        function loadhero(heroname) {
-            if(heroname=='null')return
+        function openmodal(val) {
+            var heroname = val.replace('btn_modal_', '').replace('_', ' ').replace('_', ' ').replace('_', ' ').replace('_', ' ');
+
             var xhr = new XMLHttpRequest();
 
-            var img = document.getElementById('hero_img')
-
-            var hero_name = document.getElementById('heroname')
+            var moreinfo_button = document.getElementById('moreinfo_link')
 
             var weapon_name = document.getElementById('weapon_name')
 
             var role = document.getElementById('role')
             var type = document.getElementById('type')
+            var accesory = document.getElementById('accesory')
+            var hero_pic = document.getElementById('hero_pic')
 
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
@@ -126,18 +143,63 @@
 
                         var data = JSON.parse(this.responseText)
 
-                        img.src = data.pp_link;
-                        hero_name.innerText = data.name;
                         weapon_name.innerText = data.ex_weapon
-                        hero_name.href = data.hero_link
+                        moreinfo_link.href = data.hero_link
                         role.innerText = data.role
                         type.innerText = data.type
+                        accesory.innerText = data.accesory_item
+                        hero_pic.src = data.hero_pic
                     } else {
                         alert('erreur : status -> ' + this.status)
                     }
                 }
             };
             xhr.open("GET", "http://yweelon.fr:8084/gethero/" + heroname, true);
+            xhr.send();
+
+
+            var modal_heroLabel = document.getElementById('modal_heroLabel');
+            modal_heroLabel.innerText = heroname
+        }
+
+        createcards()
+        function createcards() {
+            var xhr = new XMLHttpRequest();
+            var div = document.getElementById('list-cards');
+
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4) {
+                    if (this.status == 200) {
+                        var datas = JSON.parse(this.responseText);
+
+                        datas.forEach(data => {
+                            var card = document.createElement('div');
+                            card.style.width = '13rem';
+                            card.classList.add('card', 'text-white', 'bg-secondary');
+
+                            var img = document.createElement('img');
+
+                            img.src = data.pp_link
+                            img.classList.add('card-img-top')
+                            img.alt = 'hero profil pic img';
+
+                            var btn_modal = document.createElement('button');
+                            btn_modal.setAttribute('id', 'btn_modal_' + data.name.replace(' ', '_').replace(' ', '_').replace(' ', '_'));
+                            btn_modal.setAttribute('onclick', 'openmodal(this.id)');
+                            btn_modal.setAttribute('data-toggle', 'modal');
+                            btn_modal.setAttribute('data-target', '#modal_hero');
+                            btn_modal.innerText = data.name
+                            btn_modal.classList.add('btn', 'btn-primary')
+
+                            card.appendChild(img);
+                            card.appendChild(btn_modal)
+
+                            div.appendChild(card)
+                        })
+                    }
+                }
+            }
+            xhr.open("GET", "http://yweelon.fr:8084/getallheroinfo/", true);
             xhr.send();
         }
     </script>
