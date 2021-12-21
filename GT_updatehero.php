@@ -24,7 +24,9 @@ session_start();
 <body>
     <nav class="navbar navbar-expand-lg bg-transparent">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <img src="assets/menuIcon.svg" width="20px" height="20px" style="max-width: none !important;">
+            <a href="index.php">
+                <img src="assets/BotLogo.png" width="40" height="40">
+            </a>
         </button>
         <img src="assets/BotLogo.png" width="40" height="40">
         <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 20px !important">

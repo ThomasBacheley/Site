@@ -26,7 +26,9 @@ session_start();
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <img src="assets/menuIcon.svg" width="20px" height="20px" style="max-width: none !important;">
         </button>
-        <img src="assets/BotLogo.png" width="40" height="40">
+        <a href="index.php">
+            <img src="assets/BotLogo.png" width="40" height="40">
+        </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 20px !important">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -185,9 +187,15 @@ session_start();
     <script>
         var username = '<?php echo $_SESSION['username']; ?>';
 
+        var btn_connexion = document.getElementById('connexion_button')
+
 
         if (username !== "") {
-            document.getElementById('connexion_button').innerText = username
+            btn_connexion.innerText = username
+            document.getElementById('name').value = username
+            btn_connexion.setAttribute('title', 'Deconnexion');
+            btn_connexion.setAttribute('data-bs-toggle', 'tooltip');
+            btn_connexion.setAttribute('data-bs-placement', 'bottom');
         }
 
         (function() {
