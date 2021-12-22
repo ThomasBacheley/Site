@@ -24,15 +24,15 @@ session_start();
 <body>
     <nav class="navbar navbar-expand-lg bg-transparent">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <a href="index.php">
-                <img src="assets/BotLogo.png" width="40" height="40">
-            </a>
+            <img src="assets/menuIcon.svg" width="20px" height="20px" style="max-width: none !important;">
         </button>
-        <img src="assets/BotLogo.png" width="40" height="40">
+        <a href="index.php">
+            <img src="assets/BotLogo.png" width="40" height="40">
+        </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 20px !important">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Accueil <span class="sr-only">(actuel)</span></a>
+                    <a class="nav-link" href="index.php">Accueil</a>
                 </li>
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -41,7 +41,7 @@ session_start();
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="Hellbot.php">Hellbot</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="GIT_bot.php">GIT Bot</a>
+                        <a class="dropdown-item" href="GIT_bot.php">GIT Bot <span class="sr-only">(actuel)</span></a>
                     </div>
                 </div>
                 <div class="nav-item dropdown">
@@ -66,20 +66,22 @@ session_start();
     </nav>
     <!---->
     <div class="heading">
-        <div>
-            <img src="https://cdn.discordapp.com/attachments/922554541419921470/922554649905602560/1.png" alt=".." style="width: 128px;height: 128px;" />
-            <img src="https://cdn.discordapp.com/icons/446662355720601601/0bf80e54b84f1ea2d7b3ed4b869aa4f0.png" alt=".." style="width: 128px;height: 128px;" />
-        </div>
-        <div>
-            <h1 class="display-5 title"><span class="highlight">G</span>reen <span class="highlight">I</span>ce
-                <span class="highlight">T</span>eam Bot
-            </h1>
-            <p class="subtitle">GIT bot is a bot made for Green Ice Tea and devoted to Guardian Tales Game</p>
-            <br />
-            <p class="subtitle">Made in <span class="highlight">Javascript</span> and host on a <span class="highlight">Raspberry PI 4</span>, GIT Bot is pretty efficient.</p>
-            <p class="subtitle">You can check hero's build or Informations with commands.</p>
-            <a class="btn btn-primary btn-lg" href="https://github.com/ThomasBacheley/GIT_bot_GT" target="_blank" role="button">GitHub</a>
-        </div>
+        <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-bs-html="true" title="Text in English, because it's a English bot">
+            <div>
+                <div>
+                    <img src="https://cdn.discordapp.com/attachments/922554541419921470/922554649905602560/1.png" alt=".." style="width: 128px;height: 128px;" />
+                    <img src="https://cdn.discordapp.com/icons/446662355720601601/0bf80e54b84f1ea2d7b3ed4b869aa4f0.png" alt=".." style="width: 128px;height: 128px;" />
+                </div>
+                <h1 class="display-5 title"><span class="highlight">G</span>reen <span class="highlight">I</span>ce
+                    <span class="highlight">T</span>eam Bot
+                </h1>
+                <p class="subtitle">GIT bot is a bot made for Green Ice Tea and devoted to Guardian Tales Game</p>
+                <br />
+                <p class="subtitle">Made in <span class="highlight">Javascript</span> and host on a <span class="highlight">Raspberry PI 4</span>, GIT Bot is pretty efficient.</p>
+                <p class="subtitle">You can check hero's build or Informations with commands.</p>
+                <a class="btn btn-primary btn-lg" href="https://github.com/ThomasBacheley/GIT_bot_GT" target="_blank" role="button">GitHub</a>
+            </div>
+        </span>
     </div>
     <br /><br /><br />
     <div class="stats">

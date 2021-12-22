@@ -1,5 +1,11 @@
 <?php
 session_start();
+if (isset($_GET['deconnexion'])) {
+    if ($_GET['deconnexion'] == true) {
+        session_unset();
+        header("location:index.php");
+    }
+}
 ?>
 <html>
 
@@ -14,7 +20,7 @@ session_start();
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,600,700,800,900&display=swap" rel="stylesheet">
-    <title>Connexion</title>
+    <title>Dashboard</title>
     <meta content="Yweelon.fr" property="og:title" />
     <meta content="Site d'Yweelon" property="og:description" />
     <meta content="http://yweelon.fr" property="og:url" />
@@ -64,22 +70,24 @@ session_start();
             </div>
         </div>
     </nav>
-    <div id="container">
-        <form action="verification.php" method="POST">
-            <h3>Connexion</h3>
-            <label><b>Nom d 'utilisateur</b></label>
-            <input type="text" placeholder="Entrer le nom d'utilisateur" name="username" required>
-            <label><b>Mot de passe</b></label>
-            <input type="password" placeholder="Entrer le mot de passe" name="password" required>
-            <input type="submit" id='submit' value='LOGIN'>
-            <?php
-            if (isset($_GET['erreur'])) {
-                $err = $_GET['erreur'];
-            }
-            ?>
-        </form>
+    <div id="container_dashboard">
+        <div id="dashboard_column">
+            <button onclick="window.location.href='/dashboard.php?deconnexion=true'" class="btn login-btn btn-outline-accent my-2 my-sm-0" style="font-size: 10px !important;font-family: poppins !important;">Deconnexion</button>
+        </div>
+        <div id="dashboard_info">
 
+        </div>
     </div>
 </body>
+<script>
+    var username = '<?php echo $_SESSION['username']; ?>';
+    var perm = '<?php echo $_SESSION['permission']; ?>';
+
+    var p = document.createElement('p');
+
+    p.innerHTML = '<p>' + username + '</p><span>(' + perm + ')</span>'
+
+    document.getElementById('dashboard_column').appendChild(p)
+</script>
 
 </html>

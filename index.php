@@ -2,7 +2,7 @@
 session_start();
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" style="scroll-behavior: smooth !important;">
 
 <head>
     <meta charset="UTF-8">
@@ -61,9 +61,10 @@ session_start();
             <div class="nav-item">
                 <a class="nav-link" href="https://github.com/ThomasBacheley">Github</a>
             </div>
-            <button id="connexion_button" onclick="window.location.href='/login.php'" class="btn login-btn btn-outline-accent my-2 my-sm-0" style="font-size: 10px !important;font-family: poppins !important;">Connexion</button>
+            <button id="connexion_button" class="btn login-btn btn-outline-accent my-2 my-sm-0" style="font-size: 10px !important;font-family: poppins !important;">Connexion</button>
         </div>
     </nav>
+    <button onclick="topFunction()" id="topbtn" title="Go to top">↑</button>
     <br /><br /><br />
     <div class="heading">
         <h1 class="ml1">
@@ -84,10 +85,22 @@ session_start();
                     </g>
                 </g>
             </svg></a>
-        <a class="btn btn-secondary btn-lg" href="#server_link" target="_blank" role="button">En savoir plus</a>
-        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <a class="btn btn-secondary btn-lg" href="#about" role="button">En savoir plus</a>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     </div>
+    <div class="heading" id="about">
+        <div>
+            <img src="https://cdn.discordapp.com/avatars/663153459226345501/3170e3e92eb1101d7be7550453924593.png" alt="Ywee PP" style="width: 128px;height: 128px; border-radius:15px" />
+        </div>
+        <h1 class="display-5 title"><span class="highlight">Yweelon</span></h1>
+        <p class="subtitle">Salut, je m'appelle <span class="highlight">Thomas</span>, j'ai 22 ans et je suis <span class="highlight">développeur</span> Junior.</p>
+        <br />
+        <p class="subtitle">Je code depuis <span class="highlight">2017</span> des applications pour mes études ou des projets personnel (<a href="Hellbot.php">Hellbot</a> / <a href="GIT_bot.php">GIT Bot</a>).</p>
+        <p class="subtitle">J'heberge tous ça sur des <span>Raspberry pi (modèle 3B et modèle 4)</span>.</p>
+        <p class="subtitle"> Je m'interesse aussi à la <span class=highlight>domotique</span> en essayant de mettre en place un système de contrôle de LED avec des <span class="highlight">ESP8266</span></p>
+    </div>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     <div id="mailform" class="text-center" style="background-color: #292933;width: 80%;margin-left: auto;margin-right: auto;border-radius: 3%;padding: 20px; box-shadow: white;">
         <!--Section: Contact v.2-->
         <section class="mb-4">
@@ -108,7 +121,7 @@ session_start();
                             <div class="col-md-6">
                                 <div class="md-form mb-0">
                                     <label for="name" style="color: white;">Nom :</label>
-                                    <input type="text" id="name" name="name" class="form-control">
+                                    <input style="background-color: white;" type="text" id="name" name="name" class="form-control">
                                 </div>
                             </div>
                             <!--Grid column-->
@@ -116,7 +129,7 @@ session_start();
                             <div class="col-md-6">
                                 <div class="md-form mb-0">
                                     <label for="email" style="color: white;">Email :</label>
-                                    <input type="email" placeholder="Ton email ici" id="email" name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                                    <input style="background-color: white;" type="email" placeholder="Ton email ici" id="email" name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
                                     <div class="invalid-feedback feedback-pos">
                                         L'Email ne semble pas correct
                                     </div>
@@ -131,7 +144,7 @@ session_start();
                             <div class="col-md-12">
                                 <div class="md-form mb-0">
                                     <label for="subject" style="color: white;">Objet :</label>
-                                    <input type="text" id="subject" name="subject" class="form-control">
+                                    <input style="background-color: white;" type="text" id="subject" name="subject" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -145,7 +158,7 @@ session_start();
 
                                 <div class="md-form">
                                     <label for="validationMessage" style="color: white;">Message :</label>
-                                    <textarea class="form-control is-invalid" id="validationMessage" placeholder="Entre ton message ici" required></textarea>
+                                    <textarea style="background-color: white; border-radius:15px; padding:5px; min-height: 150px;" rows="15" class="form-control is-invalid" id="validationMessage" placeholder="Entre ton message ici" required></textarea>
                                     <div class="invalid-feedback feedback-pos">
                                         S'il te plait, entre ton message
                                     </div>
@@ -185,6 +198,27 @@ session_start();
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="js/now-ui-kit.min.js"></script>
     <script>
+        mybutton = document.getElementById("topbtn");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {
+            scrollFunction()
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+
         var username = '<?php echo $_SESSION['username']; ?>';
 
         var btn_connexion = document.getElementById('connexion_button')
@@ -193,9 +227,12 @@ session_start();
         if (username !== "") {
             btn_connexion.innerText = username
             document.getElementById('name').value = username
-            btn_connexion.setAttribute('title', 'Deconnexion');
+            btn_connexion.setAttribute('title', 'Dashboard');
             btn_connexion.setAttribute('data-bs-toggle', 'tooltip');
             btn_connexion.setAttribute('data-bs-placement', 'bottom');
+            btn_connexion.setAttribute('onclick', 'window.location.href=\'/dashboard.php\'')
+        } else {
+            btn_connexion.setAttribute('onclick', 'window.location.href=\'/login.php\'')
         }
 
         (function() {
