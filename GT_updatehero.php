@@ -67,11 +67,13 @@ session_start();
         </form>
     </div>
     <div class="page_end">
+        <br />
         <div class="footer">
             <div class="bot-footer">
-                <img src="assets/BotLogoWord.png" width="150" style="margin-left:-45px;"><br />
-            </div><br />
-            <div class="nouridio">website designed by <span style="color: #ffa500;">nouridio</span></div>
+                <a href="credits.php">
+                    <img src="assets/BotLogoWord.png" width="150" style="margin-left:-45px;"><br />
+                </a>
+            </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

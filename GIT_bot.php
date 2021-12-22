@@ -61,7 +61,7 @@ session_start();
             <div class="nav-item">
                 <a class="nav-link" href="https://github.com/ThomasBacheley">Github</a>
             </div>
-            <button id="connexion_button" onclick="window.location.href='/login.php'" class="btn login-btn btn-outline-accent my-2 my-sm-0" style="font-size: 10px !important;font-family: poppins !important;">Connexion</button>
+            <button id="connexion_button" class="btn login-btn btn-outline-accent my-2 my-sm-0" style="font-size: 10px !important;font-family: poppins !important;">Connexion</button>
         </div>
     </nav>
     <!---->
@@ -105,12 +105,14 @@ session_start();
         </div>
     </div>
     <br /><br /><br /><br /><br />
-    <div class="page_end">
+    <<div class="page_end">
+        <br />
         <div class="footer">
             <div class="bot-footer">
-                <img src="assets/BotLogoWord.png" width="150" style="margin-left:-45px;"><br />
-            </div><br />
-            <div class="nouridio">website designed by <span style="color: #ffa500;">nouridio</span></div>
+                <a href="credits.php">
+                    <img src="assets/BotLogoWord.png" width="150" style="margin-left:-45px;"><br />
+                </a>
+            </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -122,14 +124,15 @@ session_start();
 
         var btn_connexion = document.getElementById('connexion_button')
 
-
         if (username !== "") {
             btn_connexion.innerText = username
-            btn_connexion.setAttribute('title', 'Deconnexion');
+            btn_connexion.setAttribute('title', 'Dashboard');
             btn_connexion.setAttribute('data-bs-toggle', 'tooltip');
             btn_connexion.setAttribute('data-bs-placement', 'bottom');
+            btn_connexion.setAttribute('onclick', 'window.location.href=\'/dashboard.php\'')
+        } else {
+            btn_connexion.setAttribute('onclick', 'window.location.href=\'/login.php\'')
         }
-
 
         load_info()
 

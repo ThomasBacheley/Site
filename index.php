@@ -186,11 +186,13 @@ session_start();
     <br /><br /><br /><br /><br />
 
     <div class="page_end">
+        <br />
         <div class="footer">
             <div class="bot-footer">
-                <img src="assets/BotLogoWord.png" width="150" style="margin-left:-45px;"><br />
-            </div><br />
-            <div class="nouridio">website designed by <span style="color: #ffa500;">nouridio</span> | <a style="color: #ffa500;" href="https://icons8.com/icon/86840/mail">Mail icon by Icons8</a></div>
+                <a href="credits.php">
+                    <img src="assets/BotLogoWord.png" width="150" style="margin-left:-45px;"><br />
+                </a>
+            </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -222,7 +224,6 @@ session_start();
         var username = '<?php echo $_SESSION['username']; ?>';
 
         var btn_connexion = document.getElementById('connexion_button')
-
 
         if (username !== "") {
             btn_connexion.innerText = username

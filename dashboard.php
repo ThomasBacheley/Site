@@ -7,7 +7,7 @@ if (isset($_GET['deconnexion'])) {
     }
 }
 ?>
-<html>
+<html lang="fr">
 
 <head>
     <!-- importer le fichier de style -->
