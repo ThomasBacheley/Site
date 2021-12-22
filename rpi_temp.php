@@ -2,19 +2,19 @@
 session_start();
 
 // connexion à la base de données
-// $db_username = 'root';
-// $db_password = 'jjE72Dak';
-// $db_name     = 'universal_db';
-// $db_host     = 'localhost';
-// $db = mysqli_connect($db_host, $db_username, $db_password, $db_name)
-//     or die('could not connect to database');
-// // $requete = "SELECT id,temperature,date FROM rpi_temp ORDER BY id DESC";
-// $requete = "SELECT id,temperature,date FROM rpi_temp ORDER BY id DESC";
-// $exec_requete = mysqli_query($db, $requete);
+$db_username = 'root';
+$db_password = 'jjE72Dak';
+$db_name     = 'universal_db';
+$db_host     = 'localhost';
+$db = mysqli_connect($db_host, $db_username, $db_password, $db_name)
+    or die('could not connect to database');
+$requete = "SELECT id,temperature,date FROM rpi_temp ORDER BY id DESC";
+$exec_requete = mysqli_query($db, $requete);
+echo $result;
 
-// while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-//     printf("ID : %s  Nom : %s", $row[0], $row[1]);
-//  }
+while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+    echo "ID : ".$row[0]."  Nom : ".$row[1];
+ }
 
 
 ?>

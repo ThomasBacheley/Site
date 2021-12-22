@@ -68,21 +68,23 @@ session_start();
     <div class="heading">
     <p>Site design par <a style="color: #ffa500;" href="https://github.com/Nouridio">nouridio</a></p>
     <br/>
-    <p><a style="color: #ffa500;" href="https://icons8.com/icon/86840/mail">Mail icon</a> par Icons8</p>
+    <p>Mail icon par <a style="color: #ffa500;" href="https://icons8.com/icon/86840/mail">Icons8</a> </p>
     <br/>
-    <p>Données GuardianTale basé sur des connaisance personnel du jeu ,<br/>ainsi que prise sur <a style="color: #ffa500;" href="https://guardiantalesguides.com/">guardiantalesguides.com</a> et <a style="color: #ffa500;" href="https://heavenhold.com/">heavenhold.com</a></p>
+    <p>Données GuardianTale basées sur des connaissances personnelles du jeu ,<br/>ainsi que prise sur <a style="color: #ffa500;" href="https://guardiantalesguides.com/">guardiantalesguides.com</a> et <a style="color: #ffa500;" href="https://heavenhold.com/">heavenhold.com</a></p>
     </div>
     <br /><br /><br /><br /><br />
-    <div class="page_end">
-        <br />
-        <div class="footer">
-            <div class="bot-footer">
-                <a href="credits.php">
-                    <img src="assets/BotLogoWord.png" width="150" style="margin-left:-45px;"><br />
-                </a>
+    <footer>
+        <div class="page_end">
+            <br />
+            <div class="footer">
+                <div class="bot-footer">
+                    <a href="credits.php" data-bs-toggle="tooltip" title="Vers les Crédits">
+                        <img src="assets/BotLogoWord.png" width="150" style="margin-left:-45px;"><br />
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
+    </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

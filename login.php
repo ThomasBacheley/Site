@@ -65,7 +65,7 @@ session_start();
         </div>
     </nav>
     <div id="container">
-        <form action="verification.php" method="POST">
+        <form id="login-form" action="verification.php" method="POST">
             <h3>Connexion</h3>
             <label><b>Nom d 'utilisateur</b></label>
             <input type="text" placeholder="Entrer le nom d'utilisateur" name="username" required>
