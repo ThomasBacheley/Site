@@ -96,9 +96,9 @@ session_start();
         <h1 class="display-5 title"><span class="highlight">Yweelon</span></h1>
         <p class="subtitle">Salut, je m'appelle <span class="highlight">Thomas</span>, j'ai 22 ans et je suis <span class="highlight">développeur</span> Junior.</p>
         <br />
-        <p class="subtitle">Je code depuis <span class="highlight">2017</span> des applications pour mes études ou des projets personnel (<a href="Hellbot.php">Hellbot</a> / <a href="GIT_bot.php">GIT Bot</a>).</p>
-        <p class="subtitle">J'heberge tous ça sur des <span>Raspberry pi (modèle 3B et modèle 4)</span>.</p>
-        <p class="subtitle"> Je m'interesse aussi à la <span class=highlight>domotique</span> en essayant de mettre en place un système de contrôle de LED avec des <span class="highlight">ESP8266</span></p>
+        <p class="subtitle">Je code depuis <span class="highlight">2017</span> des applications pour mes études ou des projets personnels (<a href="Hellbot.php">Hellbot</a> / <a href="GIT_bot.php">GIT Bot</a>).</p>
+        <p class="subtitle">J'héberge tout ça sur des <span>Raspberry pi (modèle 3B et modèle 4)</span>.</p>
+        <p class="subtitle"> Je m'interésse aussi à la <span class=highlight>domotique</span> en essayant de mettre en place un système de contrôle de LED avec des <span class="highlight">ESP8266</span></p>
     </div>
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     <div id="mailform" class="text-center" style="background-color: #292933;width: 80%;margin-left: auto;margin-right: auto;border-radius: 3%;padding: 20px; box-shadow: white;">
