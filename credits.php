@@ -66,11 +66,11 @@ session_start();
     </nav>
     <!---->
     <div class="heading">
-    <p>Site design par <a style="color: #ffa500;" href="https://github.com/Nouridio">nouridio</a></p>
+    <p>Site design par <a href="https://github.com/Nouridio">nouridio</a></p>
     <br/>
-    <p>Mail icon par <a style="color: #ffa500;" href="https://icons8.com/icon/86840/mail">Icons8</a> </p>
+    <p>Mail icon par <a href="https://icons8.com/icon/86840/mail">Icons8</a> </p>
     <br/>
-    <p>Données GuardianTale basées sur des connaissances personnelles du jeu ,<br/>ainsi que prise sur <a style="color: #ffa500;" href="https://guardiantalesguides.com/">guardiantalesguides.com</a> et <a style="color: #ffa500;" href="https://heavenhold.com/">heavenhold.com</a></p>
+    <p>Données GuardianTale basées sur des connaissances personnelles du jeu ,<br/>ainsi que prise sur <a href="https://guardiantalesguides.com/">guardiantalesguides.com</a> et <a href="https://heavenhold.com/">heavenhold.com</a></p>
     </div>
     <br /><br /><br /><br /><br />
     <footer>

@@ -87,6 +87,7 @@ if (isset($_GET['deconnexion'])) {
             </div>
         </div>
     </nav>
+    <div id="snackbar">✅ Mail archivé</div>
     <div id="container_dashboard">
         <div id="dashboard_column">
             <button onclick="window.location.href='/dashboard.php?deconnexion=true'" class="btn login-btn btn-outline-accent my-2 my-sm-0" style="font-size: 10px !important;font-family: poppins !important;">Deconnexion</button>
@@ -94,8 +95,11 @@ if (isset($_GET['deconnexion'])) {
             <p style="color: white;" id="info_user"></p>
         </div>
         <div id="dashboard_info">
-            <div id="chart_el" style="margin-left:auto;margin-right:auto;"></div>
-            <button onclick="drawChart()" class="btn login-btn btn-outline-accent my-2 my-sm-0" style="width:20%;font-size: 10px !important;font-family: poppins !important;">Relever température</button>
+            <div id="rpi_temp_div">
+                <div id="chart_el" style="margin-left:auto;margin-right:auto;"></div>
+                <button onclick="drawChart()" class="btn login-btn btn-outline-accent my-2 my-sm-0" style="width:20%;font-size: 10px !important;font-family: poppins !important;">Relever température</button>
+            </div>
+            <br />
         </div>
     </div>
 </body>
@@ -126,13 +130,87 @@ if (isset($_GET['deconnexion'])) {
     var username = '<?php echo $_SESSION['username']; ?>'
     var perm = '<?php echo $_SESSION['permission']; ?>'
     document.getElementById('info_user').innerHTML = `${username[0].toUpperCase()}${username.slice(1)} (<span class="highlight">${perm}</span>)`
+    var dashboard_column = document.getElementById('dashboard_column')
+    var dashboard_info = document.getElementById('dashboard_info')
+
     if (perm == 'ADMIN') {
         var link_cv = document.createElement('a');
         link_cv.href = 'http://yweelon.fr/CV.pdf';
         link_cv.target = '_blank'
         link_cv.style.color = '#ffa500'
         link_cv.innerText = 'CV'
-        document.getElementById('dashboard_column').appendChild(link_cv)
+
+        dashboard_column.appendChild(link_cv)
+        dashboard_column.appendChild(document.createElement('br'))
+
+        //---
+
+        var mails_div = document.createElement('div');
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    var mails = JSON.parse(this.responseText);
+
+                    mails.forEach(mail => {
+                        var div_mail = document.createElement('div');
+                        div_mail.style.border = '2px solid yellow';
+                        div_mail.style.color = 'white'
+                        div_mail.style.padding = '5px'
+                        div_mail.id = 'div_mail' + mail.id;
+                        var close_button = document.createElement('button');
+                        close_button.id = "CB_" + mail.id;
+                        close_button.classList.add('close_button');
+                        close_button.innerText = ' X '
+                        close_button.setAttribute('onclick', 'displayid(this)')
+
+                        div_mail.appendChild(close_button);
+
+                        //--
+
+                        var mail_title = document.createElement('h3')
+                        mail_title.innerText = mail.subject;
+
+                        div_mail.appendChild(mail_title)
+
+                        var mail_from = document.createElement('p')
+                        mail_from.innerHTML = `De ${mail.sender} (${mail.email})<br/>`
+
+                        div_mail.appendChild(mail_from)
+
+                        var mail_msg = document.createElement('p')
+                        mail_msg.innerText = mail.message;
+
+                        div_mail.appendChild(mail_msg)
+
+                        mails_div.appendChild(div_mail)
+                    })
+                } else {
+                    alert('erreur : status -> ' + this.status)
+                }
+            }
+        };
+        xhr.open("GET", "http://yweelon.fr:8090/recupmail", true);
+        xhr.send();
+
+        dashboard_info.appendChild(mails_div)
+
+    }
+
+    var snackbar = document.getElementById("snackbar");
+
+    function displayid(el) {
+        alert(el.id)
+
+        // Add the "show" class to DIV
+        snackbar.className = "show";
+
+        // After 3 seconds, remove the show class from DIV
+        setTimeout(function() {
+            snackbar.className = snackbar.className.replace("show", "");
+        }, 3000);
+
     }
 </script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -173,6 +251,8 @@ if (isset($_GET['deconnexion'])) {
             legend: {
                 position: "none"
             },
+            pointSize: 7,
+            pointFillColor: '#fff',
             hAxis: {
                 tickOptions: {
                     fontWeight: 'bold',

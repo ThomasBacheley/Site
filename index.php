@@ -1,6 +1,8 @@
 <?php
 session_start();
-// echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>';
+if (isset($_GET['sendmail'])) {
+    $sendmail = $_GET['sendmail'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr" style="scroll-behavior: smooth !important;">
@@ -118,21 +120,15 @@ session_start();
                 m'envoyer un mail et j'y repondrais le plus tot possible</p>
 
             <div class="row" style="margin-right: auto;margin-left: auto;">
-                <!--Grid column-->
                 <div class="col-md-9 mb-md-0 mb-5">
-                    <form id="contact-form" class="was-validated" name="contact-form" action="http://yweelon.fr:3000/mail" method="post">
-
-                        <!--Grid row-->
+                    <form id="contact-form" class="was-validated" name="contact-form" action="mail.php" method="post">
                         <div class="row">
-                            <!--Grid column-->
                             <div class="col-md-6">
                                 <div class="md-form mb-0">
                                     <label for="name" style="color: white;">Nom :</label>
                                     <input style="background-color: white;" type="text" id="name" name="name" class="form-control">
                                 </div>
                             </div>
-                            <!--Grid column-->
-                            <!--Grid column-->
                             <div class="col-md-6">
                                 <div class="md-form mb-0">
                                     <label for="email" style="color: white;">Email :</label>
@@ -142,11 +138,7 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                            <!--Grid column-->
                         </div>
-                        <!--Grid row-->
-
-                        <!--Grid row-->
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="md-form mb-0">
@@ -155,33 +147,22 @@ session_start();
                                 </div>
                             </div>
                         </div>
-                        <!--Grid row-->
-
-                        <!--Grid row-->
                         <div class="row">
-
-                            <!--Grid column-->
                             <div class="col-md-12">
-
                                 <div class="md-form">
                                     <label for="validationMessage" style="color: white;">Message :</label>
-                                    <textarea style="background-color: white; border-radius:15px; padding:5px; min-height: 150px;" rows="15" class="form-control is-invalid" id="validationMessage" placeholder="Entre ton message ici" required></textarea>
+                                    <textarea style="background-color: white; border-radius:15px; padding:5px; min-height: 150px;" rows="15" class="form-control" pattern="*" id="validationMessage" name="validationMessage" placeholder="Entre ton message ici" required></textarea>
                                     <div class="invalid-feedback feedback-pos">
                                         S'il te plait, entre ton message
                                     </div>
-
                                 </div>
 
                             </div>
                         </div>
-                        <!--Grid row-->
-
                         <div class="text-center text-md-left">
-                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                            <button type="submit" value="SEND_MAIL" class="btn btn-primary">Envoyer</button>
                         </div>
                     </form>
-
-                    <div class="status"></div>
                 </div>
                 <!--Grid column-->
 
@@ -211,6 +192,18 @@ session_start();
     <script>
         mybutton = document.getElementById("topbtn");
 
+        let easteregg = ''
+
+        $("body").on('keyup', function(e) {
+            console.log(easteregg)
+            if (easteregg != 'ywee bg') {
+                easteregg += e.key
+            } else {
+                alert('Tu as tous compris wesh !');
+                easteregg = ''
+            }
+        });
+
         // When the user scrolls down 20px from the top of the document, show the button
         window.onscroll = function() {
             scrollFunction()
@@ -224,26 +217,30 @@ session_start();
             }
         }
 
+        function sendmail() {
+            <?php
+            header('Location: index.php?sendmail=true'); // l'utilisateur existe déja
+            ?>
+        }
+
+
         // When the user clicks on the button, scroll to the top of the document
         function topFunction() {
             document.body.scrollTop = 0; // For Safari
             document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         }
 
-        // if (sendmail == 'true') {
-        //     var x = document.getElementById("snackbar");
+        if ('<?php echo $sendmail; ?>' == 'true') {
+            var x = document.getElementById("snackbar");
 
-        //     // Add the "show" class to DIV
-        //     x.className = "show";
+            // Add the "show" class to DIV
+            x.className = "show";
 
-        //     // After 3 seconds, remove the show class from DIV
-        //     setTimeout(function() {
-        //         x.className = x.className.replace("show", "");
-        //         <?php
-        //         $_SESSION["sendmail"] = 'cannrd';
-        //         ?>
-        //     }, 3000);
-        // }
+            // After 3 seconds, remove the show class from DIV
+            setTimeout(function() {
+                x.className = x.className.replace("show", "");
+            }, 3000);
+        }
 
         var username = '<?php echo $_SESSION['username']; ?>';
         var btn_connexion = document.getElementById('connexion_button')

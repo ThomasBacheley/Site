@@ -14,7 +14,7 @@ session_start();
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,600,700,800,900&display=swap" rel="stylesheet">
-    <title>Connexion</title>
+    <title>Inscription</title>
     <meta content="Yweelon.fr" property="og:title" />
     <meta content="Site d'Yweelon" property="og:description" />
     <meta content="http://yweelon.fr" property="og:url" />
@@ -65,52 +65,52 @@ session_start();
         </div>
     </nav>
     <div id="container">
-        <form id="login-form" action="verification.php" method="POST">
-            <h3>Connexion</h3>
+        <form id="signin-form" action="verification_inscription.php" method="POST">
+            <h3>Inscription</h3>
             <label><b>Nom d 'utilisateur</b></label>
             <input type="text" placeholder="Entrer le nom d'utilisateur" name="username" required>
             <label><b>Mot de passe</b></label>
             <input type="password" placeholder="Entrer le mot de passe" name="password" required>
-            <input type="submit" id='submit' value='LOGIN'>
-            <a href="./inscription.php">Inscription ?</a>
+            <label><b>Confirmation Mot de passe</b></label>
+            <input type="password" placeholder="Entrer le mot de passe une nouvelle fois" name="password_confirmation" required>
+            <input type="submit" id='submit' value='SIGNIN'>
+            <a href="./login.php">Connexion ?</a>
             <?php
             if (isset($_GET['erreur'])) {
                 $err = $_GET['erreur'];
             }
             ?>
         </form>
-
     </div>
-    <div id="snackbar_error">❌ Erreur <span id="snackbar_content"></span></div>
+    <div id="snackbar_error">❌ Erreur : <span id="snackbar_content"></span></div>
     <script>
         var erreur = '<?php echo $err; ?>';
 
-        var snackbar = document.getElementById("snackbar_error");
-        var snackbar_content = document.getElementById("snackbar_content");
-
-        if (erreur == '1') {
-            // Add the "show" class to DIV
+        if (erreur) {
+            var snackbar = document.getElementById("snackbar_error");
+            var snackbar_content = document.getElementById("snackbar_content");
             snackbar.className = "show";
-            snackbar_content.innerText = "utilisateur ou mot de passe incorrect"
-
-            // After 3 seconds, remove the show class from DIV
+            switch (erreur) {
+                case '1':
+                    snackbar_content.innerText = "utilisateur ou mot de passe vide"
+                    break;
+                case '2':
+                    snackbar_content.innerText = "les mot de passe ne sont pas identique"
+                    break;
+                case '3':
+                    snackbar_content.innerText = "l'utilisateur existe déja"
+                    break;
+                case '4':
+                    snackbar_content.innerText = "Une erreur est survenue, l'ajout n'as pas aboutit"
+                    break;
+                default:
+                    snackbar_content.innerText = "Une erreur est survenue"
+                    break;
+            }
             setTimeout(function() {
                 snackbar.className = snackbar.className.replace("show", "");
                 snackbar_content.innerText = ""
             }, 3000);
-        } else {
-            if (erreur == '2') {
-
-                // Add the "show" class to DIV
-                snackbar.className = "show";
-                snackbar_content.innerText = "utilisateur ou mot de passe vide"
-
-                // After 3 seconds, remove the show class from DIV
-                setTimeout(function() {
-                    snackbar.className = snackbar.className.replace("show", "");
-                    snackbar_content.innerText = ""
-                }, 3000);
-            }
         }
     </script>
 </body>
