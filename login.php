@@ -80,6 +80,38 @@ session_start();
         </form>
 
     </div>
+    <div id="snackbar_error">❌ Erreur <span id="snackbar_content"></span></div>
+    <script>
+        var erreur = '<?php echo $err; ?>';
+
+        var snackbar = document.getElementById("snackbar_error");
+        var snackbar_content = document.getElementById("snackbar_content");
+
+        if (erreur == '1') {
+            // Add the "show" class to DIV
+            snackbar.className = "show";
+            snackbar_content.innerText = "utilisateur ou mot de passe incorrect"
+
+            // After 3 seconds, remove the show class from DIV
+            setTimeout(function() {
+                snackbar.className = snackbar.className.replace("show", "");
+                snackbar_content.innerText = ""
+            }, 3000);
+        } else {
+            if (erreur == '2') {
+
+                // Add the "show" class to DIV
+                snackbar.className = "show";
+                snackbar_content.innerText = "utilisateur ou mot de passe vide"
+
+                // After 3 seconds, remove the show class from DIV
+                setTimeout(function() {
+                    snackbar.className = snackbar.className.replace("show", "");
+                    snackbar_content.innerText = ""
+                }, 3000);
+            }
+        }
+    </script>
 </body>
 
 </html>

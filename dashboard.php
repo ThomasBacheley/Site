@@ -8,20 +8,20 @@ if (isset($_GET['deconnexion'])) {
 }
 
 // connexion à la base de données
-$db_username = 'root';
-$db_password = 'jjE72Dak';
-$db_name     = 'universal_db';
-$db_host     = 'localhost';
+// $db_username = 'root';
+// $db_password = 'jjE72Dak';
+// $db_name     = 'universal_db';
+// $db_host     = 'localhost';
 
-$conn = mysqli_connect($db_host, $db_username, $db_password, $db_name)
-    or die('could not connect to database');
-$query = mysqli_query($conn, "SELECT temperature,date FROM rpi_temp ORDER BY id DESC LIMIT 5");
+// $conn = mysqli_connect($db_host, $db_username, $db_password, $db_name)
+//     or die('could not connect to database');
+// $query = mysqli_query($conn, "SELECT temperature,date FROM rpi_temp ORDER BY id DESC LIMIT 5");
 
-$temperature_date_array = [];
-while ($row = mysqli_fetch_assoc($query)) {
-    $temp_str = preg_replace('/202\d{1}-/i','',$row['date']);
-    array_push($temperature_date_array, [str_replace(':','h',preg_replace('/:\d{2}$/i','',$temp_str)), intval($row['temperature'])]);
-}
+// $temperature_date_array = [];
+// while ($row = mysqli_fetch_assoc($query)) {
+//     $temp_str = preg_replace('/202\d{1}-/i', '', $row['date']);
+//     array_push($temperature_date_array, [str_replace(':', 'h', preg_replace('/:\d{2}$/i', '', $temp_str)), intval($row['temperature'])]);
+// }
 
 ?>
 <html lang="fr">
@@ -95,14 +95,38 @@ while ($row = mysqli_fetch_assoc($query)) {
         </div>
         <div id="dashboard_info">
             <div id="chart_el" style="margin-left:auto;margin-right:auto;"></div>
+            <button onclick="drawChart()" class="btn login-btn btn-outline-accent my-2 my-sm-0" style="width:20%;font-size: 10px !important;font-family: poppins !important;">Relever température</button>
         </div>
     </div>
 </body>
 <script>
+    async function getTemperature() {
+        return new Promise((resolve, reject) => {
+            try {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (this.readyState == 4) {
+                        if (this.status == 200) {
+                            var temp_data = JSON.parse(this.responseText);
+
+                            resolve(temp_data)
+                        } else {
+                            alert('erreur : status -> ' + this.status)
+                        }
+                    }
+                };
+                xhr.open("GET", "http://yweelon.fr:8090/gettemperature", true);
+                xhr.send();
+            } catch (error) {
+                reject(error)
+            }
+        })
+    }
+
     var username = '<?php echo $_SESSION['username']; ?>'
     var perm = '<?php echo $_SESSION['permission']; ?>'
     document.getElementById('info_user').innerHTML = `${username[0].toUpperCase()}${username.slice(1)} (<span class="highlight">${perm}</span>)`
-    if(perm=='ADMIN'){
+    if (perm == 'ADMIN') {
         var link_cv = document.createElement('a');
         link_cv.href = 'http://yweelon.fr/CV.pdf';
         link_cv.target = '_blank'
@@ -113,20 +137,22 @@ while ($row = mysqli_fetch_assoc($query)) {
 </script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
-    var temperature_date_array = JSON.parse('<?php echo json_encode($temperature_date_array); ?>').reverse();
+    // var temperature_date_array = JSON.parse('<?php echo json_encode($temperature_date_array); ?>').reverse();
 
     google.load("visualization", "1", {
         packages: ["corechart"]
     });
     google.setOnLoadCallback(drawChart);
 
-    function drawChart() {
+    async function drawChart() {
 
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Date');
         data.addColumn('number', 'Temperature RPI');
 
-        data.addRows(temperature_date_array);
+        let arr = await getTemperature()
+
+        data.addRows(arr);
 
         var formatPattern = '#,##0.0 C°';
         var formatNumber = new google.visualization.NumberFormat({
