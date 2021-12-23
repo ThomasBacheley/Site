@@ -92,7 +92,6 @@ while ($row = mysqli_fetch_assoc($query)) {
             <button onclick="window.location.href='/dashboard.php?deconnexion=true'" class="btn login-btn btn-outline-accent my-2 my-sm-0" style="font-size: 10px !important;font-family: poppins !important;">Deconnexion</button>
             <br />
             <p style="color: white;" id="info_user"></p>
-            <br />
         </div>
         <div id="dashboard_info">
             <div id="chart_el" style="margin-left:auto;margin-right:auto;"></div>
@@ -103,10 +102,18 @@ while ($row = mysqli_fetch_assoc($query)) {
     var username = '<?php echo $_SESSION['username']; ?>'
     var perm = '<?php echo $_SESSION['permission']; ?>'
     document.getElementById('info_user').innerHTML = `${username[0].toUpperCase()}${username.slice(1)} (<span class="highlight">${perm}</span>)`
+    if(perm=='ADMIN'){
+        var link_cv = document.createElement('a');
+        link_cv.href = 'http://yweelon.fr/CV.pdf';
+        link_cv.target = '_blank'
+        link_cv.style.color = '#ffa500'
+        link_cv.innerText = 'CV'
+        document.getElementById('dashboard_column').appendChild(link_cv)
+    }
 </script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
-    var temperature_date_array = JSON.parse('<?php echo json_encode($temperature_date_array); ?>');
+    var temperature_date_array = JSON.parse('<?php echo json_encode($temperature_date_array); ?>').reverse();
 
     google.load("visualization", "1", {
         packages: ["corechart"]

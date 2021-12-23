@@ -104,7 +104,8 @@ session_start();
         <br />
         <p class="subtitle">Je code depuis <span class="highlight">2017</span> des applications pour mes études ou des projets personnels (<a href="Hellbot.php">Hellbot</a> / <a href="GIT_bot.php">GIT Bot</a>).</p>
         <p class="subtitle">J'héberge tout ça sur des <span>Raspberry pi (modèle 3B et modèle 4)</span>.</p>
-        <p class="subtitle"> Je m'interésse aussi à la <span class=highlight>domotique</span> en essayant de mettre en place un système de contrôle de LED avec des <span class="highlight">ESP8266</span></p>
+        <p class="subtitle">Je fais beaucoup de <span class=highlight>JavaScript</span> ou de développement <span class=highlight>Web / Mobile</span> pour me simplifier la vie et gérer ma base de données</p>
+        <p class="subtitle">Je m'intéresse aussi à la <span class=highlight>domotique</span> via des minis projets autour d'<span class="highlight">ESP8266</span></p>
     </div>
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     <div id="mailform" class="text-center" style="background-color: #292933;width: 80%;margin-left: auto;margin-right: auto;border-radius: 3%;padding: 20px; box-shadow: white;">
