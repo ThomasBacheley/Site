@@ -6,6 +6,23 @@ if (isset($_GET['deconnexion'])) {
         header("location:index.php");
     }
 }
+
+// connexion à la base de données
+$db_username = 'root';
+$db_password = 'jjE72Dak';
+$db_name     = 'universal_db';
+$db_host     = 'localhost';
+
+$conn = mysqli_connect($db_host, $db_username, $db_password, $db_name)
+    or die('could not connect to database');
+$query = mysqli_query($conn, "SELECT temperature,date FROM rpi_temp ORDER BY id DESC LIMIT 5");
+
+$temperature_date_array = [];
+while ($row = mysqli_fetch_assoc($query)) {
+    $temp_str = preg_replace('/202\d{1}-/i','',$row['date']);
+    array_push($temperature_date_array, [str_replace(':','h',preg_replace('/:\d{2}$/i','',$temp_str)), intval($row['temperature'])]);
+}
+
 ?>
 <html lang="fr">
 
@@ -73,21 +90,106 @@ if (isset($_GET['deconnexion'])) {
     <div id="container_dashboard">
         <div id="dashboard_column">
             <button onclick="window.location.href='/dashboard.php?deconnexion=true'" class="btn login-btn btn-outline-accent my-2 my-sm-0" style="font-size: 10px !important;font-family: poppins !important;">Deconnexion</button>
+            <br />
+            <p style="color: white;" id="info_user"></p>
+            <br />
         </div>
         <div id="dashboard_info">
-
+            <div id="chart_el" style="margin-left:auto;margin-right:auto;"></div>
         </div>
     </div>
 </body>
 <script>
-    var username = '<?php echo $_SESSION['username']; ?>';
-    var perm = '<?php echo $_SESSION['permission']; ?>';
+    var username = '<?php echo $_SESSION['username']; ?>'
+    var perm = '<?php echo $_SESSION['permission']; ?>'
+    document.getElementById('info_user').innerHTML = `${username[0].toUpperCase()}${username.slice(1)} (<span class="highlight">${perm}</span>)`
+</script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    var temperature_date_array = JSON.parse('<?php echo json_encode($temperature_date_array); ?>');
 
-    var p = document.createElement('p');
+    google.load("visualization", "1", {
+        packages: ["corechart"]
+    });
+    google.setOnLoadCallback(drawChart);
 
-    p.innerHTML = '<p>' + username + '</p><span>(' + perm + ')</span>'
+    function drawChart() {
 
-    document.getElementById('dashboard_column').appendChild(p)
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Date');
+        data.addColumn('number', 'Temperature RPI');
+
+        data.addRows(temperature_date_array);
+
+        var formatPattern = '#,##0.0 C°';
+        var formatNumber = new google.visualization.NumberFormat({
+            pattern: formatPattern
+        });
+
+        formatNumber.format(data, 1);
+
+        var options = {
+            title: 'Température de la RPI 4',
+            titleTextStyle: {
+                color: 'white',
+                fontSize: 18,
+                bold: true
+            },
+            width: 800,
+            height: 400,
+            legend: {
+                position: "none"
+            },
+            hAxis: {
+                tickOptions: {
+                    fontWeight: 'bold',
+                    color: '#ffffff'
+                },
+                title: 'Date',
+                titleTextStyle: {
+                    fontStyle: "normal",
+                    italic: false,
+                    color: '#ffffff'
+                },
+                textStyle: {
+                    fontStyle: "normal",
+                    italic: false,
+                    color: '#ffffff'
+                }
+            },
+            vAxis: {
+                tickOptions: {
+                    fontWeight: 'bold',
+                    color: '#ffffff'
+                },
+                title: 'Celsius',
+                titleTextStyle: {
+                    fontStyle: "normal",
+                    italic: false,
+                    color: '#ffffff'
+                },
+                textStyle: {
+                    fontStyle: "normal",
+                    italic: false,
+                    color: '#ffffff'
+                },
+                format: formatPattern,
+            },
+            series: {
+                0: {
+                    color: '#ffa500'
+                }
+            },
+            backgroundColor: {
+                fill: '#272935',
+                stroke: '#fff',
+                strokeWidth: 3
+            }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_el'));
+        chart.draw(data, options);
+    }
 </script>
 
 </html>

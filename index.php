@@ -1,5 +1,6 @@
 <?php
-    session_start();
+session_start();
+// echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>';
 ?>
 <!DOCTYPE html>
 <html lang="fr" style="scroll-behavior: smooth !important;">
@@ -228,21 +229,22 @@
             document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         }
 
+        // if (sendmail == 'true') {
+        //     var x = document.getElementById("snackbar");
+
+        //     // Add the "show" class to DIV
+        //     x.className = "show";
+
+        //     // After 3 seconds, remove the show class from DIV
+        //     setTimeout(function() {
+        //         x.className = x.className.replace("show", "");
+        //         <?php
+        //         $_SESSION["sendmail"] = 'cannrd';
+        //         ?>
+        //     }, 3000);
+        // }
+
         var username = '<?php echo $_SESSION['username']; ?>';
-        var sendmail = true
-
-        if (sendmail == true) {
-            var x = document.getElementById("snackbar");
-
-            // Add the "show" class to DIV
-            x.className = "show";
-
-            // After 3 seconds, remove the show class from DIV
-            setTimeout(function() {
-                x.className = x.className.replace("show", "");
-            }, 3000);
-        }
-
         var btn_connexion = document.getElementById('connexion_button')
 
         if (username !== "") {
