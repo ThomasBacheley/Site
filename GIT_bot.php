@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -116,61 +113,62 @@ session_start();
                 </div>
             </div>
         </div>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="js/now-ui-kit.min.js"></script>
-    <script>
-        var username = '<?php echo $_SESSION['username']; ?>';
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="js/now-ui-kit.min.js"></script>
+        <script src="./js/customjs.js"></script>
+        <script>
+            
+            connexion_button(document.getElementById('connexion_button'),'<?php echo $_SESSION['username']; ?>')
+            
+            load_info()
 
-        var btn_connexion = document.getElementById('connexion_button')
+            function load_info() {
+                var xhr = new XMLHttpRequest();
 
-        if (username !== "") {
-            btn_connexion.innerText = username
-            btn_connexion.setAttribute('title', 'Dashboard');
-            btn_connexion.setAttribute('data-bs-toggle', 'tooltip');
-            btn_connexion.setAttribute('data-bs-placement', 'bottom');
-            btn_connexion.setAttribute('onclick', 'window.location.href=\'/dashboard.php\'')
-        } else {
-            btn_connexion.setAttribute('onclick', 'window.location.href=\'/login.php\'')
-        }
+                var heroes_value = document.getElementById('heroes_value')
+                var items_value = document.getElementById('items_value')
+                var cmds_value = document.getElementById('cmds_value')
 
-        load_info()
+                var heroes_value_title = document.getElementById('heroes_value_title')
+                var items_value_title = document.getElementById('items_value_title')
+                var cmds_value_title = document.getElementById('cmds_value_title')
 
-        function load_info() {
-            var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (this.readyState == 4) {
+                        if (this.status == 200) {
+                            var data = JSON.parse(this.responseText)
 
-            var heroes_value = document.getElementById('heroes_value')
-            var items_value = document.getElementById('items_value')
-            var cmds_value = document.getElementById('cmds_value')
+                            heroes_value.innerText = data.heroes_value
+                            items_value.innerText = data.items_value
+                            cmds_value.innerText = data.cmds_value
 
-            var heroes_value_title = document.getElementById('heroes_value_title')
-            var items_value_title = document.getElementById('items_value_title')
-            var cmds_value_title = document.getElementById('cmds_value_title')
+                            heroes_value_title.innerText = data.heroes_value
+                            items_value_title.innerText = data.items_value
+                            cmds_value_title.innerText = data.cmds_value
 
-            xhr.onreadystatechange = function() {
-                if (this.readyState == 4) {
-                    if (this.status == 200) {
-                        var data = JSON.parse(this.responseText)
+                        } else {
+                            switch (this.status) {
+                                case 400:
+                                    alert('Erreur : 400 Bad Request')
+                                    break;
+                                case 0:
+                                    alert('Erreur : 0 API OFFLINE')
+                                    break;
+                                default:
+                                    alert('erreur : status -> ' + this.status)
+                                    break;
+                            }
 
-                        heroes_value.innerText = data.heroes_value
-                        items_value.innerText = data.items_value
-                        cmds_value.innerText = data.cmds_value
-
-                        heroes_value_title.innerText = data.heroes_value
-                        items_value_title.innerText = data.items_value
-                        cmds_value_title.innerText = data.cmds_value
-
-                    } else {
-                        alert('erreur : status -> ' + this.status)
+                        }
                     }
-                }
-            };
-            xhr.open("GET", "http://yweelon.fr:8084/getinfosite", true);
-            xhr.send();
-        }
-    </script>
+                };
+                xhr.open("GET", "http://yweelon.fr:8084/getinfosite", true);
+                xhr.send();
+            }
+        </script>
 </body>
 
 </html>

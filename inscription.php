@@ -65,7 +65,7 @@ session_start();
         </div>
     </nav>
     <div id="container">
-        <form id="signin-form" action="verification_inscription.php" method="POST">
+        <form id="signin-form" action="/verification/verification_inscription.php" method="POST">
             <h3>Inscription</h3>
             <label><b>Nom d 'utilisateur</b></label>
             <input type="text" placeholder="Entrer le nom d'utilisateur" name="username" required>
@@ -82,12 +82,12 @@ session_start();
             ?>
         </form>
     </div>
-    <div id="snackbar_error">❌ Erreur : <span id="snackbar_content"></span></div>
+    <div id="snackbar_failed">❌ Erreur : <span id="snackbar_content"></span></div>
     <script>
         var erreur = '<?php echo $err; ?>';
 
         if (erreur) {
-            var snackbar = document.getElementById("snackbar_error");
+            var snackbar = document.getElementById("snackbar_failed");
             var snackbar_content = document.getElementById("snackbar_content");
             snackbar.className = "show";
             switch (erreur) {

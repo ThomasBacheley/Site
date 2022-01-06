@@ -10,6 +10,7 @@ session_start();
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/now-ui-kit.css">
+    <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,600,700,800,900&display=swap" rel="stylesheet">
@@ -66,11 +67,19 @@ session_start();
     </nav>
     <!---->
     <div class="heading">
+    <p>Ci-dessous les crédits et mentions légales</p>
+    <br/>
+    <p>Ce site à pour but <span class="highlight">d'informer</span> et est <span class="highlight">non lucratif</span></p>
+    <br/><br/>
+    <div style="padding:10px" id="guardiantale" class="borderBlink">
+        <p>Toutes les données à propos du jeu "<a href="https://guardiantales.com/">Guardian Tale</a>" sont en aucun cas les miennes, je décline <span class="highlight">toutes</span> responsabilités les concernants</p>
+    <p>Données GuardianTale basées sur des connaissances personnelles<br/>ainsi que prise sur <a href="https://guardiantalesguides.com/">guardiantalesguides.com</a> et <a href="https://heavenhold.com/">heavenhold.com</a></p>
+    </div>
+    <br/><br/>
     <p>Site design par <a href="https://github.com/Nouridio">nouridio</a></p>
     <br/>
     <p>Mail icon par <a href="https://icons8.com/icon/86840/mail">Icons8</a> </p>
     <br/>
-    <p>Données GuardianTale basées sur des connaissances personnelles du jeu ,<br/>ainsi que prise sur <a href="https://guardiantalesguides.com/">guardiantalesguides.com</a> et <a href="https://heavenhold.com/">heavenhold.com</a></p>
     </div>
     <br /><br /><br /><br /><br />
     <footer>
@@ -89,20 +98,9 @@ session_start();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="js/now-ui-kit.min.js"></script>
+    <script src="./js/customjs.js"></script>
     <script>
-        var username = '<?php echo $_SESSION['username']; ?>';
-
-        var btn_connexion = document.getElementById('connexion_button')
-
-        if (username !== "") {
-            btn_connexion.innerText = username
-            btn_connexion.setAttribute('title', 'Dashboard');
-            btn_connexion.setAttribute('data-bs-toggle', 'tooltip');
-            btn_connexion.setAttribute('data-bs-placement', 'bottom');
-            btn_connexion.setAttribute('onclick', 'window.location.href=\'/dashboard.php\'')
-        } else {
-            btn_connexion.setAttribute('onclick', 'window.location.href=\'/login.php\'')
-        }
+        connexion_button(document.getElementById('connexion_button'),'<?php echo $_SESSION['username']; ?>')
     </script>
 </body>
 

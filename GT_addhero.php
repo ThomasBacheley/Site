@@ -23,7 +23,7 @@ session_start();
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-transparent">
+<nav class="navbar navbar-expand-lg bg-transparent">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <img src="assets/menuIcon.svg" width="20px" height="20px" style="max-width: none !important;">
         </button>
@@ -33,25 +33,42 @@ session_start();
         <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 20px !important">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="./index.php">Accueil</a>
+                    <a class="nav-link" href="index.php">Accueil</a>
                 </li>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Bot
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="Hellbot.php">Hellbot</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="GIT_bot.php">GIT Bot</a>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Guardian Tale
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="GT_herosheet.php">Hero Sheet</a>
+                        <a class="dropdown-item" href="GT_addhero.php"><span class="sr-only">(actuel)</span>Add Hero</a>
+                        <a class="dropdown-item" href="GT_updatehero.php">Update Hero</a>
+                    </div>
+                </div>
             </ul>
-        </div>
-        <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Guardian Tale
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="GT_herosheet.php">Hero Sheet</a>
-                <a class="dropdown-item" href="GT_addhero.php">Add Hero <span class="sr-only">(actuel)</span></a>
-                <a class="dropdown-item" href="GT_updatehero.php">Update Hero</a>
+            <div class="nav-item">
+                <a class="nav-link" href="http://yweelon.fr/phpmyadmin">PHPMyAdmin</a>
             </div>
+            <div class="nav-item">
+                <a class="nav-link" href="https://github.com/ThomasBacheley">Github</a>
+            </div>
+            <button id="connexion_button" class="btn login-btn btn-outline-accent my-2 my-sm-0" style="font-size: 10px !important;font-family: poppins !important;">Connexion</button>
         </div>
     </nav>
     <button onclick="myFunction()">Show Snackbar</button>
 
     <!-- The actual snackbar -->
-    <div id="snackbar">✅ Hero succesfully added</div>
+    <div id="snackbar_success">✅ Hero succesfully added</div>
     <div class="heading">
         <form action="http://yweelon.fr:8084/addhero" method="post">
             <fieldset>
@@ -122,7 +139,7 @@ session_start();
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="cards_name" class="form-label">Cards</label>
-                        <input required type="text" name="cards_name" class="form-control" placeholder="NULL if no cards or unknow (ex:2x atk or 2x crit)" style="background-color: white;">
+                        <input type="text" name="cards_name" class="form-control" placeholder="ex:2x atk or 2x crit" style="background-color: white;">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="merchitem_name" class="form-label">Merch Item name</label>
@@ -139,11 +156,11 @@ session_start();
                     </div>
                     <div class="form-group col-md-4">
                         <label for="hero_link" class="form-label">Link to the Hero</label>
-                        <input required type="text" name="hero_link" class="form-control" placeholder="try to get the link from https://heavenhold.com/heroes/" style="background-color: white;">
+                        <input type="text" name="hero_link" class="form-control" placeholder="try to get the link from https://heavenhold.com/heroes/" style="background-color: white;">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="hero_pic" class="form-label">Link to the Hero's Illustration</label>
-                        <input required type="text" name="hero_pic" class="form-control" placeholder="try to get the link from https://heavenhold.com/heroes/" style="background-color: white;"><a href="https://heavenhold.com/wp-content/uploads/2020/11/future_princess.jpg">(example)</a>
+                        <input type="text" name="hero_pic" class="form-control" placeholder="try to get the link from https://heavenhold.com/heroes/" style="background-color: white;"><a href="https://heavenhold.com/wp-content/uploads/2020/11/future_princess.jpg">(example)</a>
                     </div>
                 </div>
                 <input type="text" name="username" id="txtinput_username" class="form-control" style="background-color: white;" placeholder="You can put your username if you want :)">
@@ -167,11 +184,12 @@ session_start();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="js/now-ui-kit.min.js"></script>
-
+    <script src="./js/customjs.js"></script>
     <script>
+        connexion_button(document.getElementById('connexion_button'),'<?php echo $_SESSION['username']; ?>')
         function myFunction() {
             // Get the snackbar DIV
-            var x = document.getElementById("snackbar");
+            var x = document.getElementById("snackbar_success");
 
             // Add the "show" class to DIV
             x.className = "show";
@@ -217,7 +235,17 @@ session_start();
                             selecter.appendChild(option);
                         })
                     } else {
-                        alert('erreur : status -> ' + this.status)
+                        switch (this.status) {
+                                case 400:
+                                    alert('Erreur : 400 Bad Request')
+                                    break;
+                                case 0:
+                                    alert('Erreur : 0 API OFFLINE')
+                                    break;
+                                default:
+                                    alert('erreur : status -> ' + this.status)
+                                    break;
+                            }
                     }
                 }
             };
@@ -246,7 +274,17 @@ session_start();
                             selecter.appendChild(option);
                         })
                     } else {
-                        alert('erreur : status -> ' + this.status)
+                        switch (this.status) {
+                                case 400:
+                                    alert('Erreur : 400 Bad Request')
+                                    break;
+                                case 0:
+                                    alert('Erreur : 0 API OFFLINE')
+                                    break;
+                                default:
+                                    alert('erreur : status -> ' + this.status)
+                                    break;
+                            }
                     }
                 }
             };
@@ -274,7 +312,17 @@ session_start();
                             selecter.appendChild(option);
                         })
                     } else {
-                        alert('erreur : status -> ' + this.status)
+                        switch (this.status) {
+                                case 400:
+                                    alert('Erreur : 400 Bad Request')
+                                    break;
+                                case 0:
+                                    alert('Erreur : 0 API OFFLINE')
+                                    break;
+                                default:
+                                    alert('erreur : status -> ' + this.status)
+                                    break;
+                            }
                     }
                 }
             };
@@ -331,7 +379,17 @@ session_start();
                             selecter.appendChild(option);
                         })
                     } else {
-                        alert('erreur : status -> ' + this.status)
+                        switch (this.status) {
+                                case 400:
+                                    alert('Erreur : 400 Bad Request')
+                                    break;
+                                case 0:
+                                    alert('Erreur : 0 API OFFLINE')
+                                    break;
+                                default:
+                                    alert('erreur : status -> ' + this.status)
+                                    break;
+                            }
                     }
                 }
             };
@@ -360,7 +418,17 @@ session_start();
                             selecter.appendChild(option);
                         })
                     } else {
-                        alert('erreur : status -> ' + this.status)
+                        switch (this.status) {
+                                case 400:
+                                    alert('Erreur : 400 Bad Request')
+                                    break;
+                                case 0:
+                                    alert('Erreur : 0 API OFFLINE')
+                                    break;
+                                default:
+                                    alert('erreur : status -> ' + this.status)
+                                    break;
+                            }
                     }
                 }
             };

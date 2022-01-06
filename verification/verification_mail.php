@@ -3,8 +3,8 @@ session_start();
 if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['subject']) && isset($_POST['validationMessage'])) {
 
     // connexion à la base de données
-    $db_username = 'root';
-    $db_password = 'jjE72Dak';
+    $db_username = 'webapi';
+    $db_password = 'lWOwlHYlG5HdOXoC';
     $db_name     = 'universal_db';
     $db_host     = 'localhost';
     $db = mysqli_connect($db_host, $db_username, $db_password, $db_name)
@@ -21,14 +21,14 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['subject']) 
         $sql = "INSERT INTO mail (sender,email,subject,message)VALUES ('" . strtolower($sender) . "', '" .  $email . "', '" .  $subject . "', '" .  $message . "')";
 
         if (mysqli_query($db, $sql)) {
-            header('Location: index.php?sendmail=true');
+            header('Location: ../index.php?sendmail=true');
         } else {
-            header('Location: index.php?sendmail=false'); // ajout pas fait
+            header('Location: ../index.php?sendmail=false'); // ajout pas fait
         }
     } else {
-        header('Location: index.php?sendmail=false'); // champ vide
+        header('Location: ../index.php?sendmail=false'); // champ vide
     }
 } else {
-    header('Location: index.php?sendmail=false');
+    header('Location: ../index.php?sendmail=false');
 }
 ?>

@@ -22,7 +22,7 @@ session_start();
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-transparent">
+<nav class="navbar navbar-expand-lg bg-transparent">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <img src="assets/menuIcon.svg" width="20px" height="20px" style="max-width: none !important;">
         </button>
@@ -32,19 +32,36 @@ session_start();
         <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 20px !important">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="./index.php">Accueil</a>
+                    <a class="nav-link" href="index.php">Accueil</a>
                 </li>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Bot
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="Hellbot.php">Hellbot</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="GIT_bot.php">GIT Bot</a>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Guardian Tale
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="GT_herosheet.php"><span class="sr-only">(actuel)</span>Hero Sheet</a>
+                        <a class="dropdown-item" href="GT_addhero.php">Add Hero</a>
+                        <a class="dropdown-item" href="GT_updatehero.php">Update Hero</a>
+                    </div>
+                </div>
             </ul>
-        </div>
-        <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Guardian Tale
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="GT_herosheet.php">Hero Sheet <span class="sr-only">(actuel)</span></a>
-                <a class="dropdown-item" href="GT_addhero.php">Add Hero</a>
-                <a class="dropdown-item" href="GT_updatehero.php">Update Hero</a>
+            <div class="nav-item">
+                <a class="nav-link" href="http://yweelon.fr/phpmyadmin">PHPMyAdmin</a>
             </div>
+            <div class="nav-item">
+                <a class="nav-link" href="https://github.com/ThomasBacheley">Github</a>
+            </div>
+            <button id="connexion_button" class="btn login-btn btn-outline-accent my-2 my-sm-0" style="font-size: 10px !important;font-family: poppins !important;">Connexion</button>
         </div>
     </nav>
 
@@ -96,12 +113,10 @@ session_start();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="js/now-ui-kit.min.js"></script>
+    <script src="./js/customjs.js"></script>
     <script>
-        // var username = '<?php echo $_SESSION['username']; ?>';
 
-        // if (username !== "") {
-        //     document.getElementById('connexion_button').innerText = username
-        // }
+connexion_button(document.getElementById('connexion_button'),'<?php echo $_SESSION['username']; ?>')
 
         $("#heroname_input").on('keyup', function(e) {
             if (e.key === 'Enter' || e.keyCode === 13) {
@@ -133,7 +148,6 @@ session_start();
 
         function openmodal(val) {
             var heroname = val.replace('btn_modal_', '').replace('_', ' ').replace('_', ' ').replace('_', ' ').replace('_', ' ');
-
             var xhr = new XMLHttpRequest();
 
             var moreinfo_button = document.getElementById('moreinfo_link')
@@ -157,8 +171,19 @@ session_start();
                         type.innerText = data.type
                         accesory.innerText = data.accesory_item
                         hero_pic.src = data.hero_pic
+                        hero_pic.setAttribute('onclick','window.open(this.src)');
                     } else {
-                        alert('erreur : status -> ' + this.status)
+                        switch (this.status) {
+                                case 400:
+                                    alert('Erreur : 400 Bad Request')
+                                    break;
+                                case 0:
+                                    alert('Erreur : 0 API OFFLINE')
+                                    break;
+                                default:
+                                    alert('erreur : status -> ' + this.status)
+                                    break;
+                            }
                     }
                 }
             };
@@ -168,6 +193,7 @@ session_start();
 
             var modal_heroLabel = document.getElementById('modal_heroLabel');
             modal_heroLabel.innerText = heroname
+            $('#modal_hero').modal('show')
         }
 
         createcards()
@@ -191,6 +217,8 @@ session_start();
                             img.src = data.pp_link
                             img.classList.add('card-img-top')
                             img.alt = 'hero profil pic img';
+                            img.setAttribute('id','btn_modal_'+data.name.replace(' ', '_').replace(' ', '_').replace(' ', '_'));
+                            img.setAttribute('onclick','openmodal(this.id)');
 
                             var btn_modal = document.createElement('button');
                             btn_modal.setAttribute('id', 'btn_modal_' + data.name.replace(' ', '_').replace(' ', '_').replace(' ', '_'));

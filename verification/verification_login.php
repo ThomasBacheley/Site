@@ -3,8 +3,8 @@ session_start();
 if(isset($_POST['username']) && isset($_POST['password']))
 {
     // connexion à la base de données
-    $db_username = 'root';
-    $db_password = 'jjE72Dak';
+    $db_username = 'webapi';
+    $db_password = 'lWOwlHYlG5HdOXoC';
     $db_name     = 'universal_db';
     $db_host     = 'localhost';
     $db = mysqli_connect($db_host, $db_username, $db_password,$db_name)
@@ -25,21 +25,26 @@ if(isset($_POST['username']) && isset($_POST['password']))
         if($count!=0) // nom d'utilisateur et mot de passe correctes
         {
            $_SESSION['username'] = $reponse['username'];
-           $_SESSION['permission'] = $reponse['permission'];;
-           header('Location: index.php');
+           $_SESSION['permission'] = $reponse['permission'];
+           if($reponse['permission']=='ADMIN'){
+              header('Location: ../admin_dashboard.php');
+            }
+           else {
+              header('Location: ../dashboard.php');
+            }
         }
         else
         {
-           header('Location: login.php?erreur=1'); // utilisateur ou mot de passe incorrect
+           header('Location: ../login.php?erreur=1'); // utilisateur ou mot de passe incorrect
         }
     }
     else
     {
-       header('Location: login.php?erreur=2'); // utilisateur ou mot de passe vide
+       header('Location: ../login.php?erreur=2'); // utilisateur ou mot de passe vide
     }
 }
 else
 {
-   header('Location: login.php');
+   header('Location: ../login.php');
 }
 mysqli_close($db); // fermer la connexion

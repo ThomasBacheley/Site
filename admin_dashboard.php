@@ -6,9 +6,7 @@ if (isset($_GET['deconnexion'])) {
         header("location:index.php");
     }
 }
-
-if(!isset($_SESSION['username']) && !isset($_SESSION['permission']))
-{
+if (!isset($_SESSION['username']) && !isset($_SESSION['permission'])) {
     header('Location: ../login.php');
 }
 
@@ -101,11 +99,11 @@ if(!isset($_SESSION['username']) && !isset($_SESSION['permission']))
             <br />
             <form id="changepswd" action="/verification/verification_changepswd.php" method="POST" style="border: 5px solid pink;">
                 <p>Change your password ?</p>
-                <label for="actualpswd" class="col-form-label">MDP Actuel</label><br/>
-                <input type="password" style="width: 150px;" name="actualpswd" id="actualpswd" class="form-control"><br/>
-                <label for="newpswd" class="col-form-label">Nouveau MDP</label><br/>
-                <input type="password" style="width: 150px;" name="newpswd" id="newpswd" class="form-control"><br/>
-                <label for="newpswd_confirmation" class="col-form-label">Retape Nouveau MDP</label><br/>
+                <label for="actualpswd" class="col-form-label">MDP Actuel</label><br />
+                <input type="password" style="width: 150px;" name="actualpswd" id="actualpswd" class="form-control"><br />
+                <label for="newpswd" class="col-form-label">Nouveau MDP</label><br />
+                <input type="password" style="width: 150px;" name="newpswd" id="newpswd" class="form-control"><br />
+                <label for="newpswd_confirmation" class="col-form-label">Retape Nouveau MDP</label><br />
                 <input type="password" style="width: 150px;" name="newpswd_confirmation" id="newpswd_confirmation" class="form-control"></br>
                 <button type="submit" value="CHANGE_PSWD" class="btn btn-primary">Changer MDP</button>
             </form>
@@ -119,6 +117,7 @@ if(!isset($_SESSION['username']) && !isset($_SESSION['permission']))
         </div>
     </div>
 </body>
+<script src="./js/customjs.js"></script>
 <script>
     async function getTemperature() {
         return new Promise((resolve, reject) => {
@@ -157,12 +156,81 @@ if(!isset($_SESSION['username']) && !isset($_SESSION['permission']))
     document.getElementById('info_user').innerHTML = `${username[0].toUpperCase()}${username.slice(1)} (<span class="highlight">${perm}</span>)`
     var dashboard_column = document.getElementById('dashboard_column')
     var dashboard_info = document.getElementById('dashboard_info')
+    var link_cv = document.createElement('a');
+    link_cv.href = 'http://yweelon.fr/CV.pdf';
+    link_cv.target = '_blank'
+    link_cv.style.color = '#ffa500'
+    link_cv.innerText = 'CV'
+
+    dashboard_column.appendChild(link_cv)
+    dashboard_column.appendChild(document.createElement('br'))
+
+    //---
+
+    var mails_div = document.createElement('div');
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4) {
+            if (this.status == 200) {
+                var mails = JSON.parse(this.responseText);
+
+                mails.forEach(mail => {
+                    var div_mail = document.createElement('div');
+                    div_mail.style.border = '2px solid yellow';
+                    div_mail.style.color = 'white'
+                    div_mail.style.padding = '5px'
+                    div_mail.id = 'div_mail' + mail.id;
+                    var close_button = document.createElement('button');
+                    close_button.id = "CB_" + mail.id;
+                    close_button.classList.add('close_button');
+                    close_button.innerText = ' X '
+                    close_button.setAttribute('onclick', 'displayid(this)')
+
+                    div_mail.appendChild(close_button);
+
+                    //--
+
+                    var mail_title = document.createElement('h3')
+                    mail_title.innerText = mail.subject;
+
+                    div_mail.appendChild(mail_title)
+
+                    var mail_from = document.createElement('p')
+                    mail_from.innerHTML = `De ${mail.sender} (${mail.email})<br/>`
+
+                    div_mail.appendChild(mail_from)
+
+                    var mail_msg = document.createElement('p')
+                    mail_msg.innerText = mail.message;
+
+                    div_mail.appendChild(mail_msg)
+
+                    mails_div.appendChild(div_mail)
+                })
+            } else {
+                switch (this.status) {
+                    case 400:
+                        alert('Erreur : 400 Bad Request')
+                        break;
+                    case 0:
+                        alert('Erreur : 0 API OFFLINE')
+                        break;
+                    default:
+                        alert('erreur : status -> ' + this.status)
+                        break;
+                }
+            }
+        }
+    };
+    xhr.open("GET", "http://yweelon.fr:8090/recupmail", true);
+    xhr.send();
+
+    dashboard_info.appendChild(mails_div)
 
     var snackbar = document.getElementById("snackbar_success");
 
     function displayid(el) {
-        alert(el.id)
-
         // Add the "show" class to DIV
         snackbar.className = "show";
 

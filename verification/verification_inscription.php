@@ -3,8 +3,8 @@ session_start();
 if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['password_confirmation'])) {
 
     // connexion à la base de données
-    $db_username = 'root';
-    $db_password = 'jjE72Dak';
+    $db_username = 'webapi';
+    $db_password = 'lWOwlHYlG5HdOXoC';
     $db_name     = 'universal_db';
     $db_host     = 'localhost';
     $db = mysqli_connect($db_host, $db_username, $db_password, $db_name)
@@ -31,20 +31,20 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['pass
                 if (mysqli_query($db, $sql)) {
                     $_SESSION['username'] = $username;
                     $_SESSION['permission'] = 'USER';
-                    header('Location: index.php');
+                    header('Location: ../index.php');
                 } else {
-                    header('Location: inscription.php?erreur=4'); // erreur l'ajout c'est pas fait
+                    header('Location: ../inscription.php?erreur=4'); // erreur l'ajout c'est pas fait
                 }
             } else {
-                header('Location: inscription.php?erreur=3'); // l'utilisateur existe déja
+                header('Location: ../inscription.php?erreur=3'); // l'utilisateur existe déja
             }
         } else {
-            header('Location: inscription.php?erreur=2'); // pswd != pswd confirmation
+            header('Location: ../inscription.php?erreur=2'); // pswd != pswd confirmation
         }
     } else {
-        header('Location: inscription.php?erreur=1'); // utilisateur ou mot de passe vide
+        header('Location: ../inscription.php?erreur=1'); // utilisateur ou mot de passe vide
     }
 } else {
-    header('Location: inscription.php');
+    header('Location: ../inscription.php');
 }
 mysqli_close($db); // fermer la connexion

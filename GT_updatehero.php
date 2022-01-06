@@ -1,5 +1,11 @@
 <?php
 session_start();
+if (isset($_GET['update'])) {
+    $update = $_GET['update'];
+}
+if (isset($_GET['heroname'])) {
+    $heroname = $_GET['heroname'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -23,7 +29,7 @@ session_start();
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-transparent">
+<nav class="navbar navbar-expand-lg bg-transparent">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <img src="assets/menuIcon.svg" width="20px" height="20px" style="max-width: none !important;">
         </button>
@@ -33,27 +39,44 @@ session_start();
         <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 20px !important">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="./index.php">Accueil</span></a>
+                    <a class="nav-link" href="index.php">Accueil</a>
                 </li>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Bot
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="Hellbot.php">Hellbot</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="GIT_bot.php">GIT Bot</a>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Guardian Tale
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="GT_herosheet.php">Hero Sheet</a>
+                        <a class="dropdown-item" href="GT_addhero.php">Add Hero</a>
+                        <a class="dropdown-item" href="GT_updatehero.php"> <span class="sr-only">(actuel)</span>Update Hero</a>
+                    </div>
+                </div>
             </ul>
-        </div>
-        <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Guardian Tale
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="GT_herosheet.php">Hero Sheet</a>
-                <a class="dropdown-item" href="GT_addhero.php">Add Hero</a>
-                <a class="dropdown-item" href="GT_updatehero.php">Update Hero <span class="sr-only">(actuel)</span></a>
+            <div class="nav-item">
+                <a class="nav-link" href="http://yweelon.fr/phpmyadmin">PHPMyAdmin</a>
             </div>
+            <div class="nav-item">
+                <a class="nav-link" href="https://github.com/ThomasBacheley">Github</a>
+            </div>
+            <button id="connexion_button" class="btn login-btn btn-outline-accent my-2 my-sm-0" style="font-size: 10px !important;font-family: poppins !important;">Connexion</button>
         </div>
     </nav>
-    <button onclick="myFunction()">Show Snackbar</button>
-
     <!-- The actual snackbar -->
-    <div id="snackbar">✅ Hero succesfully updated</div>
+    <div id="snackbar_success">✅ Hero succesfully updated</div>
+    <div id="snackbar_failed">❌ Hero not updated</div>
     <div class="heading">
-        <form action="http://yweelon.fr:8084/updatehero" method="post">
+        <form action="./verification/verif_updatehero.php" method="post">
+            <!-- <form action="http://yweelon.fr:8084/updatehero" method="post"> -->
             <fieldset>
                 <legend>Suggest a modification for</span></legend>
                 <div class="mb-3">
@@ -87,63 +110,40 @@ session_start();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="js/now-ui-kit.min.js"></script>
+    <script src="./js/customjs.js"></script>
     <script>
         var username = '<?php echo $_SESSION['username']; ?>';
+        var heroname = '<?php echo $heroname; ?>';
+        var update = '<?php echo $update; ?>';
 
+        connexion_button(document.getElementById('connexion_button'),'<?php echo $_SESSION['username']; ?>')
 
         if (username !== "") {
             document.getElementById('txtinput_username').value = username
         }
 
-
-        if (window.location.search) {
-            document.getElementById('heronameinput').value = window.location.search.substring(1).split('=')[1].split('_').join(' ');
+        if (heroname !== "") {
+            document.getElementById('heronameinput').value = heroname.split('_').join(' ')
         }
 
-        var div_newvalue = document.getElementById('div_newvalue')
-        var lbl = '<label for="newvalue" class="form-label">new Value</label>'
-
-        /*loadfirstselecter()
-        function loadfirstselecter(){
-            var xhr = new XMLHttpRequest();
-
-            div_newvalue.innerHTML = lbl + '<select name=\"newvalue\" id=\"option_value\" class=\"form-select\" required><option value="NULL">NULL (don\'t know or don\'t have item)</option></select>'
-
-            var option_value = document.getElementById('option_value')
-
-                xhr.onreadystatechange = function () {
-                    if (this.readyState == 4) {
-                        if (this.status == 200) {
-                            var donnees = JSON.parse(this.responseText)
-
-                            donnees.forEach(donnee => {
-                                var option = document.createElement('option');
-                                option.value = donnee;
-                                option.innerText = donnee;
-
-                                option_value.appendChild(option);
-                            })
-                        } else {
-                            alert('erreur : status -> ' + this.status)
-                        }
-                    }
-                };
-            xhr.open("GET", "http://yweelon.fr:8084/listoftype", true);
-            xhr.send();
-        }*/
-
-        function myFunction() {
-            // Get the snackbar DIV
-            var x = document.getElementById("snackbar");
-
-            // Add the "show" class to DIV
+        if (update == 'true') {
+            console.log('here')
+            var x = document.getElementById("snackbar_success");
             x.className = "show";
-
-            // After 3 seconds, remove the show class from DIV
             setTimeout(function() {
                 x.className = x.className.replace("show", "");
             }, 3000);
         }
+        if (update == 'false') {
+            var x = document.getElementById("snackbar_failed");
+            x.className = "show";
+            setTimeout(function() {
+                x.className = x.className.replace("show", "");
+            }, 3000);
+        }
+
+        var div_newvalue = document.getElementById('div_newvalue')
+        var lbl = '<label for="newvalue" class="form-label">new Value</label>'
 
         loadparam();
 
@@ -167,7 +167,17 @@ session_start();
                             selecter.appendChild(option);
                         })
                     } else {
-                        alert('erreur : status -> ' + this.status)
+                        switch (this.status) {
+                                case 400:
+                                    alert('Erreur : 400 Bad Request')
+                                    break;
+                                case 0:
+                                    alert('Erreur : 0 API OFFLINE')
+                                    break;
+                                default:
+                                    alert('erreur : status -> ' + this.status)
+                                    break;
+                            }
                     }
                 }
             };
@@ -178,7 +188,7 @@ session_start();
         function param_choisis(param) {
             var xhr = new XMLHttpRequest();
 
-            if (param == 'cards' || param == 'pp_link' || param == 'hero_link' || param == 'hero_pic' || param == 'name') {
+            if (param == 'cards' || param == 'pp_link' || param == 'hero_link' || param == 'hero_pic' || param == 'name' || param == 'nickname') {
                 div_newvalue.innerHTML = lbl + '<input id=\"newvalue_input\" required type=\"text\" name=\"newvalue\" class=\"form-control\" style=\"background-color: white;\">'
             } else {
                 div_newvalue.innerHTML = lbl + '<select name=\"newvalue\" id=\"option_value\" class=\"form-select\" required><option value="NULL">NULL (don\'t know or don\'t have item)</option></select>'
@@ -198,7 +208,17 @@ session_start();
                                 option_value.appendChild(option);
                             })
                         } else {
-                            alert('erreur : status -> ' + this.status)
+                            switch (this.status) {
+                                case 400:
+                                    alert('Erreur : 400 Bad Request')
+                                    break;
+                                case 0:
+                                    alert('Erreur : 0 API OFFLINE')
+                                    break;
+                                default:
+                                    alert('erreur : status -> ' + this.status)
+                                    break;
+                            }
                         }
                     }
                 };
