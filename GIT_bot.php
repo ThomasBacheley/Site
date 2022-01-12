@@ -46,18 +46,14 @@
                         Guardian Tale
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="GT.php">Guardian Tale Home</a>
+						<div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="GT_herosheet.php">Hero Sheet</a>
                         <a class="dropdown-item" href="GT_addhero.php">Add Hero</a>
                         <a class="dropdown-item" href="GT_updatehero.php">Update Hero</a>
                     </div>
                 </div>
             </ul>
-            <div class="nav-item">
-                <a class="nav-link" href="http://yweelon.fr/phpmyadmin">PHPMyAdmin</a>
-            </div>
-            <div class="nav-item">
-                <a class="nav-link" href="https://github.com/ThomasBacheley">Github</a>
-            </div>
             <button id="connexion_button" class="btn login-btn btn-outline-accent my-2 my-sm-0" style="font-size: 10px !important;font-family: poppins !important;">Connexion</button>
         </div>
     </nav>

@@ -76,18 +76,14 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['permission'])) {
                         Guardian Tale
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="GT.php">Guardian Tale Home</a>
+						<div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="GT_herosheet.php">Hero Sheet</a>
                         <a class="dropdown-item" href="GT_addhero.php">Add Hero</a>
                         <a class="dropdown-item" href="GT_updatehero.php">Update Hero</a>
                     </div>
                 </div>
             </ul>
-            <div class="nav-item">
-                <a class="nav-link" href="http://yweelon.fr/phpmyadmin">PHPMyAdmin</a>
-            </div>
-            <div class="nav-item">
-                <a class="nav-link" href="https://github.com/ThomasBacheley">Github</a>
-            </div>
         </div>
     </nav>
     <div id="snackbar_success">✅ Mail archivé</div>
@@ -107,6 +103,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['permission'])) {
                 <input type="password" style="width: 150px;" name="newpswd_confirmation" id="newpswd_confirmation" class="form-control"></br>
                 <button type="submit" value="CHANGE_PSWD" class="btn btn-primary">Changer MDP</button>
             </form>
+            <p><a href="http://yweelon.fr/CV.pdf" target="_blank">CV</a> | <a href="http://yweelon.fr/phpmyadmin" target="_blank">PHPMyAdmin</a> | <a href="https://github.com/ThomasBacheley">Github</a></p>
         </div>
         <div id="dashboard_info">
             <div id="rpi_temp_div">
@@ -156,14 +153,6 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['permission'])) {
     document.getElementById('info_user').innerHTML = `${username[0].toUpperCase()}${username.slice(1)} (<span class="highlight">${perm}</span>)`
     var dashboard_column = document.getElementById('dashboard_column')
     var dashboard_info = document.getElementById('dashboard_info')
-    var link_cv = document.createElement('a');
-    link_cv.href = 'http://yweelon.fr/CV.pdf';
-    link_cv.target = '_blank'
-    link_cv.style.color = '#ffa500'
-    link_cv.innerText = 'CV'
-
-    dashboard_column.appendChild(link_cv)
-    dashboard_column.appendChild(document.createElement('br'))
 
     //---
 

@@ -10,11 +10,10 @@ session_start();
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/now-ui-kit.css">
-    <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,600,700,800,900&display=swap" rel="stylesheet">
-    <title>Crédits</title>
+    <title>Guardian Tale</title>
     <meta content="Yweelon.fr" property="og:title" />
     <meta content="Site d'Yweelon" property="og:description" />
     <meta content="http://yweelon.fr" property="og:url" />
@@ -40,9 +39,9 @@ session_start();
                         Bot
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="Hellbot.php">Hellbot</a>
+                        <a class="dropdown-item" href="Hellbot.php">Hellbot <span class="sr-only">(actuel)</span></a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="GIT_bot.php">GIT Bot <span class="sr-only">(actuel)</span></a>
+                        <a class="dropdown-item" href="GIT_bot.php">GIT Bot</a>
                     </div>
                 </div>
                 <div class="nav-item dropdown">
@@ -50,7 +49,7 @@ session_start();
                         Guardian Tale
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="GT.php">Guardian Tale Home</a>
+						<a class="dropdown-item" href="GT.php">Guardian Tale Home</a>
 						<div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="GT_herosheet.php">Hero Sheet</a>
                         <a class="dropdown-item" href="GT_addhero.php">Add Hero</a>
@@ -63,20 +62,38 @@ session_start();
     </nav>
     <!---->
     <div class="heading">
-    <br/>
-    <p>Ce site à pour but <span class="highlight">d'informer</span> et est <span class="highlight">non lucratif</span></p>
-    <br/><br/>
-    <div style="padding:10px" id="guardiantale" class="borderBlink">
-        <p>Toutes les données à propos du jeu "<a href="https://guardiantales.com/" target="_blank">Guardian Tale</a>" sont en aucun cas les miennes, je décline <span class="highlight">toutes</span> responsabilités les concernants</p>
-        <p>Le contenu graphique de Guardian Tales est la propriété de <a target="_blank" href="https://www.playkakaogames.com/">Kakao Games Corp</a></p>
-    <p>Données GuardianTale basées sur des connaissances personnelles<br/>ainsi que prise sur <a target="_blank" href="https://guardiantalesguides.com/">guardiantalesguides.com</a> et <a target="_blank" href="https://heavenhold.com/">heavenhold.com</a></p>
+        <div>
+            <img src="https://cdn.discordapp.com/avatars/769180597045690418/98291e1cf7a0644d64012b0b7347aa76.png" alt="Hellbot PP" style="width: 128px;height: 128px;" />
+        </div>
+        <div>
+            <h1 class="display-5 title">Guardian Tale</h1>
+            <p class="subtitle">Guardian Tale est un jeu mobile conçu par Kakao Games</p>
+            <br />
+            <p class="subtitle">C'est un MMORPG / gacha jouable largement en F2P, qui as un bon lore et de bonnes réferences POP</p>
+            <br/>
+            <p class="subtitle">Ps : je ne possède aucun élement graphique, tout appartient à KaKao Games</p>
+            </div>
     </div>
-    <br/><br/>
-    <p>Site design par <a href="https://github.com/Nouridio" target="_blank">nouridio</a></p>
-    <br/>
-    <p>Mail icon par <a href="https://icons8.com/icon/86840/mail" target="_blank">Icons8</a> </p>
-    <br/>
+    <br /><br /><br />
+    <div class="features" style="background:none !important">
+    <div class="cards" style="backgroundcolor:none">
+        <div class="card" style="width: 18rem;">
+        <div class="card-body">
+			<a href="./GT_herosheet.php" class="btn btn-primary">Hero Sheet</a>
+		</div>
     </div>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+				<a href="./GT_addhero.php" class="btn btn-primary">Add Hero</a>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+				<a href="./GT_updatehero.php" class="btn btn-primary">Update Hero</a>
+            </div>
+        </div>
+    </div>
+</div>
     <br /><br /><br /><br /><br />
     <footer>
         <div class="page_end">
@@ -96,7 +113,12 @@ session_start();
     <script src="js/now-ui-kit.min.js"></script>
     <script src="./js/customjs.js"></script>
     <script>
-        connexion_button(document.getElementById('connexion_button'),'<?php echo $_SESSION['username']; ?>')
+
+connexion_button(document.getElementById('connexion_button'),'<?php echo $_SESSION['username']; ?>')
+
+       function removeblur(el) {
+            el.classList.remove("NSFW")
+        }
     </script>
 </body>
 

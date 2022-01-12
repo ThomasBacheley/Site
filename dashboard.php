@@ -78,6 +78,8 @@ if(!isset($_SESSION['username']) && !isset($_SESSION['permission']))
                         Guardian Tale
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="GT.php">Guardian Tale Home</a>
+						<div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="GT_herosheet.php">Hero Sheet</a>
                         <a class="dropdown-item" href="GT_addhero.php">Add Hero</a>
                         <a class="dropdown-item" href="GT_updatehero.php">Update Hero</a>
