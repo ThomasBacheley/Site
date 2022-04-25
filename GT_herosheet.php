@@ -5,62 +5,14 @@ session_start();
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/now-ui-kit.css">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700,800,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,600,700,800,900&display=swap" rel="stylesheet">
+    <?php include 'head.php'; ?>
     <title>GT Hero's Sheet</title>
-    <meta content="Yweelon.fr" property="og:title" />
-    <meta content="Site d'Yweelon" property="og:description" />
-    <meta content="http://yweelon.fr" property="og:url" />
-    <meta content="https://cdn.discordapp.com/attachments/770357581549535233/922704792260866058/BotLogo.png" property="og:image" />
-    <meta content="#ffa500" data-react-helmet="true" name="theme-color" />
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg bg-transparent">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <img src="assets/menuIcon.svg" width="20px" height="20px" style="max-width: none !important;">
-        </button>
-        <a href="index.php">
-            <img src="assets/BotLogo.png" width="40" height="40">
-        </a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 20px !important">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Accueil</a>
-                </li>
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Bot
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="Hellbot.php">Hellbot</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="GIT_bot.php">GIT Bot</a>
-                    </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Guardian Tale
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="GT.php">Guardian Tale Home</a>
-						<div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="GT_herosheet.php">Hero Sheet</a>
-                        <a class="dropdown-item" href="GT_addhero.php">Add Hero</a>
-                        <a class="dropdown-item" href="GT_updatehero.php">Update Hero</a>
-                    </div>
-                </div>
-            </ul>
-            <button id="connexion_button" class="btn login-btn btn-outline-accent my-2 my-sm-0" style="font-size: 10px !important;font-family: poppins !important;">Connexion</button>
-        </div>
+    <nav id="navbar" class="navbar navbar-expand-lg bg-transparent">
+        <?php include 'navbar.php'; ?>
     </nav>
-
     <button onclick="topFunction()" id="topbtn" title="Go to top">↑</button>
 
     <div class="modal fade" id="modal_hero" tabindex="-1" role="dialog" aria-labelledby="modal_heroLabel" aria-hidden="true">
@@ -71,7 +23,8 @@ session_start();
                     <h3 class="modal-title text-secondary" id="modal_heroLabel" style="font-size: 18px;"></h3>
                     <p>His EX Weapon is : <span id="weapon_name" style="font-weight: bold;"></span></p>
                     <p>He/She is a <span id="type" style="font-weight: bold;"></span> <span id="role" style="font-weight: bold;"></span> Hero</p>
-                    <p>It's recommended to put <span id="accesory" style="font-weight: bold;"></span> as accesory item
+                    <p>Its Party Buff is <span id="party_buff" style="font-weight: bold;"></span></p>
+                    <p>Its recommended to put <span id="accesory" style="font-weight: bold;"></span> as accesory item
                     </p>
                     <img id="hero_pic" src="https://upload.wikimedia.org/wikipedia/commons/7/71/Black.png" alt="hero pic img" style="width: auto;height: auto;border-radius: 5%;">
                 </div>
@@ -84,9 +37,13 @@ session_start();
     </div>
     <div class="heading" id="heading">
         <div class="input-group mb-3">
-            <input type="text" id="heroname_input" class="form-control" placeholder="Hero's name" aria-label="Hero's name" aria-describedby="button-addon2">
-            <button class="btn btn-outline-primary" type="button" id="button-addon2" onclick="research_hero()">Research</button>
+            <input type="text" id="heroname_input" oninput="tapeinput(this.value)" class="form-control" placeholder="Hero's name" aria-label="Hero's name" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-primary" type="button" onclick="research_hero()">Research</button>
+            </div>
         </div>
+        <br /><br />
+        <h3><span class="highlight" id="num_hero">0</span> Hero(s) Founded</h3>
         <br /><br />
         <div id="list-cards" style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content:space-evenly">
 
@@ -111,8 +68,24 @@ session_start();
     <script src="js/now-ui-kit.min.js"></script>
     <script src="./js/customjs.js"></script>
     <script>
+        let hero_array = []
 
-connexion_button(document.getElementById('connexion_button'),'<?php echo $_SESSION['username']; ?>')
+        function tapeinput(val) {
+            if (val == '') {
+                listcards.innerHTML = ''
+                loadallcards();
+            } else {
+                let heros = hero_array.filter(el => (el.name).toLowerCase().startsWith(val.toLowerCase()));
+                num_hero.innerText = heros.length
+                listcards.innerHTML = ''
+                heros.forEach(h => {
+                    createcard(h)
+                })
+            }
+        }
+
+
+        connexion_button(document.getElementById('connexion_button'), '<?php echo $_SESSION['username']; ?>')
 
         $("#heroname_input").on('keyup', function(e) {
             if (e.key === 'Enter' || e.keyCode === 13) {
@@ -146,12 +119,13 @@ connexion_button(document.getElementById('connexion_button'),'<?php echo $_SESSI
             var heroname = val.replace('btn_modal_', '').replace('_', ' ').replace('_', ' ').replace('_', ' ').replace('_', ' ');
             var xhr = new XMLHttpRequest();
 
-            var moreinfo_button = document.getElementById('moreinfo_link')
+            var moreinfo_link = document.getElementById('moreinfo_link')
 
             var weapon_name = document.getElementById('weapon_name')
 
             var role = document.getElementById('role')
-            var type = document.getElementById('type')
+            var type = document.getElementById('type');
+            var party_buff = document.getElementById('party_buff')
             var accesory = document.getElementById('accesory')
             var hero_pic = document.getElementById('hero_pic')
 
@@ -163,23 +137,25 @@ connexion_button(document.getElementById('connexion_button'),'<?php echo $_SESSI
 
                         weapon_name.innerText = data.ex_weapon
                         moreinfo_link.href = data.hero_link
+                        moreinfo_link.setAttribute('target', '_blank');
                         role.innerText = data.role
                         type.innerText = data.type
                         accesory.innerText = data.accesory_item
                         hero_pic.src = data.hero_pic
-                        hero_pic.setAttribute('onclick','window.open(this.src)');
+                        party_buff.innerText = data.party_buff
+                        hero_pic.setAttribute('onclick', 'window.open(this.src)');
                     } else {
                         switch (this.status) {
-                                case 400:
-                                    alert('Erreur : 400 Bad Request')
-                                    break;
-                                case 0:
-                                    alert('Erreur : 0 API OFFLINE')
-                                    break;
-                                default:
-                                    alert('erreur : status -> ' + this.status)
-                                    break;
-                            }
+                            case 400:
+                                alert('Erreur : 400 Bad Request')
+                                break;
+                            case 0:
+                                alert('Erreur : 0 API OFFLINE')
+                                break;
+                            default:
+                                alert('erreur : status -> ' + this.status)
+                                break;
+                        }
                     }
                 }
             };
@@ -192,42 +168,57 @@ connexion_button(document.getElementById('connexion_button'),'<?php echo $_SESSI
             $('#modal_hero').modal('show')
         }
 
-        createcards()
+        var listcards = document.getElementById('list-cards');
+        var num_hero = document.getElementById('num_hero');
 
-        function createcards() {
+        function createcard(h) {
+            var card = document.createElement('div');
+            card.style.width = '13rem';
+            card.classList.add('card', 'text-white', 'bg-secondary');
+
+            var img = document.createElement('img');
+
+            img.src = h.pp_link
+            img.classList.add('card-img-top')
+            img.alt = 'hero profil pic img';
+            img.setAttribute('id', 'btn_modal_' + h.name.replace(' ', '_').replace(' ', '_').replace(' ', '_'));
+            img.setAttribute('onclick', 'openmodal(this.id)');
+
+            var btn_modal = document.createElement('button');
+            btn_modal.setAttribute('id', 'btn_modal_' + h.name.replace(' ', '_').replace(' ', '_').replace(' ', '_'));
+            btn_modal.setAttribute('onclick', 'openmodal(this.id)');
+            btn_modal.setAttribute('data-toggle', 'modal');
+            btn_modal.setAttribute('data-target', '#modal_hero');
+            btn_modal.innerText = h.name
+            if (h.collaboration) {
+                btn_modal.classList.add('btn', 'btn-purple')
+            } else {
+                btn_modal.classList.add('btn', 'btn-primary')
+            }
+
+            card.appendChild(img);
+            card.appendChild(btn_modal)
+
+            listcards.appendChild(card)
+        }
+
+        loadallcards()
+
+        function loadallcards() {
             var xhr = new XMLHttpRequest();
-            var div = document.getElementById('list-cards');
+
 
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4) {
                     if (this.status == 200) {
                         var datas = JSON.parse(this.responseText);
 
+                        hero_array = datas
+
+                        num_hero.innerText = hero_array.length
+
                         datas.forEach(data => {
-                            var card = document.createElement('div');
-                            card.style.width = '13rem';
-                            card.classList.add('card', 'text-white', 'bg-secondary');
-
-                            var img = document.createElement('img');
-
-                            img.src = data.pp_link
-                            img.classList.add('card-img-top')
-                            img.alt = 'hero profil pic img';
-                            img.setAttribute('id','btn_modal_'+data.name.replace(' ', '_').replace(' ', '_').replace(' ', '_'));
-                            img.setAttribute('onclick','openmodal(this.id)');
-
-                            var btn_modal = document.createElement('button');
-                            btn_modal.setAttribute('id', 'btn_modal_' + data.name.replace(' ', '_').replace(' ', '_').replace(' ', '_'));
-                            btn_modal.setAttribute('onclick', 'openmodal(this.id)');
-                            btn_modal.setAttribute('data-toggle', 'modal');
-                            btn_modal.setAttribute('data-target', '#modal_hero');
-                            btn_modal.innerText = data.name
-                            btn_modal.classList.add('btn', 'btn-primary')
-
-                            card.appendChild(img);
-                            card.appendChild(btn_modal)
-
-                            div.appendChild(card)
+                            createcard(data)
                         })
                     }
                 }

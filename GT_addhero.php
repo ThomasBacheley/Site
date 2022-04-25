@@ -1,70 +1,25 @@
 <?php
 session_start();
+if (isset($_GET['added'])) {
+    $added = $_GET['added'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/now-ui-kit.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700,800,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,600,700,800,900&display=swap" rel="stylesheet">
+    <?php include 'head.php'; ?>
     <title>GT Add Hero</title>
-    <meta content="Yweelon.fr" property="og:title" />
-    <meta content="Site d'Yweelon" property="og:description" />
-    <meta content="http://yweelon.fr" property="og:url" />
-    <meta content="https://cdn.discordapp.com/attachments/770357581549535233/922704792260866058/BotLogo.png" property="og:image" />
-    <meta content="#ffa500" data-react-helmet="true" name="theme-color" />
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg bg-transparent">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <img src="assets/menuIcon.svg" width="20px" height="20px" style="max-width: none !important;">
-        </button>
-        <a href="index.php">
-            <img src="assets/BotLogo.png" width="40" height="40">
-        </a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 20px !important">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Accueil</a>
-                </li>
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Bot
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="Hellbot.php">Hellbot</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="GIT_bot.php">GIT Bot</a>
-                    </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Guardian Tale
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="GT.php">Guardian Tale Home</a>
-						<div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="GT_herosheet.php">Hero Sheet</a>
-                        <a class="dropdown-item" href="GT_addhero.php">Add Hero</a>
-                        <a class="dropdown-item" href="GT_updatehero.php">Update Hero</a>
-                    </div>
-                </div>
-            </ul>
-            <button id="connexion_button" class="btn login-btn btn-outline-accent my-2 my-sm-0" style="font-size: 10px !important;font-family: poppins !important;">Connexion</button>
-        </div>
+    <nav id="navbar" class="navbar navbar-expand-lg bg-transparent">
+        <?php include 'navbar.php'; ?>
     </nav>
-    <button onclick="myFunction()">Show Snackbar</button>
 
     <!-- The actual snackbar -->
     <div id="snackbar_success">✅ Hero succesfully added</div>
+    <div id="snackbar_failed">❌ Hero not added</div>
     <div class="heading">
         <form action="http://yweelon.fr:8084/addhero" method="post">
             <fieldset>
@@ -133,16 +88,22 @@ session_start();
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label for="cards_name" class="form-label">Cards</label>
                         <input type="text" name="cards_name" class="form-control" placeholder="ex:2x atk or 2x crit" style="background-color: white;">
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label for="merchitem_name" class="form-label">Merch Item name</label>
                         <select required name="merchitem_name" id="merchitem_name" class="form-select">
                             <option value="NULL">NULL</option>
                             <option value="NULL">----------------</option>
                         </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <input class="form-check-input" name="collaboration" type="checkbox" value="1" id="collaboration">
+                        <label class="form-check-label" for="collaboration">
+                            Collaboration
+                        </label>
                     </div>
                 </div>
                 <div class="form-row">
@@ -182,15 +143,20 @@ session_start();
     <script src="js/now-ui-kit.min.js"></script>
     <script src="./js/customjs.js"></script>
     <script>
-        connexion_button(document.getElementById('connexion_button'),'<?php echo $_SESSION['username']; ?>')
-        function myFunction() {
-            // Get the snackbar DIV
+        connexion_button(document.getElementById('connexion_button'), '<?php echo $_SESSION['username']; ?>')
+
+        var added = '<?php echo $added; ?>';
+
+        if (added == 'true') {
             var x = document.getElementById("snackbar_success");
-
-            // Add the "show" class to DIV
             x.className = "show";
-
-            // After 3 seconds, remove the show class from DIV
+            setTimeout(function() {
+                x.className = x.className.replace("show", "");
+            }, 3000);
+        }
+        if (added == 'false') {
+            var x = document.getElementById("snackbar_failed");
+            x.className = "show";
             setTimeout(function() {
                 x.className = x.className.replace("show", "");
             }, 3000);
@@ -232,16 +198,16 @@ session_start();
                         })
                     } else {
                         switch (this.status) {
-                                case 400:
-                                    alert('Erreur : 400 Bad Request')
-                                    break;
-                                case 0:
-                                    alert('Erreur : 0 API OFFLINE')
-                                    break;
-                                default:
-                                    alert('erreur : status -> ' + this.status)
-                                    break;
-                            }
+                            case 400:
+                                alert('Erreur : 400 Bad Request')
+                                break;
+                            case 0:
+                                alert('Erreur : 0 API OFFLINE')
+                                break;
+                            default:
+                                alert('erreur : status -> ' + this.status)
+                                break;
+                        }
                     }
                 }
             };
@@ -271,16 +237,16 @@ session_start();
                         })
                     } else {
                         switch (this.status) {
-                                case 400:
-                                    alert('Erreur : 400 Bad Request')
-                                    break;
-                                case 0:
-                                    alert('Erreur : 0 API OFFLINE')
-                                    break;
-                                default:
-                                    alert('erreur : status -> ' + this.status)
-                                    break;
-                            }
+                            case 400:
+                                alert('Erreur : 400 Bad Request')
+                                break;
+                            case 0:
+                                alert('Erreur : 0 API OFFLINE')
+                                break;
+                            default:
+                                alert('erreur : status -> ' + this.status)
+                                break;
+                        }
                     }
                 }
             };
@@ -309,16 +275,16 @@ session_start();
                         })
                     } else {
                         switch (this.status) {
-                                case 400:
-                                    alert('Erreur : 400 Bad Request')
-                                    break;
-                                case 0:
-                                    alert('Erreur : 0 API OFFLINE')
-                                    break;
-                                default:
-                                    alert('erreur : status -> ' + this.status)
-                                    break;
-                            }
+                            case 400:
+                                alert('Erreur : 400 Bad Request')
+                                break;
+                            case 0:
+                                alert('Erreur : 0 API OFFLINE')
+                                break;
+                            default:
+                                alert('erreur : status -> ' + this.status)
+                                break;
+                        }
                     }
                 }
             };
@@ -376,16 +342,16 @@ session_start();
                         })
                     } else {
                         switch (this.status) {
-                                case 400:
-                                    alert('Erreur : 400 Bad Request')
-                                    break;
-                                case 0:
-                                    alert('Erreur : 0 API OFFLINE')
-                                    break;
-                                default:
-                                    alert('erreur : status -> ' + this.status)
-                                    break;
-                            }
+                            case 400:
+                                alert('Erreur : 400 Bad Request')
+                                break;
+                            case 0:
+                                alert('Erreur : 0 API OFFLINE')
+                                break;
+                            default:
+                                alert('erreur : status -> ' + this.status)
+                                break;
+                        }
                     }
                 }
             };
@@ -415,16 +381,16 @@ session_start();
                         })
                     } else {
                         switch (this.status) {
-                                case 400:
-                                    alert('Erreur : 400 Bad Request')
-                                    break;
-                                case 0:
-                                    alert('Erreur : 0 API OFFLINE')
-                                    break;
-                                default:
-                                    alert('erreur : status -> ' + this.status)
-                                    break;
-                            }
+                            case 400:
+                                alert('Erreur : 400 Bad Request')
+                                break;
+                            case 0:
+                                alert('Erreur : 0 API OFFLINE')
+                                break;
+                            default:
+                                alert('erreur : status -> ' + this.status)
+                                break;
+                        }
                     }
                 }
             };

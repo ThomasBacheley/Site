@@ -9,82 +9,17 @@ if (isset($_GET['deconnexion'])) {
 if (!isset($_SESSION['username']) && !isset($_SESSION['permission'])) {
     header('Location: ../login.php');
 }
-
-// connexion à la base de données
-// $db_username = 'root';
-// $db_password = 'jjE72Dak';
-// $db_name     = 'universal_db';
-// $db_host     = 'localhost';
-
-// $conn = mysqli_connect($db_host, $db_username, $db_password, $db_name)
-//     or die('could not connect to database');
-// $query = mysqli_query($conn, "SELECT temperature,date FROM rpi_temp ORDER BY id DESC LIMIT 5");
-
-// $temperature_date_array = [];
-// while ($row = mysqli_fetch_assoc($query)) {
-//     $temp_str = preg_replace('/202\d{1}-/i', '', $row['date']);
-//     array_push($temperature_date_array, [str_replace(':', 'h', preg_replace('/:\d{2}$/i', '', $temp_str)), intval($row['temperature'])]);
-// }
-
 ?>
 <html lang="fr">
 
 <head>
-    <!-- importer le fichier de style -->
-    <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/now-ui-kit.css">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700,800,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,600,700,800,900&display=swap" rel="stylesheet">
-    <title>Dashboard</title>
-    <meta content="Yweelon.fr" property="og:title" />
-    <meta content="Site d'Yweelon" property="og:description" />
-    <meta content="http://yweelon.fr" property="og:url" />
-    <meta content="https://cdn.discordapp.com/attachments/770357581549535233/922704792260866058/BotLogo.png" property="og:image" />
-    <meta content="#ffa500" data-react-helmet="true" name="theme-color" />
+    <?php include 'head.php'; ?>
+    <title>Admin Dashboard</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-transparent">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <img src="assets/menuIcon.svg" width="20px" height="20px" style="max-width: none !important;">
-        </button>
-        <a href="index.php">
-            <img src="assets/BotLogo.png" width="40" height="40">
-        </a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 20px !important">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Accueil</a>
-                </li>
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Bot
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="Hellbot.php">Hellbot</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="GIT_bot.php">GIT Bot</a>
-                    </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Guardian Tale
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="GT.php">Guardian Tale Home</a>
-						<div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="GT_herosheet.php">Hero Sheet</a>
-                        <a class="dropdown-item" href="GT_addhero.php">Add Hero</a>
-                        <a class="dropdown-item" href="GT_updatehero.php">Update Hero</a>
-                    </div>
-                </div>
-            </ul>
-        </div>
+    <nav id="navbar" class="navbar navbar-expand-lg bg-transparent">
+        <?php include 'navbar.php'; ?>
     </nav>
     <div id="snackbar_success">✅ Mail archivé</div>
     <div id="container_dashboard">
@@ -103,7 +38,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['permission'])) {
                 <input type="password" style="width: 150px;" name="newpswd_confirmation" id="newpswd_confirmation" class="form-control"></br>
                 <button type="submit" value="CHANGE_PSWD" class="btn btn-primary">Changer MDP</button>
             </form>
-            <p><a href="http://yweelon.fr/CV.pdf" target="_blank">CV</a> | <a href="http://yweelon.fr/phpmyadmin" target="_blank">PHPMyAdmin</a> | <a href="https://github.com/ThomasBacheley">Github</a></p>
+            <p><a href="http://yweelon.fr/BACHELEY_CV.pdf" target="_blank">CV</a> | <a href="http://yweelon.fr/phpmyadmin" target="_blank">PHPMyAdmin</a> | <a href="https://github.com/ThomasBacheley">Github</a> | <a href="http://192.168.1.66:3000">React</a></p>
         </div>
         <div id="dashboard_info">
             <div id="rpi_temp_div">
@@ -166,14 +101,12 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['permission'])) {
 
                 mails.forEach(mail => {
                     var div_mail = document.createElement('div');
-                    div_mail.style.border = '2px solid yellow';
-                    div_mail.style.color = 'white'
-                    div_mail.style.padding = '5px'
+                    div_mail.classList.add('div_mail_css')
                     div_mail.id = 'div_mail' + mail.id;
                     var close_button = document.createElement('button');
-                    close_button.id = "CB_" + mail.id;
+                    close_button.id = "CloseButton_" + mail.id;
                     close_button.classList.add('close_button');
-                    close_button.innerText = ' X '
+                    close_button.innerText = ' X'
                     close_button.setAttribute('onclick', 'displayid(this)')
 
                     div_mail.appendChild(close_button);
@@ -186,7 +119,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['permission'])) {
                     div_mail.appendChild(mail_title)
 
                     var mail_from = document.createElement('p')
-                    mail_from.innerHTML = `De ${mail.sender} (${mail.email})<br/>`
+                    mail_from.innerHTML = `De ${mail.sender} (${mail.email}) (${mail.date})<br/>`
 
                     div_mail.appendChild(mail_from)
 
@@ -228,6 +161,9 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['permission'])) {
             snackbar.className = snackbar.className.replace("show", "");
         }, 3000);
 
+        let id_mail = el.id.replace('CloseButton_', '');
+
+        console.log(id_mail)
     }
 </script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>

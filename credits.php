@@ -5,77 +5,29 @@ session_start();
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/now-ui-kit.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700,800,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,600,700,800,900&display=swap" rel="stylesheet">
+    <?php include 'head.php'; ?>
     <title>Crédits</title>
-    <meta content="Yweelon.fr" property="og:title" />
-    <meta content="Site d'Yweelon" property="og:description" />
-    <meta content="http://yweelon.fr" property="og:url" />
-    <meta content="https://cdn.discordapp.com/attachments/770357581549535233/922704792260866058/BotLogo.png" property="og:image" />
-    <meta content="#ffa500" data-react-helmet="true" name="theme-color" />
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-transparent">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <img src="assets/menuIcon.svg" width="20px" height="20px" style="max-width: none !important;">
-        </button>
-        <a href="index.php">
-            <img src="assets/BotLogo.png" width="40" height="40">
-        </a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 20px !important">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Accueil</a>
-                </li>
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Bot
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="Hellbot.php">Hellbot</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="GIT_bot.php">GIT Bot <span class="sr-only">(actuel)</span></a>
-                    </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Guardian Tale
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="GT.php">Guardian Tale Home</a>
-						<div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="GT_herosheet.php">Hero Sheet</a>
-                        <a class="dropdown-item" href="GT_addhero.php">Add Hero</a>
-                        <a class="dropdown-item" href="GT_updatehero.php">Update Hero</a>
-                    </div>
-                </div>
-            </ul>
-            <button id="connexion_button" class="btn login-btn btn-outline-accent my-2 my-sm-0" style="font-size: 10px !important;font-family: poppins !important;">Connexion</button>
-        </div>
+    <nav id="navbar" class="navbar navbar-expand-lg bg-transparent">
+        <?php include 'navbar.php'; ?>
     </nav>
     <!---->
     <div class="heading">
-    <br/>
-    <p>Ce site à pour but <span class="highlight">d'informer</span> et est <span class="highlight">non lucratif</span></p>
-    <br/><br/>
-    <div style="padding:10px" id="guardiantale" class="borderBlink">
-        <p>Toutes les données à propos du jeu "<a href="https://guardiantales.com/" target="_blank">Guardian Tale</a>" sont en aucun cas les miennes, je décline <span class="highlight">toutes</span> responsabilités les concernants</p>
-        <p>Le contenu graphique de Guardian Tales est la propriété de <a target="_blank" href="https://www.playkakaogames.com/">Kakao Games Corp</a></p>
-    <p>Données GuardianTale basées sur des connaissances personnelles<br/>ainsi que prise sur <a target="_blank" href="https://guardiantalesguides.com/">guardiantalesguides.com</a> et <a target="_blank" href="https://heavenhold.com/">heavenhold.com</a></p>
-    </div>
-    <br/><br/>
-    <p>Site design par <a href="https://github.com/Nouridio" target="_blank">nouridio</a></p>
-    <br/>
-    <p>Mail icon par <a href="https://icons8.com/icon/86840/mail" target="_blank">Icons8</a> </p>
-    <br/>
+        <br />
+        <p>Ce site à pour but <span class="highlight">d'informer</span> et est <span class="highlight">non lucratif</span></p>
+        <br /><br />
+        <div style="padding:10px" id="guardiantale" class="borderBlink">
+            <p>Toutes les données à propos du jeu "<a href="https://guardiantales.com/" target="_blank">Guardian Tale</a>" sont en aucun cas les miennes, je décline <span class="highlight">toutes</span> responsabilités les concernants</p>
+            <p>Le contenu graphique de Guardian Tales est la propriété de <a target="_blank" href="https://www.playkakaogames.com/">Kakao Games Corp</a></p>
+            <p>Données GuardianTale basées sur des connaissances personnelles<br />ainsi que prise sur <a target="_blank" href="https://guardiantalesguides.com/">guardiantalesguides.com</a> et <a target="_blank" href="https://heavenhold.com/">heavenhold.com</a></p>
+        </div>
+        <br /><br />
+        <p>Site design par <a href="https://github.com/Nouridio" target="_blank">nouridio</a></p>
+        <br />
+        <p>Mail icon par <a href="https://icons8.com/icon/86840/mail" target="_blank">Icons8</a> </p>
+        <br />
     </div>
     <br /><br /><br /><br /><br />
     <footer>
@@ -96,7 +48,7 @@ session_start();
     <script src="js/now-ui-kit.min.js"></script>
     <script src="./js/customjs.js"></script>
     <script>
-        connexion_button(document.getElementById('connexion_button'),'<?php echo $_SESSION['username']; ?>')
+        connexion_button(document.getElementById('connexion_button'), '<?php echo $_SESSION['username']; ?>')
     </script>
 </body>
 

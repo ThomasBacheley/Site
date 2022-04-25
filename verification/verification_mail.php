@@ -17,6 +17,10 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['subject']) 
     $subject = mysqli_real_escape_string($db, htmlspecialchars($_POST['subject']));
     $message = mysqli_real_escape_string($db, htmlspecialchars($_POST['validationMessage']));
 
+    if (str_contains($message, 'speed-seo.net')) {
+        header('Location: ../index.php?sendmail=false');
+    }
+
     if ($sender !== "" && $email !== "" && $subject !== "" && $message !== "") {
         $sql = "INSERT INTO mail (sender,email,subject,message)VALUES ('" . strtolower($sender) . "', '" .  $email . "', '" .  $subject . "', '" .  $message . "')";
 

@@ -20,7 +20,9 @@ if (isset($_POST['select_hero']) && isset($_POST['select_param']) && isset($_POS
     $count = $reponse['count(*)'];
     if ($count == 1) //hero trouver
     {
-        if($newvalue == 'NULL') {$newvalue= NULL;}
+        if ($newvalue == 'NULL') {
+            $newvalue = NULL;
+        }
         $sql = "UPDATE heroes SET " . $select_param . "=";
         switch ($select_param) {
             case 'type':
@@ -38,14 +40,17 @@ if (isset($_POST['select_hero']) && isset($_POST['select_param']) && isset($_POS
             case 'merch_item':
                 $sql .= "(SELECT id from merch_item WHERE name = '" . $newvalue . "')";
                 break;
+            case 'party_buff':
+                $sql .= "(SELECT id from party_buff WHERE value = '" . $newvalue . "')";
+                break;
             default:
                 $sql .= "'" . $newvalue . "'";
                 break;
         }
-        if(isset($_POST['username'])){
+        if (isset($_POST['username'])) {
             $updater = mysqli_real_escape_string($db, htmlspecialchars($_POST['username']));
-            if($updater !== ''){
-                $sql .= ",lastupdateby ='".$updater."'";
+            if ($updater !== '') {
+                $sql .= ",lastupdateby ='" . $updater . "'";
             }
         }
 
