@@ -5,8 +5,7 @@ var E_bubble = document.querySelector(".interraction_bubble")
 var character_info = {
    x:90,
    y:34,
-   speed:0.5,
-   // style:"./assets/customCharacter.png"
+   speed:0.5
 }
 
 function init() {
@@ -107,9 +106,20 @@ var list_interraction = [
             ymin: 40,
             ymax: 44
          },
-         msg: "Frère, casse toi"
+         msg: "Bienvenue dans les Test d'Ywee, c'est encore en construction. Soyez indulgents ! Merci"
       }
-   }
+   },
+   door = {
+         rangeX: {
+            xmin: 84,
+            xmax: 94
+         },
+         rangeY: {
+            ymin: 23,
+            ymax: 25
+         },
+         msg: "Door event"
+      }
 ];
 
 var listDecor = [
@@ -200,8 +210,16 @@ npcInterraction = () => {
             msg: list_interraction[1].mother.msg
          }
       } else {
-         inFrontSign = false;
-         return null
+         if ((character_info.x >= list_interraction[2].rangeX.xmin && character_info.x <= list_interraction[2].rangeX.xmax) && (character_info.y >= list_interraction[2].rangeY.ymin && character_info.y <= list_interraction[2].rangeY.ymax)) {
+            inFrontSign = true;
+            return {
+               name: "Door",
+               msg: list_interraction[2].msg
+            }
+         } else {
+            inFrontSign = false;
+            return null
+         }
       }
    }
 }
@@ -254,6 +272,9 @@ document.addEventListener("keydown", (e) => {
    }
    if (inFrontSign && interractionKeys.indexOf(e.keyCode) !== -1) {
       console.log(interraction_item.name+": "+interraction_item.msg)
+   }
+   if(e.keyCode == "69"){
+      console.log(character_info.x,character_info.y)
    }
    if (e.keyCode == "32") {
       character_info.speed = 1;

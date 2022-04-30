@@ -1,0 +1,8 @@
+{
+    "fountain": {
+        "leftLimit": 185,
+        "rightLimit": 100,
+        "topLimit": 320,
+        "bottomLimit": 248
+    }
+}

@@ -1,0 +1,61 @@
+{
+    "listSign": {
+        "wall_sign": {
+            "rangeX": {
+                "xmin": 132,
+                "xmax": 142
+            },
+            "rangeY": {
+                "ymin": 24,
+                "ymax": 24
+            },
+            "msg": "Wall sign event"
+        },
+        "fountain_sign": {
+            "rangeX": {
+                "xmin": 141,
+                "xmax": 152
+            },
+            "rangeY": {
+                "ymin": 313,
+                "ymax": 320
+            },
+            "msg": "Fountain sign event"
+        }
+    },
+    "npc": {
+        "cat": {
+            "rangeX": {
+                "xmin": 56,
+                "xmax": 60
+            },
+            "rangeY": {
+                "ymin": 33,
+                "ymax": 46
+            },
+            "msg": "Miaaouuu"
+        },
+        "mother": {
+            "rangeX": {
+                "xmin": 101,
+                "xmax": 106
+            },
+            "rangeY": {
+                "ymin": 40,
+                "ymax": 44
+            },
+            "msg": "Frère, casse toi"
+        }
+    },
+    "door": {
+        "rangeX": {
+            "xmin": 56,
+            "xmax": 60
+        },
+        "rangeY": {
+            "ymin": 33,
+            "ymax": 46
+        },
+        "msg": "Miaaouuu"
+    }
+}
