@@ -15,8 +15,8 @@
         <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-bs-html="true" title="Text in English, because it's a English bot">
             <div>
                 <div>
-                    <img src="https://cdn.discordapp.com/attachments/922554541419921470/922554649905602560/1.png" alt=".." style="width: 128px;height: 128px;" />
-                    <img src="https://cdn.discordapp.com/icons/446662355720601601/0bf80e54b84f1ea2d7b3ed4b869aa4f0.png" alt=".." style="width: 128px;height: 128px;" />
+                    <img src="/assets/GT_pp.png" alt=".." style="width: 128px;height: 128px;" />
+                    <img src="/assets/GIT_pp.png" alt=".." style="width: 128px;height: 128px;" />
                 </div>
                 <h1 class="display-5 title"><span class="highlight">G</span>reen <span class="highlight">I</span>ce
                     <span class="highlight">T</span>eam Bot
@@ -45,8 +45,8 @@
         </div>
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title"><span id="cmds_value_title">0</span> <img src="https://cdn.discordapp.com/attachments/922554541419921470/922563836056338452/commands_icon.png" alt="commands_icon" style="width: 32px;height: 32px;" /></h5>
-                <p class="card-text"><span id="cmds_value" class="highlight">0</span> Commands are currently avaible</p>
+                <h5 class="card-title"><span id="cmds_value_title">20</span> <img src="https://cdn.discordapp.com/attachments/922554541419921470/922563836056338452/commands_icon.png" alt="commands_icon" style="width: 32px;height: 32px;" /></h5>
+                <p class="card-text"><span id="cmds_value" class="highlight">20</span> Commands are currently avaible</p>
             </div>
         </div>
     </div>
@@ -78,11 +78,9 @@
 
                 var heroes_value = document.getElementById('heroes_value')
                 var items_value = document.getElementById('items_value')
-                var cmds_value = document.getElementById('cmds_value')
 
                 var heroes_value_title = document.getElementById('heroes_value_title')
                 var items_value_title = document.getElementById('items_value_title')
-                var cmds_value_title = document.getElementById('cmds_value_title')
 
                 xhr.onreadystatechange = function() {
                     if (this.readyState == 4) {
@@ -91,11 +89,9 @@
 
                             heroes_value.innerText = data.heroes_value
                             items_value.innerText = data.items_value
-                            cmds_value.innerText = data.cmds_value
 
                             heroes_value_title.innerText = data.heroes_value
                             items_value_title.innerText = data.items_value
-                            cmds_value_title.innerText = data.cmds_value
 
                         } else {
                             switch (this.status) {

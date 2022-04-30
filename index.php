@@ -4,7 +4,7 @@ if (isset($_GET['sendmail'])) {
     $sendmail = $_GET['sendmail'];
 }
 ?>
- 
+
 <!DOCTYPE html>
 <html lang="fr" style="scroll-behavior: smooth !important;">
 
@@ -30,8 +30,10 @@ if (isset($_GET['sendmail'])) {
                 <span class="line line2"></span>
             </span>
         </h1>
+        <br/><br/>
         <p class="subtitle">Bienvenue sur <span style="text-decoration: underline;">Yweelon.fr</span><br />Un site
             dévéloppé par Yweelon</p>
+        <br/>
         <a class="btn btn-primary btn-lg" href="#mailform" role="button">Mail <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 226 226" style=" fill:#000000;">
                 <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
                     <path d="M0,226v-226h226v226z" fill="none"></path>
@@ -42,11 +44,16 @@ if (isset($_GET['sendmail'])) {
                 </g>
             </svg></a>
         <a class="btn btn-secondary btn-lg" href="#about" role="button">En savoir plus</a>
-        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br /><br /><br />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
-        <script src="./js/customjs.js"></script>
+        <script src="./js/ml1.js"></script>
     </div>
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <br id="about"/>
+    <div style="text-align: center;">
+        <p class="subtitle" style="font-size:22px !important;">Ici tu pourras trouver la plupart de <span class="highlight">mes projets</span> personnels et professionnels!<br/>Ainsi que <span class="highlight">mon parcours</span> et autres</p>
+        <p class="subtitle" style="font-size:22px !important;">Je mets quotidiennement à jour ce site, je t'invite donc à le <span class="highlight">visiter</span> via les différentes pages disponible</p>
+    </div>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br />
     <div id="mailform" class="text-center" style="background-color: #292933;width: 80%;margin-left: auto;margin-right: auto;border-radius: 3%;padding: 20px; box-shadow: white;">
         <!--Section: Contact v.2-->
         <section class="mb-4">
@@ -123,24 +130,8 @@ if (isset($_GET['sendmail'])) {
             </div>
         </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="js/now-ui-kit.min.js"></script>
     <script>
         mybutton = document.getElementById("topbtn");
-
-        let easteregg = ''
-
-        $("body").on('keyup', function(e) {
-            console.log(easteregg)
-            if (easteregg != 'ywee bg') {
-                easteregg += e.key
-            } else {
-                alert('Tu as tous compris wesh !');
-                easteregg = ''
-            }
-        });
 
         // When the user scrolls down 20px from the top of the document, show the button
         window.onscroll = function() {

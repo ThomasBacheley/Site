@@ -6,7 +6,7 @@ function connexion_button(btn_connexion, username) {
 
         btn_connexion.innerText = username
     }
-    btn_connexion.addEventListener('click', function() {
+    btn_connexion.addEventListener('click', function () {
         window.location.href = './verification/verification_connexion.php'
     }, false);
 }

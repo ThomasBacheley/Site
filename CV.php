@@ -20,7 +20,13 @@ session_start();
             <div>
                 <img src="https://cdn.discordapp.com/avatars/663153459226345501/fb2641134780a5c5fe8f92f9814cc580.png" alt="Ywee PP" style="width: 128px;height: 128px; border-radius:15px" />
             </div>
-            <h1 class="display-5 title">Thomas <span class="highlight">/</span> Yweelon</h1>
+            <br/>
+            <h1 class="ml11">
+                <span class="text-wrapper">
+                    <span class="line line1"></span>
+                    <h1 class="display-5 title letters">Thomas</h1>
+                </span>
+            </h1>
             <p class="subtitle">Salut, je m'appelle <span class="highlight">Thomas</span>, j'ai 22 ans et je suis <span class="highlight">développeur</span> Junior.</p>
             <br />
             <p class="subtitle">Je code depuis <span class="highlight">2017</span> des applications pour mes études ou des projets personnels (<a href="Hellbot.php">Hellbot</a> / <a href="GIT_bot.php">GIT Bot</a>).</p>
@@ -31,11 +37,11 @@ session_start();
         </div>
         <br />
         <div id="objectif">
-            <p class="subtitle">En Septembre 2022 je rejoins l'école <span class="highlight">Créative</span> dans la license Web mobile & Business Intelligence pour une durée de <span class="highlight">1 an</span></p>
+            <p class="subtitle">En Septembre 2022, je rejoins l'école <span class="highlight">Créative</span> dans la licence Web mobile & Business Intelligence pour une durée de <span class="highlight">1 an</span></p>
         </div>
     </div>
     <br /><br />
-    <p style="text-align: center; color:white;">--------------------------------------------------------------</p>
+    <hr class="roundedHR">
     <br /><br />
     <div id="div_CV">
         <div id="formations" style="text-align: left;">
@@ -55,7 +61,7 @@ session_start();
             </ul>
         </div>
         <div id="langages" style="text-align: left;">
-            <h3 class="display-3 title CV_title">Langes de Programmation</h3>
+            <h3 class="display-3 title CV_title">Langages de Programmation</h3>
             <ul class="CV_ul">
                 <li>HTML, PHP, CSS</li>
                 <li>Javascript (nodeJS, Express, React Native)</li>
@@ -66,16 +72,16 @@ session_start();
             <h3 class="display-3 title CV_title">Projets</h3>
             <ul class="CV_ul">
                 <li><span class="highlight">Yweelon.fr</span> : Principalement en PHP</li>
-                <li><span class="highlight">GIT Bot</span> : Réalisation d'un bot Discord en JS pour aider une communauté sur un jeu mobile.<br /> Le Bot à une API et une Base de données attitré</li>
-                <li><span class="highlight">Chronocross</span> : Réalisation d'une DLL (en C#) et d'une base de données pour l'institut lemonnier,<br /> dans le but d'actualiser et numériser le deroulement du Cross annuel</li>
-                <li><span class="highlight">ATV</span> : Réalisation d'une application de gestion de bon de commande (en C#), <br />ainsi que d'une base de données pour la société ATV</li>
+                <li><span class="highlight">GIT Bot</span> : Réalisation d'un bot Discord en JS pour aider une communauté sur un jeu mobile.<br />Le Bot a une API et une base de données attitrée</li>
+                <li><span class="highlight">Chronocross</span> : Réalisation d'une DLL (en C#) et d'une base de données pour l'institut lemonnier.<br />Dans le but d'actualiser et numériser le déroulement du cross annuel</li>
+                <li><span class="highlight">ATV</span> : Réalisation d'une application de gestion de bon de commande (en C#),<br />ainsi que d'une base de données pour la société ATV</li>
             </ul>
         </div>
         <br /><br /><br /><br /><br /><br />
         <div id="CV_end" style="font-size:18px; text-align:center">
-            <p>Vous pouvez telecharger mon CV en cliquant <a href="/BACHELEY_CV.pdf" download>ici</a> et accéder à mon github <a target="_blank" href="https://github.com/ThomasBacheley">la</a></p>
+            <p>Vous pouvez télécharger mon CV en cliquant <a href="/BACHELEY_CV.pdf" download>ici</a> et accéder à mon github <a target="_blank" href="https://github.com/ThomasBacheley">la</a></p>
             <div id="contact">
-                <p>Si vous etes interesser par mon profil, n'hesitez pas à me contacter à l'addresse <span class="highlight">thom.bacheley@gmail.com</span></p>
+                <p>Si vous êtes intéresser par mon profil, n'hésitez pas à me contacter à l'adresse <span class="highlight">thom.bacheley@gmail.com</span></p>
             </div>
         </div>
     </div>
@@ -92,11 +98,7 @@ session_start();
             </div>
         </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="js/now-ui-kit.min.js"></script>
-    <script src="./js/customjs.js"></script>
+    <script src="./js/ml11.js"></script>
 </body>
 
 </html>

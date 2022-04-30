@@ -16,7 +16,7 @@ session_start();
     <!---->
     <div class="heading">
         <div>
-            <img src="https://cdn.discordapp.com/avatars/769180597045690418/98291e1cf7a0644d64012b0b7347aa76.png" alt="Hellbot PP" style="width: 128px;height: 128px;" />
+            <img src="/assets/GT_pp.png" alt="GT PP" style="width: 128px;height: 128px;" />
         </div>
         <div>
             <h1 class="display-5 title">Guardian Tale</h1>

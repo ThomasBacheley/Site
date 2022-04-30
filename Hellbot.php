@@ -44,14 +44,14 @@ session_start();
     <div class="stats">
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title"><span id="user_count_title">0</span> <img src="https://cdn.discordapp.com/attachments/922554541419921470/922565743319584838/heroes_icon.png" alt="heroes_icon" style="width: 32px;height: 32px;" /></h5>
-                <p class="card-text"><span id="heroes_value" class="highlight">0</span> Utilisateur gérer</p>
+                <h5 class="card-title"><span id="user_count_title">2016</span> <img src="https://cdn.discordapp.com/attachments/922554541419921470/922565743319584838/heroes_icon.png" alt="heroes_icon" style="width: 32px;height: 32px;" /></h5>
+                <p class="card-text"><span id="heroes_value" class="highlight">2016</span> Utilisateur gérer</p>
             </div>
         </div>
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title"><span id="cmds_value_title">0</span> <img src="https://cdn.discordapp.com/attachments/922554541419921470/922563836056338452/commands_icon.png" alt="commands_icon" style="width: 32px;height: 32px;" /></h5>
-                <p class="card-text"><span id="cmds_value" class="highlight">0</span> Commandes disponibles</p>
+                <h5 class="card-title"><span id="cmds_value_title">14</span> <img src="https://cdn.discordapp.com/attachments/922554541419921470/922563836056338452/commands_icon.png" alt="commands_icon" style="width: 32px;height: 32px;" /></h5>
+                <p class="card-text"><span id="cmds_value" class="highlight">14</span> Commandes disponibles</p>
             </div>
         </div>
     </div>
