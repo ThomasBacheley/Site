@@ -2,6 +2,9 @@
     --pixel-size: 2px;
     --grid-cell: calc(var(--pixel-size) * 16);
     --bg: #1D1E28;
+    --map-size: 2px;
+    --frame-size-height:144;
+    --frame-size-width:200;
 }
 
 @media(min-width: 700px) {
@@ -28,29 +31,42 @@
 
 .frame {
     /* This is just for Pen decoration */
-    width: calc(var(--pixel-size) * 160);
-    height: calc(var(--pixel-size) * 144);
+    width: calc(var(--pixel-size) * var(--frame-size-width));
+    height: calc(var(--pixel-size) * var(--frame-size-height));
     outline: var(--pixel-size) solid #fff;
     z-index: 1;
     position: relative;
 }
 
+.blackscreen {
+    background-color: black;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
 .camera {
-    width: calc(var(--pixel-size) * 160);
-    height: calc(var(--pixel-size) * 144);
+    width: calc(var(--pixel-size) * var(--frame-size-width));
+    height: calc(var(--pixel-size) * var(--frame-size-height));
     overflow: hidden;
     position: relative;
 }
 
 .map {
     image-rendering: pixelated;
-    background-image: url("./assets/Map.png");
     background-size: 100%;
-    /*15 : nbr de carreaux*/
-    width: calc(15 * var(--grid-cell));
-    /* height: calc(10 * var(--grid-cell)); */
-    height: calc(26 * var(--grid-cell));
     position: relative;
+}
+
+.fishing {
+    background-image: url("./assets/fishing.gif");
+    background-size: 100%;
+    width: 180px;
+    height: 96px;
+    position: absolute;
+    bottom: 5px;
+    left: -75px;
+    visibility: hidden;
 }
 
 .character {
@@ -58,6 +74,7 @@
     height: calc(var(--grid-cell)* 2);
     position: absolute;
     overflow: hidden;
+    border: 1px solid red;
 }
 
 .shadow {
@@ -72,7 +89,7 @@
 
 .character_spritesheet {
     position: absolute;
-    background: url("./assets/customCharacter.png") no-repeat no-repeat;
+    background: url("./assets/character/customCharacter.png") no-repeat no-repeat;
     background-size: 100%;
     width: calc(var(--grid-cell)* 8);
     height: calc(var(--grid-cell)* 8);
@@ -216,4 +233,17 @@
     top: calc(var(--pixel-size) * 2);
     right: calc(var(--pixel-size) * 2);
     width: calc(var(--pixel-size) * 75)
+}
+
+.tchat {
+    resize: none;
+    border-top-right-radius: 10px 10px;
+    background-color: rgba(150, 150, 150, 0.6);
+    width: 60%;
+    height: 20%;
+    max-height: 20%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
 }

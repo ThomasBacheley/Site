@@ -1,0 +1,133 @@
+{
+    "defaultspawn": {
+        "mapname": "house_1floor",
+        "spawn": {
+            "x": 15,
+            "y": 82,
+            "direction": "right"
+        }
+    },
+    "outside": {
+        "doors": [
+            {
+                "name": "house_door",
+                "travel":{
+                    "to":"house",
+                    "spawn": {
+                        "x": 60,
+                        "y": 94,
+                        "direction": "up"
+                    }
+                },
+                "rangeX": {
+                    "xmin": 78,
+                    "xmax": 94
+                },
+                "rangeY": {
+                    "ymin": 71,
+                    "ymax": 73
+                },
+                "msg": "Rentrer dans la maison"
+            }
+        ],
+        "background_path": "./assets/Map/outside.png",
+        "limit": {
+            "leftLimit": -8,
+            "rightLimit": 216,
+            "topLimit": 71,
+            "bottomLimit": 400
+        }
+    },
+    "house": {
+        "doors": [
+            {
+                "name": "house_door",
+                "travel":{
+                    "to":"outside",
+                    "spawn": {
+                        "x": 88,
+                        "y": 72.5,
+                        "direction": "down"
+                    }
+                },
+                "rangeX": {
+                    "xmin": 49,
+                    "xmax": 72
+                },
+                "rangeY": {
+                    "ymin": 94,
+                    "ymax": 95
+                },
+                "msg": "Sortir de la maison"
+            },
+            {
+                "name": "house_stair",
+                "travel": {
+                    "to": "house_1floor",
+                    "spawn": {
+                        "x": 31,
+                        "y": 120,
+                        "direction": "up"
+                    }
+                },
+                "rangeX": {
+                    "xmin": 40,
+                    "xmax": 60
+                },
+                "rangeY": {
+                    "ymin": 37,
+                    "ymax": 38
+                },
+                "msg": "Monter à l'étage"
+            }
+        ],
+        "spawn": {
+            "x": 61,
+            "y": 95,
+            "direction": "up"
+        },
+        "background_path": "./assets/Map/house2.png",
+        "limit": {
+            "leftLimit": -4,
+            "rightLimit": 120,
+            "topLimit": 37,
+            "bottomLimit": 95
+        }
+    },
+    "house_1floor": {
+        "doors": [
+            {
+                "name": "house_stair",
+                "travel": {
+                    "to": "house",
+                    "spawn": {
+                        "x": 48,
+                        "y": 40,
+                        "direction": "down"
+                    }
+                },
+                "rangeX": {
+                    "xmin": 20,
+                    "xmax": 41
+                },
+                "rangeY": {
+                    "ymin": 119,
+                    "ymax": 120
+                },
+                "msg": "Rentrer dans la maison"
+            }
+        ],
+        "background_path": "./assets/Map/house2_1floor.png",
+        "limit": {
+            "leftLimit": -3,
+            "rightLimit": 120,
+            "topLimit": 38,
+            "bottomLimit": 120
+        },
+        "spawn": {
+            "x": 32,
+            "y": 118,
+            "direction": "up"
+        }
+    }
+}

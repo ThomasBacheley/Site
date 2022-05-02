@@ -1,13 +1,18 @@
 var character = document.querySelector(".character");
 var map = document.querySelector(".map");
 var E_bubble = document.querySelector(".interraction_bubble")
+var character_spritesheet = document.querySelector(".character_spritesheet")
+
+var tchat = document.querySelector(".tchat")
 
 var character_info = {
-   x:90,
-   y:34,
-   speed:0.5
+   speed: 0.5
 }
 
+// function RB_style(name_style){
+//    console.log(name_style)
+//    character_spritesheet.setAttribute("style","background: url(\"./assets/character/"+name_style.toLowerCase()+"Character.png\") no-repeat no-repeat !important")
+// }
 function init() {
    var timecolor = "#6DB4EB";
 
@@ -35,92 +40,37 @@ function init() {
       }
    }
 
-   var colorPicker = new window.iro.ColorPicker("#picker", {
-      // Set the size of the color picker
-      width: 320,
-      // Set the initial color to pure red
-      color: timecolor
-   });
+   // var colorPicker = new window.iro.ColorPicker("#picker", {
+   //    // Set the size of the color picker
+   //    width: 320,
+   //    // Set the initial color to pure red
+   //    color: timecolor
+   // });
 
-   colorPicker.on('color:change', function (color) {
-      camera.style.backgroundColor = color.hexString;
-   });
+   // colorPicker.on('color:change', function (color) {
+   //    camera.style.backgroundColor = color.hexString;
+   // });
 
    camera.style.backgroundColor = timecolor
-
+   spawn()
 }
 
 init()
 var held_directions = []; //State of which arrow keys we are holding down
 
-var mapLimit = {
-   leftLimit: -8,//x mur de gauche
-   rightLimit: 216,// x mur de droite
-   topLimit: 24, //y mur en haut
-   bottomLimit: 368 // y mur en bas
+var mapLimit = null
+
+function applyLimit(limit) {
+   mapLimit = {
+      leftLimit: limit.leftLimit,//x mur de gauche
+      rightLimit: limit.rightLimit,// x mur de droite
+      topLimit: limit.topLimit, //y mur en haut
+      bottomLimit: limit.bottomLimit // y mur en bas
+   }
 }
 
-var list_interraction = [
-   listSign = {
-      wall_sign: {
-         rangeX: {
-            xmin: 132,
-            xmax: 142
-         },
-         rangeY: {
-            ymin: 24,
-            ymax: 24
-         },
-         msg: "Wall sign event"
-      },
-      fountain_sign: {
-         rangeX: {
-            xmin: 141,
-            xmax: 152
-         },
-         rangeY: {
-            ymin: 313,
-            ymax: 320
-         },
-         msg: "Fountain sign event"
-      }
-   },
-   npc = {
-      cat: {
-         rangeX: {
-            xmin: 56,
-            xmax: 60
-         },
-         rangeY: {
-            ymin: 33,
-            ymax: 46
-         },
-         msg: "Miaaouuu"
-      },
-      mother: {
-         rangeX: {
-            xmin: 101,
-            xmax: 106
-         },
-         rangeY: {
-            ymin: 40,
-            ymax: 44
-         },
-         msg: "Bienvenue dans les Test d'Ywee, c'est encore en construction. Soyez indulgents ! Merci"
-      }
-   },
-   door = {
-         rangeX: {
-            xmin: 84,
-            xmax: 94
-         },
-         rangeY: {
-            ymin: 23,
-            ymax: 25
-         },
-         msg: "Door event"
-      }
-];
+var list_interraction = [];
+var mapdoors = [];
 
 var listDecor = [
    fountain = {
@@ -149,24 +99,39 @@ const placeCharacter = () => {
    }
    character.setAttribute("walking", held_direction ? "true" : "false");
 
+   interraction_item = null;
+
    //Limits (gives the illusion of walls)
    //place du pixel sur la ligne noir , - ou + 34 ou 90
-   if (character_info.x < mapLimit.leftLimit) { character_info.x = mapLimit.leftLimit; }
-   if (character_info.x > mapLimit.rightLimit) { character_info.x = mapLimit.rightLimit; }
-   if (character_info.y < mapLimit.topLimit) { character_info.y = mapLimit.topLimit; }
-   if (character_info.y > mapLimit.bottomLimit) { character_info.y = mapLimit.bottomLimit; }
+   if (mapLimit) {
+      if (character_info.x < mapLimit.leftLimit) { character_info.x = mapLimit.leftLimit; }
+      if (character_info.x > mapLimit.rightLimit) { character_info.x = mapLimit.rightLimit; }
+      if (character_info.y < mapLimit.topLimit) { character_info.y = mapLimit.topLimit; }
+      if (character_info.y > mapLimit.bottomLimit) { character_info.y = mapLimit.bottomLimit; }
 
-   interraction_item = signInterraction() || npcInterraction()
+      if (list_interraction != undefined) {
+         signInterraction();
+         npcInterraction();
+         otherInterraction();
+      }
+      if (mapdoors != undefined) {
+         doorInterraction();
+      }
 
-   if (interraction_item != null) {
-      displayBubble(true)
-   } else {
-      displayBubble()
+      if (interraction_item != null) {
+         E_bubble.style.visibility = "visible"
+      } else {
+         E_bubble.style.visibility = "hidden"
+      }
    }
 
+   //(((66/42)/(160/144))*(200/144))*42 = 82.5
+
+   var camera_left = pixelSize * 82.5;
+   var camera_top = pixelSize * 42;
 
 
-   var camera_left = pixelSize * 66;
+   var camera_left = pixelSize * 82.5;
    var camera_top = pixelSize * 42;
 
    map.style.transform = `translate3d( ${-character_info.x * pixelSize + camera_left}px, ${-character_info.y * pixelSize + camera_top}px, 0 )`;
@@ -174,63 +139,68 @@ const placeCharacter = () => {
    character.style.transform = `translate3d( ${character_info.x * pixelSize}px, ${character_info.y * pixelSize}px, 0 )`;
 }
 
-signInterraction = () => {
-   if ((character_info.x >= list_interraction[0].wall_sign.rangeX.xmin && character_info.x <= list_interraction[0].wall_sign.rangeX.xmax) && (character_info.y >= list_interraction[0].wall_sign.rangeY.ymin && character_info.y <= list_interraction[0].wall_sign.rangeY.ymax)) {
-      inFrontSign = true;
-      return {
-         name: "Wall Sign",
-         msg: list_interraction[0].wall_sign.msg
-      }
-   } else {
-      if ((character_info.x >= list_interraction[0].fountain_sign.rangeX.xmin && character_info.x <= list_interraction[0].fountain_sign.rangeX.xmax) && (character_info.y >= list_interraction[0].fountain_sign.rangeY.ymin && character_info.y <= list_interraction[0].fountain_sign.rangeY.ymax)) {
-         inFrontSign = true;
-         return {
-            name: "Fountain Sign",
-            msg: list_interraction[0].fountain_sign.msg
-         }
+async function signInterraction() {
+   list_interraction.texts.forEach(txt => {
+      if ((character_info.x >= txt.rangeX.xmin && character_info.x <= txt.rangeX.xmax) && (character_info.y >= txt.rangeY.ymin && character_info.y <= txt.rangeY.ymax)) {
+         locktxt = true;
+         txt.type = "text"
+         interraction_item = txt;
       } else {
-         inFrontSign = false;
-         return null
+         locktxt = false;
       }
-   }
+   })
 }
 
-npcInterraction = () => {
-   if ((character_info.x >= list_interraction[1].cat.rangeX.xmin && character_info.x <= list_interraction[1].cat.rangeX.xmax) && (character_info.y >= list_interraction[1].cat.rangeY.ymin && character_info.y <= list_interraction[1].cat.rangeY.ymax)) {
-      inFrontSign = true;
-      return {
-         name: "Cat",
-         msg: list_interraction[1].cat.msg
-      }
-   } else {
-      if ((character_info.x >= list_interraction[1].mother.rangeX.xmin && character_info.x <= list_interraction[1].mother.rangeX.xmax) && (character_info.y >= list_interraction[1].mother.rangeY.ymin && character_info.y <= list_interraction[1].mother.rangeY.ymax)) {
-         inFrontSign = true;
-         return {
-            name: "Mother",
-            msg: list_interraction[1].mother.msg
-         }
+async function otherInterraction() {
+   list_interraction.others.forEach(other_interraction => {
+      if ((character_info.x >= other_interraction.rangeX.xmin && character_info.x <= other_interraction.rangeX.xmax) && (character_info.y >= other_interraction.rangeY.ymin && character_info.y <= other_interraction.rangeY.ymax)) {
+         lockother = true;
+         other_interraction.type = "other"
+         interraction_item = other_interraction;
       } else {
-         if ((character_info.x >= list_interraction[2].rangeX.xmin && character_info.x <= list_interraction[2].rangeX.xmax) && (character_info.y >= list_interraction[2].rangeY.ymin && character_info.y <= list_interraction[2].rangeY.ymax)) {
-            inFrontSign = true;
-            return {
-               name: "Door",
-               msg: list_interraction[2].msg
-            }
-         } else {
-            inFrontSign = false;
-            return null
-         }
+         lockother = false;
       }
-   }
+   })
 }
 
-displayBubble = (lock = false) => {
-   if (lock) {
-      E_bubble.style.visibility = "visible"
-   } else {
-      E_bubble.style.visibility = "hidden"
-   }
+async function npcInterraction() {
+   list_interraction.npcs.forEach(npc => {
+      if ((character_info.x >= npc.rangeX.xmin && character_info.x <= npc.rangeX.xmax) && (character_info.y >= npc.rangeY.ymin && character_info.y <= npc.rangeY.ymax)) {
+         locknpc = true;
+         npc.type = "npc"
+         interraction_item = npc;
+      }
+      else {
+         locknpc = false;
+      }
+   })
 }
+
+async function doorInterraction() {
+   mapdoors.forEach(door => {
+      if ((character_info.x >= door.rangeX.xmin && character_info.x <= door.rangeX.xmax) && (character_info.y >= door.rangeY.ymin && character_info.y <= door.rangeY.ymax)) {
+         lockdoor = true;
+         door.type = "door";
+         interraction_item = door;
+      } else {
+         lockdoor = false;
+      }
+   })
+}
+
+let lockdoor = false;
+let locktxt = false;
+let locknpc = false;
+let lockother = false;
+
+// displayBubble = (lock = false) => {
+//    console.log(lock)
+//    if (lock) {
+//       E_bubble.style.visibility = "visible"
+//    } else {
+//       E_bubble.style.visibility = "hidden"
+//    }
+// }
 
 //Set up the game loop
 const step = () => {
@@ -261,25 +231,127 @@ const keys = {
    83: directions.down,
 }
 
-const interractionKeys = [
-   69
-]
 
 document.addEventListener("keydown", (e) => {
    var dir = keys[e.which];
    if (dir && held_directions.indexOf(dir) === -1) {
       held_directions.unshift(dir)
    }
-   if (inFrontSign && interractionKeys.indexOf(e.keyCode) !== -1) {
-      console.log(interraction_item.name+": "+interraction_item.msg)
+   if (e.key == "e" && interraction_item) {
+      tchat_display(interraction_item)
+      switch (interraction_item.type) {
+         case 'door':
+            console.log(interraction_item)
+            mapload(interraction_item.travel)
+            break;
+         case 'fishing':
+            document.querySelector(".fishing").style.visibility = "visible"
+            setTimeout(() => {
+               document.querySelector(".fishing").style.visibility = "hidden"
+            }, 8000)
+         default:
+            break;
+      }
    }
-   if(e.keyCode == "69"){
-      console.log(character_info.x,character_info.y)
+   if (e.key == "i") {
+      tchat_display({
+         name: "info",
+         msg: JSON.stringify(character_info)
+      });
+      console.log(character_info)
    }
-   if (e.keyCode == "32") {
+   if (e.key == " ") { /* spacebar */
       character_info.speed = 1;
    }
+   if (e.key == "t") {
+      tchat_display()
+   }
+
+   if (e.key == "r") {
+      init()
+   }
 })
+
+function fondu(){
+   anime.timeline({ loop: false })
+      .add({
+         targets: '.blackscreen',
+         opacity: [1, 0],
+         easing: "easeOutExpo",
+         duration: 3000
+      });
+}
+
+function spawn(){
+
+   fondu()
+
+   let spawnmap = undefined
+
+   readTextFile("./components/Maps.json", function (text) {
+      var data = JSON.parse(text);
+
+      spawnmap = data.defaultspawn.mapname
+
+      var mapdata = data[spawnmap]
+      applyLimit(mapdata.limit);
+
+      if (mapdata.doors) { mapdoors = mapdata.doors; }
+      else { mapdoors = []; }
+
+      var temp_img = new Image();
+      temp_img.src = mapdata.background_path;
+      map.setAttribute("style", "background-image: url(\"" + mapdata.background_path + "\") !important;");
+      temp_img.onload = function () {
+         var width = temp_img.width,
+            height = temp_img.height;
+         map.style.height = (height * 4) + "px";
+         map.style.width = (width * 4) + "px";
+      };
+      character_info.x = data.defaultspawn.spawn.x;
+      character_info.y = data.defaultspawn.spawn.y;
+      character_info.location = spawnmap;
+      character.setAttribute("facing", data.defaultspawn.spawn.direction);
+   });
+
+   readTextFile("./components/Interractions.json", function (text) {
+      var data = JSON.parse(text);
+      list_interraction = data[spawnmap]
+   })
+}
+
+function mapload(travel_item) {
+
+   fondu();
+
+   readTextFile("./components/Maps.json", function (text) {
+      var data = JSON.parse(text);
+      var mapdata = data[travel_item.to]
+      applyLimit(mapdata.limit);
+
+      if (mapdata.doors) { mapdoors = mapdata.doors; }
+      else { mapdoors = []; }
+
+      var temp_img = new Image();
+      temp_img.src = mapdata.background_path;
+      map.setAttribute("style", "background-image: url(\"" + mapdata.background_path + "\") !important;");
+      temp_img.onload = function () {
+         var width = temp_img.width,
+            height = temp_img.height;
+         map.style.height = (height * 4) + "px";
+         map.style.width = (width * 4) + "px";
+      };
+      character_info.x = travel_item.spawn.x;
+      character_info.y = travel_item.spawn.y;
+      character.setAttribute("facing", travel_item.spawn.direction);
+      character_info.location = travel_item.to;
+   });
+
+   readTextFile("./components/Interractions.json", function (text) {
+      var data = JSON.parse(text);
+      list_interraction = data[travel_item.to]
+   })
+}
 
 document.addEventListener("keyup", (e) => {
    var dir = keys[e.which];
@@ -287,13 +359,10 @@ document.addEventListener("keyup", (e) => {
    if (index > -1) {
       held_directions.splice(index, 1)
    }
-   if (e.keyCode == "32") {
-      character_info.speed = 0.5
+   if (e.key == " ") { /* spacebar */
+      character_info.speed = 0.5;
    }
 });
-
-var inFrontSign = false;
-
 /* BONUS! Dpad functionality for mouse and touch */
 var isPressed = false;
 const removePressedAll = () => {
@@ -335,3 +404,42 @@ document.querySelector(".dpad-left").addEventListener("mouseover", (e) => handle
 document.querySelector(".dpad-up").addEventListener("mouseover", (e) => handleDpadPress(directions.up));
 document.querySelector(".dpad-right").addEventListener("mouseover", (e) => handleDpadPress(directions.right));
 document.querySelector(".dpad-down").addEventListener("mouseover", (e) => handleDpadPress(directions.down));
+
+let tchat_isDisplay = false;
+let tchattimeout = 5000
+
+function tchat_display(interraction_item = null) {
+   if (interraction_item) {
+      tchat.innerHTML = interraction_item.name + ": " + interraction_item.msg + "\n" + tchat.innerHTML;
+   }
+   tchat_isDisplay = true;
+
+   tchat.style.opacity = 100;
+   timeoutTchat = setTimeout(() => {
+      anime.timeline({ loop: false })
+         .add({
+            targets: '.tchat',
+            opacity: [100, 0],
+            easing: "easeOutExpo",
+            duration: 2000
+         });
+      tchat_isDisplay = false;
+   }, tchattimeout)
+
+}
+
+function readTextFile(file, callback) {
+   var rawFile = new XMLHttpRequest();
+   rawFile.overrideMimeType("application/json");
+   rawFile.open("GET", file, true);
+   rawFile.onreadystatechange = function () {
+      if (rawFile.readyState === 4 && rawFile.status == "200") {
+         callback(rawFile.responseText);
+      }
+   }
+   rawFile.send(null);
+}
+
+function tp(door_item){
+   console.log(door_item)
+}
