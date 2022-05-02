@@ -58,7 +58,7 @@
         ],
         "others": [
             {
-                "name": "Fishing",
+                "name": "fishing",
                 "comment": "ponton",
                 "rangeX": {
                     "xmin": 22,
@@ -69,6 +69,51 @@
                     "ymax": 174.5
                 },
                 "msg": "Belle journée pour pecher"
+            }
+        ]
+    },
+    "house_1floor": {
+        "texts": null,
+        "npcs":null,
+        "others": [
+            {
+                "name": "wardrobe",
+                "comment": "garde robe",
+                "rangeX": {
+                    "xmin": 57,
+                    "xmax": 70
+                },
+                "rangeY": {
+                    "ymin": 74,
+                    "ymax": 85.5
+                },
+                "msg": "En développement, tu pourras bientot changer de style et de genre !"
+            },
+            {
+                "name": "telescope",
+                "comment": "pour mater dehors",
+                "rangeX": {
+                    "xmin": 95.5,
+                    "xmax": 105.5
+                },
+                "rangeY": {
+                    "ymin": 38,
+                    "ymax": 43.5
+                },
+                "msg": "En développement, tu pourras bientot observer le ciel!"
+            },
+            {
+                "name": "bed",
+                "comment": "pour mater dehors",
+                "rangeX": {
+                    "xmin": 14,
+                    "xmax": 19
+                },
+                "rangeY": {
+                    "ymin": 67.5,
+                    "ymax": 96
+                },
+                "msg": "Juste pour dodo"
             }
         ]
     }

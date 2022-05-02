@@ -20,20 +20,30 @@ function init() {
 
    let time = new Date();
 
+   let atr_value = "background-color: " + timecolor
+
    if (time.getHours() >= 20) { //entre 20h et minuit
-      timecolor = "#2e4482";
+      atr_value = "background-color: #2e4482";
    } else {
-      if (time.getHours() >= 17) { //entre 17h et minuit
-         timecolor = "#629fe3";
+      if (time.getHours() >= 19) {//entre 19h et 20h
+         atr_value = "background-color: #FCEBA8";
       } else {
-         if (time.getHours() >= 14) { //entre 14h et 17h
-            timecolor = "#6DB4EB";
+         if (time.getHours() >= 17) { //entre 17h et 19h
+            atr_value = "background-color: #629fe3";
          } else {
-            if (time.getHours() >= 8) { //entre 8h et 14h
-               timecolor = "#94CDFD";
+            if (time.getHours() >= 14) { //entre 14h et 17h
+               atr_value = "background-color: #6DB4EB";
             } else {
-               if (time.getHours() >= 0) { //entre minuit et 8h
-                  timecolor = "#131862";
+               if (time.getHours() >= 8) { //entre 8h et 14h
+                  atr_value = "background-color: #94CDFD";
+               } else {
+                  if (time.getHours() >= 2) { //entre 2h et 8h
+                     atr_value = "background-color: #131862";
+                  } else {
+                     if (time.getHours() >= 0) { //entre minuit et 2h
+                        atr_value = "background-image: url(\"./assets/starsky.gif\") !important; background-size: 100%;"
+                     }
+                  }
                }
             }
          }
@@ -50,8 +60,7 @@ function init() {
    // colorPicker.on('color:change', function (color) {
    //    camera.style.backgroundColor = color.hexString;
    // });
-
-   camera.style.backgroundColor = timecolor
+   camera.setAttribute("style", atr_value);
    spawn()
 }
 
@@ -61,6 +70,7 @@ var held_directions = []; //State of which arrow keys we are holding down
 var mapLimit = null
 
 function applyLimit(limit) {
+   console.log(limit)
    mapLimit = {
       leftLimit: limit.leftLimit,//x mur de gauche
       rightLimit: limit.rightLimit,// x mur de droite
@@ -140,6 +150,7 @@ const placeCharacter = () => {
 }
 
 async function signInterraction() {
+   if (list_interraction.texts == null || list_interraction.texts == undefined) { return }
    list_interraction.texts.forEach(txt => {
       if ((character_info.x >= txt.rangeX.xmin && character_info.x <= txt.rangeX.xmax) && (character_info.y >= txt.rangeY.ymin && character_info.y <= txt.rangeY.ymax)) {
          locktxt = true;
@@ -152,6 +163,7 @@ async function signInterraction() {
 }
 
 async function otherInterraction() {
+   if (list_interraction.others == null || list_interraction.others == undefined) { return }
    list_interraction.others.forEach(other_interraction => {
       if ((character_info.x >= other_interraction.rangeX.xmin && character_info.x <= other_interraction.rangeX.xmax) && (character_info.y >= other_interraction.rangeY.ymin && character_info.y <= other_interraction.rangeY.ymax)) {
          lockother = true;
@@ -164,6 +176,7 @@ async function otherInterraction() {
 }
 
 async function npcInterraction() {
+   if (list_interraction.npcs == null || list_interraction.npcs == undefined) { return }
    list_interraction.npcs.forEach(npc => {
       if ((character_info.x >= npc.rangeX.xmin && character_info.x <= npc.rangeX.xmax) && (character_info.y >= npc.rangeY.ymin && character_info.y <= npc.rangeY.ymax)) {
          locknpc = true;
@@ -241,14 +254,25 @@ document.addEventListener("keydown", (e) => {
       tchat_display(interraction_item)
       switch (interraction_item.type) {
          case 'door':
-            console.log(interraction_item)
             mapload(interraction_item.travel)
             break;
-         case 'fishing':
-            document.querySelector(".fishing").style.visibility = "visible"
-            setTimeout(() => {
-               document.querySelector(".fishing").style.visibility = "hidden"
-            }, 8000)
+         case 'other':
+            switch (interraction_item.name) {
+               case 'fishing':
+                  document.querySelector(".fishing").style.visibility = "visible"
+                  setTimeout(() => {
+                     document.querySelector(".fishing").style.visibility = "hidden"
+                  }, 8000)
+                  break
+               case 'telescope':
+                  map.style.visibility = "hidden";
+                  setTimeout(()=>{
+                     map.style.visibility = "visible"
+                  },5000)
+                  break
+               default:
+                  break;
+            }
          default:
             break;
       }
@@ -272,7 +296,7 @@ document.addEventListener("keydown", (e) => {
    }
 })
 
-function fondu(){
+function fondu() {
    anime.timeline({ loop: false })
       .add({
          targets: '.blackscreen',
@@ -282,7 +306,7 @@ function fondu(){
       });
 }
 
-function spawn(){
+function spawn() {
 
    fondu()
 
@@ -317,6 +341,7 @@ function spawn(){
    readTextFile("./components/Interractions.json", function (text) {
       var data = JSON.parse(text);
       list_interraction = data[spawnmap]
+      console.log(list_interraction)
    })
 }
 
@@ -440,6 +465,6 @@ function readTextFile(file, callback) {
    rawFile.send(null);
 }
 
-function tp(door_item){
+function tp(door_item) {
    console.log(door_item)
 }

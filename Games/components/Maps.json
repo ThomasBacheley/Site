@@ -32,6 +32,7 @@
         ],
         "background_path": "./assets/Map/outside.png",
         "limit": {
+            "type":"square",
             "leftLimit": -8,
             "rightLimit": 216,
             "topLimit": 71,
@@ -81,13 +82,9 @@
                 "msg": "Monter à l'étage"
             }
         ],
-        "spawn": {
-            "x": 61,
-            "y": 95,
-            "direction": "up"
-        },
         "background_path": "./assets/Map/house2.png",
         "limit": {
+            "type":"square",
             "leftLimit": -4,
             "rightLimit": 120,
             "topLimit": 37,
@@ -114,20 +111,16 @@
                     "ymin": 119,
                     "ymax": 120
                 },
-                "msg": "Rentrer dans la maison"
+                "msg": "Descendre dans le salon"
             }
         ],
         "background_path": "./assets/Map/house2_1floor.png",
         "limit": {
+            "type":"square",
             "leftLimit": -3,
-            "rightLimit": 120,
+            "rightLimit": 118.5,
             "topLimit": 38,
             "bottomLimit": 120
-        },
-        "spawn": {
-            "x": 32,
-            "y": 118,
-            "direction": "up"
         }
     }
 }
