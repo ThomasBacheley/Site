@@ -234,6 +234,8 @@
     width: calc(var(--pixel-size) * 75)
 }
 
+
+
 .tchat {
     resize: none;
     border-top-right-radius: 10px 10px;

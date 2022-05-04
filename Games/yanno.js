@@ -6,7 +6,8 @@ var character_spritesheet = document.querySelector(".character_spritesheet")
 var tchat = document.querySelector(".tchat")
 
 var character_info = {
-   speed: 0.5
+   speed: 0.5,
+   watching_sky: false
 }
 
 // function RB_style(name_style){
@@ -70,7 +71,6 @@ var held_directions = []; //State of which arrow keys we are holding down
 var mapLimit = null
 
 function applyLimit(limit) {
-   console.log(limit)
    mapLimit = {
       leftLimit: limit.leftLimit,//x mur de gauche
       rightLimit: limit.rightLimit,// x mur de droite
@@ -265,10 +265,10 @@ document.addEventListener("keydown", (e) => {
                   }, 8000)
                   break
                case 'telescope':
-                  map.style.visibility = "hidden";
-                  setTimeout(()=>{
-                     map.style.visibility = "visible"
-                  },5000)
+                  sky_observation()
+                  break
+               case 'bed':
+                  dodoanimation()
                   break
                default:
                   break;
@@ -341,13 +341,18 @@ function spawn() {
    readTextFile("./components/Interractions.json", function (text) {
       var data = JSON.parse(text);
       list_interraction = data[spawnmap]
-      console.log(list_interraction)
    })
 }
 
 function mapload(travel_item) {
 
-   fondu();
+   anime.timeline({ loop: false })
+      .add({
+         targets: '.blackscreen',
+         opacity: [0, 1],
+         easing: "easeOutExpo",
+         duration: 1500
+      })
 
    readTextFile("./components/Maps.json", function (text) {
       var data = JSON.parse(text);
@@ -376,6 +381,14 @@ function mapload(travel_item) {
       var data = JSON.parse(text);
       list_interraction = data[travel_item.to]
    })
+
+   anime.timeline({ loop: false })
+      .add({
+         targets: '.blackscreen',
+         opacity: [1, 0],
+         easing: "easeInExpo",
+         duration: 1500
+      });
 }
 
 document.addEventListener("keyup", (e) => {
@@ -465,6 +478,39 @@ function readTextFile(file, callback) {
    rawFile.send(null);
 }
 
-function tp(door_item) {
-   console.log(door_item)
+function sky_observation() {
+   if (character_info.watching_sky) {
+      character_info.watching_sky = false;
+      character_info.speed = 0.5;
+      map.style.visibility = "visible"
+   } else {
+      character_info.watching_sky = true;
+      character_info.speed = 0;
+      map.style.visibility = "hidden";
+   }
+}
+
+function tpanimation() {
+   anime.timeline({ loop: false })
+      .add({
+         targets: '.blackscreen',
+         opacity: [1, 0],
+         easing: "easeInExpo",
+         duration: 1500
+      });
+}
+
+function dodoanimation() {
+   anime.timeline({ loop: false })
+      .add({
+         targets: '.blackscreen',
+         opacity: [0, 1],
+         easing: "easeOutExpo",
+         duration: 1500
+      }).add({
+         targets: '.blackscreen',
+         opacity: [1, 0],
+         easing: "easeInExpo",
+         duration: 1500
+      });
 }

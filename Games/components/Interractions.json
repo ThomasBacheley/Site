@@ -100,7 +100,7 @@
                     "ymin": 38,
                     "ymax": 43.5
                 },
-                "msg": "En développement, tu pourras bientot observer le ciel!"
+                "msg": "Rappuye sur E pour arreter d'observer le ciel"
             },
             {
                 "name": "bed",
@@ -113,7 +113,7 @@
                     "ymin": 67.5,
                     "ymax": 96
                 },
-                "msg": "Juste pour dodo"
+                "msg": "Allez Dodo"
             }
         ]
     }
