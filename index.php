@@ -9,13 +9,13 @@ if (isset($_GET['sendmail'])) {
 <html lang="fr" style="scroll-behavior: smooth !important;">
 
 <head>
-    <?php include 'head.php'; ?>
+    <?php include './components/head.html'; ?>
     <title>Yweelon.fr</title>
 </head>
 
 <body>
     <nav id="navbar" class="navbar navbar-expand-lg bg-transparent">
-        <?php include 'navbar.php'; ?>
+        <?php include './components/navbar.html'; ?>
     </nav>
     <button onclick="topFunction()" id="topbtn" title="Go to top">↑</button>
     <!-- The actual snackbar -->
@@ -30,10 +30,10 @@ if (isset($_GET['sendmail'])) {
                 <span class="line line2"></span>
             </span>
         </h1>
-        <br/><br/>
+        <br /><br />
         <p class="subtitle">Bienvenue sur <span style="text-decoration: underline;">Yweelon.fr</span><br />Un site
             dévéloppé par Yweelon</p>
-        <br/>
+        <br />
         <a class="btn btn-primary btn-lg" href="#mailform" role="button">Mail <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 226 226" style=" fill:#000000;">
                 <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
                     <path d="M0,226v-226h226v226z" fill="none"></path>
@@ -48,12 +48,13 @@ if (isset($_GET['sendmail'])) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
         <script src="./js/ml1.js"></script>
     </div>
-    <br id="about"/>
+    <br id="about" />
     <div style="text-align: center;">
-        <p class="subtitle" style="font-size:22px !important;">Ici tu pourras trouver la plupart de <span class="highlight">mes projets</span> personnels et professionnels!<br/>Ainsi que <span class="highlight">mon parcours</span> et autres</p>
+        <p class="subtitle" style="font-size:22px !important;">Ici tu pourras trouver la plupart de <span class="highlight">mes projets</span> personnels et professionnels!<br />Ainsi que <span class="highlight">mon parcours</span> et autres</p>
         <p class="subtitle" style="font-size:22px !important;">Je mets quotidiennement à jour ce site, je t'invite donc à le <span class="highlight">visiter</span> via les différentes pages disponible</p>
     </div>
     <br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <p style="font-style: italic;text-align: center">(En construction)</p>
     <div id="mailform" class="text-center" style="background-color: #292933;width: 80%;margin-left: auto;margin-right: auto;border-radius: 3%;padding: 20px; box-shadow: white;">
         <!--Section: Contact v.2-->
         <section class="mb-4">
@@ -119,16 +120,7 @@ if (isset($_GET['sendmail'])) {
     </div>
     <br /><br /><br /><br /><br />
     <footer>
-        <div class="page_end">
-            <br />
-            <div class="footer">
-                <div class="bot-footer">
-                    <a href="credits.php" data-bs-toggle="tooltip" title="Vers les Crédits">
-                        <img src="assets/BotLogoWord.png" width="150" style="margin-left:-45px;"><br />
-                    </a>
-                </div>
-            </div>
-        </div>
+        <?php include './components/footer.html'; ?>
     </footer>
     <script>
         mybutton = document.getElementById("topbtn");

@@ -4,13 +4,13 @@ session_start();
 <html>
 
 <head>
-    <?php include 'head.php'; ?>
+    <?php include './components/head.html'; ?>
     <title>Inscription</title>
 </head>
 
 <body>
     <nav id="navbar" class="navbar navbar-expand-lg bg-transparent">
-        <?php include 'navbar.php'; ?>
+        <?php include './components/navbar.html'; ?>
     </nav>
     <div id="container">
         <form id="signin-form" action="/verification/verification_inscription.php" method="POST">
@@ -31,6 +31,9 @@ session_start();
         </form>
     </div>
     <div id="snackbar_failed">❌ Erreur : <span id="snackbar_content"></span></div>
+    <footer>
+        <?php include './components/footer.html'; ?>
+    </footer>
     <script>
         var erreur = '<?php echo $err; ?>';
 

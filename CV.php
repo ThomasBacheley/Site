@@ -5,28 +5,29 @@ session_start();
 <html lang="fr">
 
 <head>
-    <?php include 'head.php'; ?>
+    <?php include './components/head.html'; ?>
     <title>Mon CV</title>
+    <link rel="stylesheet" href="/css/card.css">
 </head>
 
 <body>
     <nav id="navbar" class="navbar navbar-expand-lg bg-transparent">
-        <?php include 'navbar.php'; ?>
+        <?php include './components/navbar.html'; ?>
     </nav>
-    <!---->
 
     <div class="heading" id="div_presentation">
         <div id="presentation">
             <div>
-                <img src="https://cdn.discordapp.com/avatars/663153459226345501/fb2641134780a5c5fe8f92f9814cc580.png" alt="Ywee PP" style="width: 128px;height: 128px; border-radius:15px" />
+                <img class="pp" src="https://cdn.discordapp.com/avatars/663153459226345501/8d71af75400b5a03b144b0e6755477ed.png" alt="Ywee PP" />
             </div>
-            <br/>
+            <br />
             <h1 class="ml11">
                 <span class="text-wrapper">
                     <span class="line line1"></span>
                     <h1 class="display-5 title letters">Thomas</h1>
                 </span>
             </h1>
+            <p>(À la recherche d'une alternance)</p>
             <p class="subtitle">Salut, je m'appelle <span class="highlight">Thomas</span>, j'ai 22 ans et je suis <span class="highlight">développeur</span> Junior.</p>
             <br />
             <p class="subtitle">Je code depuis <span class="highlight">2017</span> des applications pour mes études ou des projets personnels (<a href="Hellbot.php">Hellbot</a> / <a href="GIT_bot.php">GIT Bot</a>).</p>
@@ -37,68 +38,122 @@ session_start();
         </div>
         <br />
         <div id="objectif">
-            <p class="subtitle">En Septembre 2022, je rejoins l'école <span class="highlight">Créative</span> dans la licence Web mobile & Business Intelligence pour une durée de <span class="highlight">1 an</span></p>
+            <p class="subtitle">En Septembre 2022, je rejoins l'école <span class="highlight">Créative</span> dans la formation BAC+3 "<a href="Bac3_CDA.pdf" target="_blank">Concepteur Développeur D'Application</a>" pour une durée de <span class="highlight">1 an</span></p>
         </div>
     </div>
     <br /><br />
     <hr class="roundedHR">
     <br /><br />
-    <div id="div_CV">
-        <div id="formations" style="text-align: left;">
-            <h3 class="display-3 title CV_title">Formations</h3>
-            <ul class="CV_ul">
-                <li><span class="highlight">Créative</span> - (BAC +3 - 2022-2023)</li>
-                <li><span class="highlight">BTS SNIR</span> - (2019)</li>
-                <li><span class="highlight">BAC STI2D</span> - (2017)</li>
-            </ul>
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div style="bottom: 10px;" class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-        <div id="experiences" style="text-align: right;">
-            <h3 class="display-3 title CV_title">Experiences</h3>
-            <ul class="CV_ul">
-                <li><span class="highlight">Fiber Academy</span> (Colombelles) : Developpeur - Mi Aout → Fin Octobre 2020 (10 semaines)</li>
-                <li><span class="highlight">ATV</span> (Mathieu) : Developpeur Stagiaire - Mai → Juin 2018 (6 semaines)</li>
-                <li><span class="highlight">DL Négoce</span> (Colombelles) : Stage de Decouverte - Fevrier 2014 (1 semaine)</li>
-            </ul>
-        </div>
-        <div id="langages" style="text-align: left;">
-            <h3 class="display-3 title CV_title">Langages de Programmation</h3>
-            <ul class="CV_ul">
-                <li>HTML, PHP, CSS</li>
-                <li>Javascript (nodeJS, Express, React Native)</li>
-                <li>SQL</li>
-            </ul>
-        </div>
-        <div id="projets" style="text-align: right;">
-            <h3 class="display-3 title CV_title">Projets</h3>
-            <ul class="CV_ul">
-                <li><span class="highlight">Yweelon.fr</span> : Principalement en PHP</li>
-                <li><span class="highlight">GIT Bot</span> : Réalisation d'un bot Discord en JS pour aider une communauté sur un jeu mobile.<br />Le Bot a une API et une base de données attitrée</li>
-                <li><span class="highlight">Chronocross</span> : Réalisation d'une DLL (en C#) et d'une base de données pour l'institut lemonnier.<br />Dans le but d'actualiser et numériser le déroulement du cross annuel</li>
-                <li><span class="highlight">ATV</span> : Réalisation d'une application de gestion de bon de commande (en C#),<br />ainsi que d'une base de données pour la société ATV</li>
-            </ul>
-        </div>
-        <br /><br /><br /><br /><br /><br />
-        <div id="CV_end" style="font-size:18px; text-align:center">
-            <p>Vous pouvez télécharger mon CV en cliquant <a href="/BACHELEY_CV.pdf" download>ici</a> et accéder à mon github <a target="_blank" href="https://github.com/ThomasBacheley">la</a></p>
-            <div id="contact">
-                <p>Si vous êtes intéresser par mon profil, n'hésitez pas à me contacter à l'adresse <span class="highlight">thom.bacheley@gmail.com</span></p>
+
+
+        <div id="div_CV" class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="text-center">
+                    <h3 class="display-3 title CV_title">Formations</h3>
+                    <ul class="CV_ul">
+                        <li><span class="highlight">Créative</span> - (BAC +3 - 2022-2023)</li><br />
+                        <li><span class="highlight">BTS SNIR</span> - (2019)</li><br />
+                        <li><span class="highlight">BAC STI2D</span> - (2017)</li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </div>
-    <br /><br /><br /><br /><br />
-    <footer>
-        <div class="page_end">
-            <br />
-            <div class="footer">
-                <div class="bot-footer">
-                    <a href="credits.php" data-bs-toggle="tooltip" title="Vers les Crédits">
-                        <img src="assets/BotLogoWord.png" width="150" style="margin-left:-45px;"><br />
-                    </a>
+            <div class="carousel-item">
+                <div class="text-center">
+                    <h3 class="display-3 title CV_title">Experiences</h3>
+                    <ul class="CV_ul">
+                        <li><span class="highlight">Fiber Academy</span> (Colombelles) : Developpeur<br />Mi Aout → Fin Octobre 2020 (10 semaines)</li><br />
+                        <li><span class="highlight">ATV</span> (Mathieu) : Developpeur Stagiaire<br />Mai → Juin 2018 (6 semaines)</li><br />
+                        <li><span class="highlight">DL Négoce</span> (Colombelles) : Stage de Decouverte<br />Fevrier 2014 (1 semaine)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="text-center">
+                    <h3 class="display-3 title CV_title">Langages de Programmation</h3>
+                    <ul class="CV_ul">
+                        <li>HTML, PHP, CSS<br />(<span class="highlight">1 an</span> en formation / <span class="highlight">3 ans</span> en autodidacte)</li><br />
+                        <li>Javascript (nodeJS, Express, React Native)<br />(<span class="highlight">1 an</span> en formation / <span class="highlight">3 ans</span> en autodidacte)</li><br />
+                        <li>SQL<br />(<span class="highlight">2 ans</span> en formation / <span class="highlight">3 ans</span> en autodidacte)</li>
+                    </ul>
                 </div>
             </div>
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+    </div>
+    <br /><br />
+    <hr class="roundedHR">
+    <div class="heading" style="padding-top:5px !important;">
+        <h1 class="display-5 title underline">Réalisation</h1>
+        <br />
+        <div id="div_realisation">
+            <div class="div_realisation">
+                <article class="reacards animate pop" id="c1">
+                    <div class="reacards_content">
+                        <h3 class="reacards_title underline">Yweelon.fr</h3>
+                        <span class="reacards_language">PHP</span>
+                        <p class="reacards_description">Site principalement en PHP, j'y affiches mes créations et y fixe plein de petit modules et projets.</p>
+                        <a href="https://github.com/ThomasBacheley/Site" target="_blank" class="btn btn-primary">Github</a>
+                    </div>
+                </article>
+                <article class="reacards animate pop" id="c2">
+                    <div class="reacards_content">
+                        <h3 class="reacards_title underline">GIT Bot</h3>
+                        <span class="reacards_language">JS</span>
+                        <p class="reacards_description">Bot Discord pour aider une communauté sur un jeu mobile, le Bot a une API et une base de données</p>
+                        <a href="https://github.com/ThomasBacheley/GIT_bot_GT" target="_blank" class="btn btn-primary">Github</a>
+                    </div>
+                </article>
+            </div>
+            <div class="div_realisation">
+                <article class="reacards animate pop" id="c3">
+                    <div class="reacards_content">
+                        <h3 class="reacards_title underline">Chronocross</h3>
+                        <span class="reacards_language">C#, SQL</span>
+                        <p class="reacards_description">Applis qui à pour but d'actualiser et numériser le déroulement du cross annuel à l'institut Lemonnier</p>
+                        <a href="https://github.com/ThomasBacheley/ProjetCross2019" target="_blank" class="btn btn-primary">Github</a>
+                    </div>
+                </article>
+                <article class="reacards animate pop" id="c4">
+                    <div class="reacards_content">
+                        <h3 class="reacards_title underline">ATV</h3>
+                        <span class="reacards_language">C#, SQL</span>
+                        <p class="reacards_description">Applis de gestion de bon de commande pour la société ATV</p>
+                        <a href="https://github.com/ThomasBacheley/ATV-Application" target="_blank" class="btn btn-primary">Github</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+    </div>
+    <br /><br /><br /><br /><br /><br />
+    <div id="CV_end" style="text-align:center">
+        <p>Vous pouvez télécharger mon CV en cliquant <a href="/BACHELEY_CV.pdf" download>ici</a> <img src="./assets/loupe.png" onClick="loupe()" title="Visionner le CV" height="16px;" width="16px" alt="loupe" /> et accéder à mon github <a target="_blank" href="https://github.com/ThomasBacheley">la</a></p>
+        <div id="contact">
+            <p>Si vous êtes intéresser par mon profil, n'hésitez pas à me contacter à l'adresse <span class="highlight">thom.bacheley@gmail.com</span></p>
+        </div>
+    </div>
+    </div>
+    <br /><br /><br /><br /><br />
+    <footer>
+        <?php include './components/footer.html'; ?>
     </footer>
     <script src="./js/ml11.js"></script>
+    <script>
+        function loupe() {
+            window.open("http://yweelon.fr/BACHELEY_CV.pdf");
+        }
+    </script>
 </body>
 
 </html>

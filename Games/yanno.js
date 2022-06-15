@@ -4,6 +4,7 @@ var E_bubble = document.querySelector(".interraction_bubble")
 var character_spritesheet = document.querySelector(".character_spritesheet")
 
 var tchat = document.querySelector(".tchat")
+var tchat_div = document.querySelector(".tchat_div")
 
 var character_info = {
    speed: 0.5,
@@ -135,13 +136,10 @@ const placeCharacter = () => {
       }
    }
 
-   //(((66/42)/(160/144))*(200/144))*42 = 82.5
-
-   var camera_left = pixelSize * 82.5;
-   var camera_top = pixelSize * 42;
+   //(((66/42)/(160/144))*(220/144))*42 = 99 //seulement pour la width
 
 
-   var camera_left = pixelSize * 82.5;
+   var camera_left = pixelSize * 99;
    var camera_top = pixelSize * 42;
 
    map.style.transform = `translate3d( ${-character_info.x * pixelSize + camera_left}px, ${-character_info.y * pixelSize + camera_top}px, 0 )`;
@@ -270,6 +268,8 @@ document.addEventListener("keydown", (e) => {
                case 'bed':
                   dodoanimation()
                   break
+               case 'tpitem':
+               break;
                default:
                   break;
             }
@@ -286,9 +286,7 @@ document.addEventListener("keydown", (e) => {
    }
    if (e.key == " ") { /* spacebar */
       character_info.speed = 1;
-   }
-   if (e.key == "t") {
-      tchat_display()
+      e.preventDefault(); 
    }
 
    if (e.key == "r") {
@@ -346,14 +344,6 @@ function spawn() {
 
 function mapload(travel_item) {
 
-   anime.timeline({ loop: false })
-      .add({
-         targets: '.blackscreen',
-         opacity: [0, 1],
-         easing: "easeOutExpo",
-         duration: 1500
-      })
-
    readTextFile("./components/Maps.json", function (text) {
       var data = JSON.parse(text);
       var mapdata = data[travel_item.to]
@@ -381,14 +371,6 @@ function mapload(travel_item) {
       var data = JSON.parse(text);
       list_interraction = data[travel_item.to]
    })
-
-   anime.timeline({ loop: false })
-      .add({
-         targets: '.blackscreen',
-         opacity: [1, 0],
-         easing: "easeInExpo",
-         duration: 1500
-      });
 }
 
 document.addEventListener("keyup", (e) => {
@@ -401,62 +383,28 @@ document.addEventListener("keyup", (e) => {
       character_info.speed = 0.5;
    }
 });
-/* BONUS! Dpad functionality for mouse and touch */
-var isPressed = false;
-const removePressedAll = () => {
-   document.querySelectorAll(".dpad-button").forEach(d => {
-      d.classList.remove("pressed")
-   })
-}
-document.body.addEventListener("mousedown", () => {
-   isPressed = true;
-})
-document.body.addEventListener("mouseup", () => {
-   isPressed = false;
-   held_directions = [];
-   removePressedAll();
-})
-const handleDpadPress = (direction, click) => {
-   if (click) {
-      isPressed = true;
-   }
-   held_directions = (isPressed) ? [direction] : []
 
-   if (isPressed) {
-      removePressedAll();
-      document.querySelector(".dpad-" + direction).classList.add("pressed");
-   }
-}
-//Bind a ton of events for the dpad
-document.querySelector(".dpad-left").addEventListener("touchstart", (e) => handleDpadPress(directions.left, true));
-document.querySelector(".dpad-up").addEventListener("touchstart", (e) => handleDpadPress(directions.up, true));
-document.querySelector(".dpad-right").addEventListener("touchstart", (e) => handleDpadPress(directions.right, true));
-document.querySelector(".dpad-down").addEventListener("touchstart", (e) => handleDpadPress(directions.down, true));
-
-document.querySelector(".dpad-left").addEventListener("mousedown", (e) => handleDpadPress(directions.left, true));
-document.querySelector(".dpad-up").addEventListener("mousedown", (e) => handleDpadPress(directions.up, true));
-document.querySelector(".dpad-right").addEventListener("mousedown", (e) => handleDpadPress(directions.right, true));
-document.querySelector(".dpad-down").addEventListener("mousedown", (e) => handleDpadPress(directions.down, true));
-
-document.querySelector(".dpad-left").addEventListener("mouseover", (e) => handleDpadPress(directions.left));
-document.querySelector(".dpad-up").addEventListener("mouseover", (e) => handleDpadPress(directions.up));
-document.querySelector(".dpad-right").addEventListener("mouseover", (e) => handleDpadPress(directions.right));
-document.querySelector(".dpad-down").addEventListener("mouseover", (e) => handleDpadPress(directions.down));
 
 let tchat_isDisplay = false;
 let tchattimeout = 5000
 
+var pp = document.getElementById("pp")
+
 function tchat_display(interraction_item = null) {
+   if (tchat_isDisplay) {
+      tchattimeout += 10000
+   }
    if (interraction_item) {
-      tchat.innerHTML = interraction_item.name + ": " + interraction_item.msg + "\n" + tchat.innerHTML;
+      pp.src = interraction_item.pp
+      tchat.innerHTML = interraction_item.name + ": " + interraction_item.msg
    }
    tchat_isDisplay = true;
 
-   tchat.style.opacity = 100;
+   tchat_div.style.opacity = 100;
    timeoutTchat = setTimeout(() => {
       anime.timeline({ loop: false })
          .add({
-            targets: '.tchat',
+            targets: '.tchat_div',
             opacity: [100, 0],
             easing: "easeOutExpo",
             duration: 2000
@@ -488,16 +436,6 @@ function sky_observation() {
       character_info.speed = 0;
       map.style.visibility = "hidden";
    }
-}
-
-function tpanimation() {
-   anime.timeline({ loop: false })
-      .add({
-         targets: '.blackscreen',
-         opacity: [1, 0],
-         easing: "easeInExpo",
-         duration: 1500
-      });
 }
 
 function dodoanimation() {

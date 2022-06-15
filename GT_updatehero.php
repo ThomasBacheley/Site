@@ -11,13 +11,13 @@ if (isset($_GET['heroname'])) {
 <html lang="fr">
 
 <head>
-    <?php include 'head.php'; ?>
+    <?php include './components/head.html'; ?>
     <title>GT Update Hero</title>
 </head>
 
 <body>
     <nav id="navbar" class="navbar navbar-expand-lg bg-transparent">
-        <?php include 'navbar.php'; ?>
+        <?php include './components/navbar.html'; ?>
     </nav>
     <!-- The actual snackbar -->
     <div id="snackbar_success">✅ Hero succesfully updated</div>
@@ -43,16 +43,7 @@ if (isset($_GET['heroname'])) {
         </form>
     </div>
     <footer>
-        <div class="page_end">
-            <br />
-            <div class="footer">
-                <div class="bot-footer">
-                    <a href="credits.php" data-bs-toggle="tooltip" title="Vers les Crédits">
-                        <img src="assets/BotLogoWord.png" width="150" style="margin-left:-45px;"><br />
-                    </a>
-                </div>
-            </div>
-        </div>
+        <?php include './components/footer.html'; ?>
     </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -51,13 +51,13 @@ if ($Query !== null) {
 <html lang="fr">
 
 <head>
-    <?php include 'head.php'; ?>
+    <?php include './components/head.html'; ?>
     <title>Minecraft</title>
 </head>
 
 <body>
     <nav id="navbar" class="navbar navbar-expand-lg bg-transparent">
-        <?php include 'navbar.php'; ?>
+        <?php include './components/navbar.html'; ?>
     </nav>
     <div class="heading">
         <div id="serverinfo">
@@ -82,16 +82,7 @@ if ($Query !== null) {
         </div>
     </div>
     <footer>
-        <div class="page_end">
-            <br />
-            <div class="footer">
-                <div class="bot-footer">
-                    <a href="credits.php" data-bs-toggle="tooltip" title="Vers les Crédits">
-                        <img src="assets/BotLogoWord.png" width="150" style="margin-left:-45px;"><br />
-                    </a>
-                </div>
-            </div>
-        </div>
+        <?php include './components/footer.html'; ?>
     </footer>
     <script>
         connexion_button(document.getElementById('connexion_button'), '<?php echo $_SESSION['username']; ?>');

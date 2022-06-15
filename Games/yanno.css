@@ -3,8 +3,8 @@
     --grid-cell: calc(var(--pixel-size) * 16);
     --bg: #1D1E28;
     --map-size: 2px;
-    --frame-size-height:144;
-    --frame-size-width:200;
+    --frame-size-height: 144;
+    --frame-size-width: 220;
 }
 
 @media(min-width: 700px) {
@@ -40,9 +40,11 @@
 
 .blackscreen {
     background-color: black;
-    position: relative;
-    width: 100%;
-    height: 100%;
+    width: calc(var(--pixel-size) * var(--frame-size-width));
+    height: calc(var(--pixel-size) * var(--frame-size-height));
+    top:0;
+    left:0;
+    position: absolute;
 }
 
 .camera {
@@ -137,65 +139,6 @@
     flex-direction: column;
 }
 
-.dpad {
-    position: absolute;
-    right: calc(var(--pixel-size) * 2);
-    bottom: calc(var(--pixel-size) * 2);
-    width: calc(var(--pixel-size) * 37);
-    height: calc(var(--pixel-size) * 38);
-}
-
-.dpad-button {
-    appearance: none;
-    outline: 0;
-    border: 0;
-    background: transparent;
-    padding: 0;
-    cursor: pointer;
-}
-
-.dpad-button svg {
-    display: block;
-    height: calc(var(--pixel-size) * 13);
-}
-
-.dpad-button.pressed .Arrow_arrow-inset {
-    stroke: #07c2cc;
-}
-
-.dpad-button.pressed .Arrow_arrow-body {
-    stroke: #17dfea;
-}
-
-.dpad-up {
-    position: absolute;
-    left: calc(var(--pixel-size) * 12);
-    top: 0;
-}
-
-.dpad-down {
-    position: absolute;
-    bottom: var(--pixel-size);
-    left: calc(var(--pixel-size) * 12);
-}
-
-.dpad-left {
-    position: absolute;
-    top: calc(var(--pixel-size) * 12);
-    left: 0;
-}
-
-.dpad-right {
-    position: absolute;
-    top: calc(var(--pixel-size) * 12);
-    right: 0;
-}
-
-.dpad {
-    user-select: none;
-}
-
-
 .corner_topleft,
 .corner_topright,
 .corner_bottomleft,
@@ -234,17 +177,43 @@
     width: calc(var(--pixel-size) * 75)
 }
 
+.tchat_div {
+    display: flex;
+    flex-direction: row;
+    font-size: 23px;
+    opacity: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 25%;
+    max-height: 25%;
+    font-family: 'Comic Sans MS', cursive;
+    border-top-right-radius: 10px 10px;
+    border-top-left-radius: 10px 10px;
+    border: 5px solid #5b3c11;
+    background-color: rgba(180, 180, 180, 0.8);
+    width: 100%;
+}
 
 
 .tchat {
     resize: none;
+    width: 100%;
+    background-color: rgba(180, 180, 180, 0.8);
+}
+
+/* .tchat {
+    font-family: 'Comic Sans MS', cursive;
+    resize: none;
     border-top-right-radius: 10px 10px;
-    background-color: rgba(150, 150, 150, 0.6);
-    width: 60%;
-    height: 20%;
-    max-height: 20%;
+    border-top-left-radius: 10px 10px;
+    border: 5px solid #5b3c11;
+    background-color: rgba(180, 180, 180, 0.8);
+    width: 100%;
+    height: 25%;
+    max-height: 25%;
     position: absolute;
     bottom: 0;
     left: 0;
     opacity: 0;
-}
+} */

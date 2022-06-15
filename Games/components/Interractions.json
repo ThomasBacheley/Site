@@ -12,7 +12,8 @@
                     "ymin": 71,
                     "ymax": 87
                 },
-                "msg": "Chez Yanno"
+                "msg": "Chez Yanno",
+                "pp":"./assets/character/pp/yanno.png"
             },
             {
                 "name": "Système",
@@ -25,7 +26,8 @@
                     "ymin": 339.5,
                     "ymax": 351
                 },
-                "msg": "Quelle belle fontaine"
+                "msg": "Quelle belle fontaine",
+                "pp":"./assets/character/pp/yanno.png"
             }
         ],
         "npcs": [
@@ -40,7 +42,8 @@
                     "ymin": 102,
                     "ymax": 131
                 },
-                "msg": "Miaaouuu"
+                "msg": "Miaaouuu",
+                "pp":"./assets/character/pp/cat.png"
             },
             {
                 "name": "Mère",
@@ -53,7 +56,8 @@
                     "ymin": 83,
                     "ymax": 95
                 },
-                "msg": "C'est encore en construction ici, donc soyez indulgents ! Merci ^^"
+                "msg": "C'est encore en construction ici, donc soyez indulgents ! Merci ^^",
+                "pp":"./assets/character/pp/daronne.png"
             }
         ],
         "others": [
@@ -68,7 +72,8 @@
                     "ymin": 167.5,
                     "ymax": 174.5
                 },
-                "msg": "Belle journée pour pecher"
+                "msg": "Belle journée pour pecher",
+                "pp":"./assets/character/pp/yanno.png"
             }
         ]
     },
@@ -87,7 +92,8 @@
                     "ymin": 74,
                     "ymax": 85.5
                 },
-                "msg": "En développement, tu pourras bientot changer de style et de genre !"
+                "msg": "En développement, tu pourras bientôt changer de style et de genre !",
+                "pp":"./assets/character/pp/yanno.png"
             },
             {
                 "name": "telescope",
@@ -100,11 +106,12 @@
                     "ymin": 38,
                     "ymax": 43.5
                 },
-                "msg": "Rappuye sur E pour arreter d'observer le ciel"
+                "msg": "Rappuis sur E pour arreter d'observer le ciel",
+                "pp":"./assets/character/pp/yanno.png"
             },
             {
                 "name": "bed",
-                "comment": "pour mater dehors",
+                "comment": "pour dodo",
                 "rangeX": {
                     "xmin": 14,
                     "xmax": 19
@@ -113,7 +120,22 @@
                     "ymin": 67.5,
                     "ymax": 96
                 },
-                "msg": "Allez Dodo"
+                "msg": "Allez au dodo",
+                "pp":"./assets/character/pp/yanno.png"
+            },
+            {
+                "name": "tpitem",
+                "comment": "pour te tp",
+                "rangeX": {
+                    "xmin": 115.5,
+                    "xmax": 118.5
+                },
+                "rangeY": {
+                    "ymin": 71,
+                    "ymax": 81
+                },
+                "msg": "En Developpement",
+                "pp":"./assets/character/pp/yanno.png"
             }
         ]
     }

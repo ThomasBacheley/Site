@@ -11,8 +11,9 @@
         "doors": [
             {
                 "name": "house_door",
-                "travel":{
-                    "to":"house",
+                "pp":"./assets/character/pp/yanno.png",
+                "travel": {
+                    "to": "house",
                     "spawn": {
                         "x": 60,
                         "y": 94,
@@ -32,19 +33,20 @@
         ],
         "background_path": "./assets/Map/outside.png",
         "limit": {
-            "type":"square",
+            "type": "square",
             "leftLimit": -8,
             "rightLimit": 216,
             "topLimit": 71,
-            "bottomLimit": 400
+            "bottomLimit": 335
         }
     },
     "house": {
         "doors": [
             {
                 "name": "house_door",
-                "travel":{
-                    "to":"outside",
+                "pp":"./assets/character/pp/yanno.png",
+                "travel": {
+                    "to": "outside",
                     "spawn": {
                         "x": 88,
                         "y": 72.5,
@@ -63,6 +65,7 @@
             },
             {
                 "name": "house_stair",
+                "pp":"./assets/character/pp/yanno.png",
                 "travel": {
                     "to": "house_1floor",
                     "spawn": {
@@ -84,7 +87,7 @@
         ],
         "background_path": "./assets/Map/house2.png",
         "limit": {
-            "type":"square",
+            "type": "square",
             "leftLimit": -4,
             "rightLimit": 120,
             "topLimit": 37,
@@ -95,6 +98,7 @@
         "doors": [
             {
                 "name": "house_stair",
+                "pp":"./assets/character/pp/yanno.png",
                 "travel": {
                     "to": "house",
                     "spawn": {
@@ -116,7 +120,7 @@
         ],
         "background_path": "./assets/Map/house2_1floor.png",
         "limit": {
-            "type":"square",
+            "type": "square",
             "leftLimit": -3,
             "rightLimit": 118.5,
             "topLimit": 38,

@@ -13,13 +13,13 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['permission'])) {
 <html lang="fr">
 
 <head>
-    <?php include 'head.php'; ?>
+    <?php include './components/head.html'; ?>
     <title>Admin Dashboard</title>
 </head>
 
 <body>
     <nav id="navbar" class="navbar navbar-expand-lg bg-transparent">
-        <?php include 'navbar.php'; ?>
+        <?php include './components/navbar.html'; ?>
     </nav>
     <div id="snackbar_success">✅ Mail archivé</div>
     <div id="container_dashboard">
@@ -48,6 +48,9 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['permission'])) {
             <br />
         </div>
     </div>
+    <footer>
+        <?php include './components/footer.html'; ?>
+    </footer>
 </body>
 <script src="./js/customjs.js"></script>
 <script>

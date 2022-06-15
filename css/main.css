@@ -168,11 +168,12 @@ body {
 .navbar-toggler-icon {
     color: #fff !important
 }
+
 .footer {
     text-align: center !important;
     padding: 5px 6px !important;
     color: #ecf2ff;
-    padding: 150px 30px 30px !important
+    padding: 200px 30px 30px !important
 }
 
 #topbtn {

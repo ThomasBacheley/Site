@@ -1,0 +1,102 @@
+#c1 {
+    background: url('../assets/patterncard_1.png');
+}
+
+#c2 {
+    background: url('../assets/patterncard_2.png');
+}
+
+#c3 {
+    background: url('../assets/patterncard_3.png');
+}
+
+#c4 {
+    background: url('../assets/patterncard_4.png');
+}
+
+.reacards {
+    position: relative;
+    width: 400px;
+    height: 300px;
+    color: #ffa500;
+    background-size: cover;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.reacards_content {
+    position: absolute;
+    top : 40%;
+    width: 100%;
+    padding: 20px;
+    background-color: #292A36;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    transform: translateY(70px);
+    transition: transform .25s;
+}
+
+.reacards_content::before {
+    position: absolute;
+    width: 400px;
+    height: 300px;
+}
+
+.reacards_title {
+    color: #fff;
+    line-height: 10px;
+}
+
+.reacards_language {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.reacards_description {
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity .5s;
+}
+
+.reacards:hover .reacards_content {
+    transform: translateY(0);
+    top : 25%;
+}
+
+.reacards:hover .reacards_description {
+    opacity: 1;
+    transition-delay: .25s;
+}
+
+
+
+.animate {
+    animation-duration: 0.5s;
+    animation-name: animate-fade;
+    animation-delay: 0.5s;
+    animation-fill-mode: backwards;
+  }
+      
+  @keyframes animate-fade {
+      0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  
+  .animate.pop {
+    animation-name: animate-pop;
+    animation-timing-function: cubic-bezier(.26,.53,.74,1.48);
+  }
+  
+  @keyframes animate-pop {
+    0% {
+      opacity: 0;
+      transform: scale(0.5, 0.5);
+    }
+          
+    100% {
+      opacity: 1;
+      transform: scale(1, 1);
+    }
+  }

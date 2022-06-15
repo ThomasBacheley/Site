@@ -107,9 +107,42 @@ p {
     color: #fff;
 }
 
+#carouselExampleIndicators {
+    width: 80%;
+    left: 10%;
+}
+
+.carousel-inner {
+    height: 300px;
+}
+
+.pp {
+    width: 128px;
+    height: 128px;
+    box-shadow: 0 0 5px 5px #ffa500 !important; border-radius:15px
+}
+
+
+.div_realisation {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-content: center;
+    padding: 20px;
+}
+
 #div_CV>* {
-    margin: 15px 120px 15px 120px;
     color: #fff;
+}
+
+.underline {
+    text-decoration: #ffa500 underline !important;
+    text-underline-offset: 5px !important;
+}
+
+.inv_underline {
+    text-decoration: #fff underline !important;
+    text-underline-offset: 5px !important;
 }
 
 .CV_title {
@@ -119,7 +152,6 @@ p {
 
 .CV_ul>li {
     list-style: inside;
-    margin-top: 10px;
 }
 
 input[type=submit]:hover {
@@ -348,3 +380,24 @@ input[type=submit]:hover {
     border-radius: 5px;
     width: 80%;
 }
+
+.ml10 {
+    position: relative;
+    font-weight: 900;
+    font-size: 4em;
+  }
+  
+  .ml10 .text-wrapper {
+    position: relative;
+    display: inline-block;
+    padding-top: 0.2em;
+    padding-right: 0.05em;
+    padding-bottom: 0.1em;
+    overflow: hidden;
+  }
+  
+  .ml10 .letter {
+    display: inline-block;
+    line-height: 1em;
+    transform-origin: 0 0;
+  }
