@@ -1,0 +1,25 @@
+.userGrayText {
+    color: #8D8D8D;
+}
+
+.usercard {
+    width: 350px;
+    background-color: #FEFEFF !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 10px 10px 10px;
+}
+
+.userimg {
+    margin-top: 10px;
+    background-color: rgb(228, 228, 228);
+    width: 200px;
+    height: 200px;
+}
+
+hr {
+    color: #9e9e9e;
+    border: 5px solid #9e9e9e;
+    border-radius: 2px;
+}
