@@ -34,15 +34,7 @@ if (isset($_GET['sendmail'])) {
         <p class="subtitle">Bienvenue sur <span style="text-decoration: underline;">Yweelon.fr</span><br />Un site
             dévéloppé par Yweelon</p>
         <br />
-        <a class="btn btn-primary btn-lg" href="#mailform" role="button">Mail <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 226 226" style=" fill:#000000;">
-                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
-                    <path d="M0,226v-226h226v226z" fill="none"></path>
-                    <g fill="#ffffff">
-                        <path d="M37.66667,37.66667c-10.40542,0 -18.83333,8.42792 -18.83333,18.83333v16.31364l9.41667,5.90381l9.41667,5.90381l75.33333,47.21208l75.33333,-46.89941l9.41667,-5.86702l9.41667,-5.84863v-16.71826c0,-10.40542 -8.42792,-18.83333 -18.83333,-18.83333zM37.66667,56.5h150.66667v7.24642l-75.33333,46.88102l-75.33333,-47.21208zM18.83333,95.03109v74.46891c0,10.40542 8.42792,18.83333 18.83333,18.83333h150.66667c10.40542,0 18.83333,-8.42792 18.83333,-18.83333v-74.10108l-18.83333,11.71566v62.38542h-150.66667v-62.6613z">
-                        </path>
-                    </g>
-                </g>
-            </svg></a>
+        <a class="btn btn-primary btn-lg" href="#mailform" role="button">Mail <img alt="mail icon" src="./bootstrap_icons/envelope-fill.svg"/></a>
         <a class="btn btn-secondary btn-lg" href="#about" role="button">En savoir plus</a>
         <br /><br /><br /><br /><br /><br /><br /><br /><br />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
@@ -50,19 +42,22 @@ if (isset($_GET['sendmail'])) {
     </div>
     <br id="about" />
     <div style="text-align: center;">
+        <div>
+            <img alt="Logo Site" src="./assets/Logo.png" />
+        </div>
+        <br />
         <p class="subtitle" style="font-size:22px !important;">Ici tu pourras trouver la plupart de <span class="highlight">mes projets</span> personnels et professionnels!<br />Ainsi que <span class="highlight">mon parcours</span> et autres</p>
-        <p class="subtitle" style="font-size:22px !important;">Je mets quotidiennement à jour ce site, je t'invite donc à le <span class="highlight">visiter</span> via les différentes pages disponible</p>
+        <p class="subtitle" style="font-size:22px !important;">Je mets très souvent à jour ce site, je t'invite donc à le <span class="highlight">visiter</span> via les différentes pages disponible</p>
     </div>
     <br /><br /><br /><br /><br /><br /><br /><br /><br />
     <p style="font-style: italic;text-align: center">(En construction)</p>
-    <div id="mailform" class="text-center" style="background-color: #292933;width: 80%;margin-left: auto;margin-right: auto;border-radius: 3%;padding: 20px; box-shadow: white;">
-        <!--Section: Contact v.2-->
-        <section class="mb-4">
-            <!--Section heading-->
+    <div id="mailform" class="text-center">
+        <div>
             <h2 class="h1-responsive font-weight-bold text-center my-4" style="color: white;">Contact</h2>
-            <!--Section description-->
             <p class="text-center w-responsive mx-auto mb-5" style="color: white;">Une Question ? Je t'invite à
                 m'envoyer un mail et j'y repondrais le plus tot possible</p>
+        </div>
+        <!--<section class="mb-4" style="display:flex; justify-content:center;">
             <div class="row">
                 <div class="col-md-9 mb-md-0 mb-5">
                     <form id="contact-form" class="was-validated" name="contact-form" action="/verification/verification_mail.php" method="post">
@@ -113,10 +108,8 @@ if (isset($_GET['sendmail'])) {
                         </div>
                     </form>
                 </div>
-                <!--Grid column-->
             </div>
-        </section>
-        <!--Section: Contact v.2-->
+        </section>-->
     </div>
     <br /><br /><br /><br /><br />
     <footer>

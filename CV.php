@@ -8,6 +8,7 @@ session_start();
     <?php include './components/head.html'; ?>
     <title>Mon CV</title>
     <link rel="stylesheet" href="/css/card.css">
+    <link rel="stylesheet" href="/css/icon.css">
 </head>
 
 <body>
@@ -141,6 +142,17 @@ session_start();
         <p>Vous pouvez télécharger mon CV en cliquant <a href="/BACHELEY_CV.pdf" download>ici</a> <img src="./assets/loupe.png" onClick="loupe()" title="Visionner le CV" height="16px;" width="16px" alt="loupe" /> et accéder à mon github <a target="_blank" href="https://github.com/ThomasBacheley">la</a></p>
         <div id="contact">
             <p>Si vous êtes intéresser par mon profil, n'hésitez pas à me contacter à l'adresse <span class="highlight">thom.bacheley@gmail.com</span></p>
+        </div>
+        <div class="icons">
+            <a title="github" href="https://github.com/ThomasBacheley" target="_blank" class="icon icon--github">
+                <img alt="icon github" width="40px" height="40px" src="./bootstrap_icons/github.svg" />
+            </a>
+            <a title="linkedin" href="https://www.linkedin.com/in/thomas-bacheley/" target="_blank" class="icon icon--linkedin">
+                <img alt="icon linkedin" width="35px" height="35px" src="./bootstrap_icons/linkedin.svg" />
+            </a>
+            <a title="mail" href="mailto:thom.bacheley@gmail.com" class="icon icon--mail">
+                <img alt="icon mail" width="40px" height="40px" src="./bootstrap_icons/envelope-fill.svg" />
+            </a>
         </div>
     </div>
     </div>

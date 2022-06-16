@@ -1,0 +1,50 @@
+.icons {
+    display: flex;
+    column-gap: 30px;
+    justify-content: center;
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 26px;
+    color: #fff;
+    border-radius: 50%;
+    outline: 3px solid #fff;
+    transition-property: outline-offset,outline-color,background-color;
+    transition-duration: 0.25s;
+}
+
+.icon:hover {
+    outline-offset: 4px;
+}
+
+.icon:hover img{
+    animation: shake .75s;
+}
+
+.icon--linkedin:hover{
+    background-color: #0077b5;
+    outline-color: #0077b5;
+}
+
+.icon--github:hover{
+    background-color: #ffa500;
+    outline-color: #ffa500;
+}
+
+.icon--mail:hover{
+    background-color: #a60303;
+    outline-color: #a60303;
+}
+
+@keyframes shake {
+    10%{transform: rotate(15deg);}
+    30%{transform: rotate(-15deg);}
+    50%{transform: rotate(15deg);}
+    70%{transform: rotate(-15deg);}
+}
