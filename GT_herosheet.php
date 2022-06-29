@@ -75,9 +75,6 @@ session_start();
             }
         }
 
-
-        connexion_button(document.getElementById('connexion_button'), '<?php echo $_SESSION['username']; ?>')
-
         $("#heroname_input").on('keyup', function(e) {
             if (e.key === 'Enter' || e.keyCode === 13) {
                 research_hero()
@@ -193,12 +190,10 @@ session_start();
             listcards.appendChild(card)
         }
 
-        loadallcards()
+        loadallcards();
 
         function loadallcards() {
             var xhr = new XMLHttpRequest();
-
-
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4) {
                     if (this.status == 200) {

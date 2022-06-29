@@ -1,0 +1,33 @@
+.ml3 {
+    font-weight: 900;
+    font-size: 3.5em;
+  }
+
+
+.dessin {
+  display: flex;
+  flex-direction: row;
+  background-color: #292A36;
+  border-radius: 20px;
+  justify-content: space-evenly;
+  margin: 30px !important;
+}
+
+.div_img {
+  padding: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.div_txt {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Comic Sans MS', cursive;
+  text-decoration: underline;
+  text-decoration-color: blueviolet;
+  text-underline-offset: 3px;
+  font-style: italic;
+  background-color: red;
+  align-content: center;
+}

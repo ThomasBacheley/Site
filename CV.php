@@ -9,6 +9,7 @@ session_start();
     <title>Mon CV</title>
     <link rel="stylesheet" href="/css/card.css">
     <link rel="stylesheet" href="/css/icon.css">
+    <script src="./js/ml11.js"></script>
 </head>
 
 <body>

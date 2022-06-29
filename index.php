@@ -161,8 +161,6 @@ if (isset($_GET['sendmail'])) {
             }, 3000);
         }
 
-        connexion_button(document.getElementById('connexion_button'), '<?php echo $_SESSION['username']; ?>')
-
         (function() {
             'use strict';
             window.addEventListener('load', function() {

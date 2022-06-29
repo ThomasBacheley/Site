@@ -6,17 +6,16 @@ session_start();
 
 <head>
     <?php include './components/head.html'; ?>
-    <title>Test Technique Dokki</title>
+    <title>Mon CV</title>
 </head>
 
 <body>
     <nav id="navbar" class="navbar navbar-expand-lg bg-transparent">
         <?php include './components/navbar.html'; ?>
     </nav>
-    <!---->
     <div class="heading">
         <h1 class="display-5 title">Test Technique <span style="color: #994B9A; text-decoration:underline; text-decoration-color: white;">Dokki</span></h1>
-        <div id="sujet" style="border: 2px lightgray solid; border-radius:10px;">
+        <div id="sujet">
             <p class="h4" style="text-decoration:underline; text-decoration-color: white;"><span class="highlight">Sujet</span> :</p>
             <br />
             <div id="intitule" style="font-style: italic;">
@@ -36,18 +35,20 @@ session_start();
 
         <br />
         <br />
-        <a href="https://github.com/ThomasBacheley/Dokki_UserDisplay" target="_blank" class="btn btn-primary">Github</a>
+        <div style="display: flex; flex-direction:row; justify-content:space-evenly;">
+            <a href="https://github.com/ThomasBacheley/Dokki_UserDisplay" target="_blank" class="btn btn-primary">Github</a>
+            <a href="http://yweelon.fr/Dokki_UserDisplay/sujet.pdf" target="_blank" class="btn btn-primary">PDF</a>
+        </div>
+
     </div>
     <footer>
         <?php include './components/footer.html'; ?>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="js/now-ui-kit.min.js"></script>
-    <script src="./js/customjs.js"></script>
+    <script src="./js/ml11.js"></script>
     <script>
-        connexion_button(document.getElementById('connexion_button'), '<?php echo $_SESSION['username']; ?>')
+        function loupe() {
+            window.open("http://yweelon.fr/BACHELEY_CV.pdf");
+        }
     </script>
 </body>
 

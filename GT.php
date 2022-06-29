@@ -10,7 +10,7 @@ session_start();
 </head>
 
 <body>
-    <nav id="navbar" class="navbar navbar-expand-lg bg-transparent">
+<nav id="navbar" class="navbar navbar-expand-lg bg-transparent">
         <?php include './components/navbar.html'; ?>
     </nav>
     <!---->
