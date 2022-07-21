@@ -16,7 +16,7 @@ session_start();
     <!---->
     <div class="heading">
         <br />
-        <p>Ce site à pour but <span class="highlight">d'informer</span> et est <span class="highlight">non lucratif</span></p>
+        <p>Ce site à pour but <span class="highlight">d'informer</span>, de <span class="highlight">présenter</span> mon travail et est <span class="highlight">non lucratif</span></p>
         <br /><br />
         <div style="padding:10px" id="guardiantale" class="borderBlink">
             <p>Toutes les données à propos du jeu "<a href="https://guardiantales.com/" target="_blank">Guardian Tale</a>" sont en aucun cas les miennes, je décline <span class="highlight">toutes</span> responsabilités les concernants</p>
