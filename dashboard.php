@@ -12,8 +12,8 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['permission'])) {
 }
 
 // connexion à la base de données
-// $db_username = 'root';
-// $db_password = 'jjE72Dak';
+// $db_username = 'site';
+// $db_password = 'ESeoejBGEx[Xm23u';
 // $db_name     = 'universal_db';
 // $db_host     = 'localhost';
 

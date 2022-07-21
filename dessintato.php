@@ -53,14 +53,14 @@ session_start();
         data.sort().forEach(dessin=>{
             // ---------------
             var h1 = document.createElement('h1')
-            h1.innerText = " "+dessin.replace('.png','')+" ";
+            h1.innerText = " "+dessin.replace('.png','').replace('_',' ').replace('_',' ').replace('_',' ');
             var div1 = document.createElement('div');
             div1.classList.add('div_txt');
             div1.appendChild(h1);
             // ---------------
             var img = document.createElement('img');
             img.src = './dessintato/'+dessin;
-            img.alt = dessin.replace('.png','');
+            img.alt = dessin.replace('.png','').replace('_',' ').replace('_',' ').replace('_',' ');
             var div2 = document.createElement('div');
             div2.classList.add('div_img');
             div2.appendChild(img)

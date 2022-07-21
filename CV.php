@@ -20,7 +20,7 @@ session_start();
     <div class="heading" id="div_presentation">
         <div id="presentation">
             <div>
-                <img class="pp" src="https://cdn.discordapp.com/avatars/663153459226345501/8d71af75400b5a03b144b0e6755477ed.png" alt="Ywee PP" />
+                <img class="pp" src="https://cdn.discordapp.com/avatars/663153459226345501/38db3bef89bf56571bb66b11442c2fa3.png" alt="Ywee PP" />
             </div>
             <br />
             <h1 class="ml11">
